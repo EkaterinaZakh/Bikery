@@ -1,9 +1,10 @@
-const { Router } = require('express');
+// const { Router } = require('express');
+const express = require('express');
 const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
 const generateTokens = require('../utils/generateTokens');
 const cookiesConfig = require('../config/cookiesConfig');
 
-const tokensRouter = Router();
+const tokensRouter = express.Router();
 
 tokensRouter.get('/refresh', verifyRefreshToken, async (req, res) => {
   const { accessToken, refreshToken } = generateTokens({

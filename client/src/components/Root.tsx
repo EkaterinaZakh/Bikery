@@ -6,7 +6,7 @@ export default function Root(): JSX.Element {
   return (
     <div>
       <NavBar />
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
