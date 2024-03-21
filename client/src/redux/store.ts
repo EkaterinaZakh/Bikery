@@ -1,7 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import festReducer from './slices/fest/slice';
+
+
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    festivals: festReducer,
+  },
 });
 
 export type StoreT = typeof store;

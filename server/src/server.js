@@ -1,9 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 // const authRouter = require('./routes/authRouter');
 const tokensRouter = require('./routes/tokensRouter');
+const festRouter = require('./routes/festRouter');
 require('dotenv').config();
 
 const app = express();
@@ -21,5 +23,6 @@ app.use(express.json());
 
 app.use('/api/tokens', tokensRouter);
 // app.use('/api/auth', authRouter);
+app.use('/api/fest', festRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
