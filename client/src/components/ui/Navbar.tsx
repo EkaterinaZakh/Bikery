@@ -25,7 +25,7 @@ export default function NavBar(): JSX.Element {
           <Button href='/' color="inherit">Главная</Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ marginRight:'10px'}}>
-          <Button color="inherit">Фестивали</Button>
+          <Button href='/fests' color="inherit">Фестивали</Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ marginRight:'10px'}}>
           <Button color="inherit">Байкшоп</Button>
