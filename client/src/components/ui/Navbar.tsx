@@ -6,8 +6,17 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useAppDispatch } from '../../redux/hooks';
+import { logoutThunk } from '../../redux/slices/auth/thunks';
 
 export default function NavBar(): JSX.Element {
+
+   const dispatch = useAppDispatch()
+
+   const logoutHandler = ():void => {
+      void dispatch(logoutThunk())
+   }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="static">
@@ -35,7 +44,7 @@ export default function NavBar(): JSX.Element {
           </Typography>
           <Button href='/signup' color="inherit">Регистрация</Button>
           <Button href='/login' color="inherit">Войти</Button>
-          <Button href='/logout' color="inherit">Выйти</Button>
+          <Button onClick={logoutHandler} color="inherit">Выйти</Button>
         </Toolbar>
       </AppBar>
     </Box>
