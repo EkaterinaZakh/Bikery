@@ -15,18 +15,13 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<AuthState>) => action.payload,
-    logout: (state) => {
-      state.user.status = 'guest';
-      state.accessToken = '';
-    },
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder) => { 
+    builder.addCase(loginThunk.fulfilled, (state, action) => action.payload);
     builder.addCase(logoutThunk.fulfilled, (state, action) => {
       state.user.status = 'guest';
       state.accessToken = '';
-    });
-
-    builder.addCase(loginThunk.fulfilled, (state, action) => action.payload);
+    });                            
     builder.addCase(signupThunk.fulfilled, (state, action) => action.payload);
     builder.addCase(refreshAuth.fulfilled, (state, action) => action.payload);
     builder.addCase(refreshAuth.rejected, (state) => {
@@ -36,6 +31,6 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout } = authSlice.actions;
+export const { login} = authSlice.actions;
 
 export default authSlice.reducer;

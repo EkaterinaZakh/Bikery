@@ -15,7 +15,7 @@ authRouter.post('/signup', async (req, res) => {
 
     const [user, created] = await User.findOrCreate({
       where: { email },
-      defaults: { name, hashpass: await bcrypt.hash(password, 10) },
+      defaults: { name, password: await bcrypt.hash(password, 10) },
     });
 
     if (!created) {
@@ -23,7 +23,7 @@ authRouter.post('/signup', async (req, res) => {
     }
 
     const plainUser = user.get();
-    delete plainUser.hashpass;
+    delete plainUser.password;
 
     const { accessToken, refreshToken } = generateTokens({ user: plainUser });
 
@@ -48,7 +48,7 @@ authRouter.post('/login', async (req, res) => {
 
     if (!user) return res.status(401).json({ message: 'User not found' });
 
-    const valid = await bcrypt.compare(password, user.hashpass);
+    const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) return res.status(401).json({ message: 'Incorrect password' });
 
