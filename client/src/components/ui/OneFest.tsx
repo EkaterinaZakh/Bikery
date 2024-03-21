@@ -13,6 +13,8 @@ import {
 import { styled } from '@mui/material/styles';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import React from 'react';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import type { FestType } from '../../types/fest';
 
 type ExpandMoreProps = {
   expand: boolean;
