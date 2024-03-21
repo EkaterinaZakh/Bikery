@@ -9,9 +9,11 @@ type OneFestProps = {
 export default function OneFest({ fest }: OneFestProps): JSX.Element {
 
   return (
+    
     <Card>
+      <h3>OneFestComp</h3>
       <CardMedia
-        image={fest.image}
+        image="http://i.postimg.cc/P5LNB2dC/fest-photo.png"
         title={fest.name}
       />
       <CardContent>
@@ -22,7 +24,8 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
           {fest.desc}
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          Place: {fest.place}, Date: {fest.date.toLocaleDateString()}
+          {/* {fest.date} */}
+          {/* Place: {fest.place}, Date: {fest.date.toLocaleDateString()} */}
         </Typography>
       </CardContent>
     </Card>

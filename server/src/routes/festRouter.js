@@ -1,6 +1,6 @@
-import express from 'express';
-import { Fest, User } from '../../db/models';
-import verifyAccessToken from '../middlewares/verifyAccessToken';
+const express = require('express');
+const { Fest, User } = require('../../db/models');
+const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const router = express.Router();
 
@@ -11,8 +11,10 @@ router
       order: [['id', 'DESC']],
       include: User,
     });
+    console.log('---', fests);
     res.json(fests);
   })
+
   .post(verifyAccessToken, async (req, res) => {
     try {
       const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
@@ -24,4 +26,4 @@ router
     }
   });
 
-export default router;
+module.exports = router;
