@@ -12,7 +12,7 @@ export default function LoginPage(): JSX.Element {
       const data = Object.fromEntries(new FormData(event.currentTarget)) as LoginForm
       void dispatch(loginThunk(data))
    }
-
+//
   return (
     <div style={{ margin: '10px' }}>
        <h3 style={{textAlign:'center'}}>Войти в аккаунт</h3>
