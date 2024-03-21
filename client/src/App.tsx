@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import MainPage from './components/pages/MainPage'
+import MainPage from './components/pages/MainPage';
 // import NavBar from './components/ui/Navbar';
 // import LoginPage from './components/pages/LoginPage';
 // import PrivateRoute from './components/HOC/PrivateRoute';
@@ -38,7 +38,7 @@ function App(): JSX.Element {
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },
- 
+
         // { path: '/login', element: <LoginPage /> },
         // { path: '/signup', element: <SignupPage /> },
       ],
