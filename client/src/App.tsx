@@ -10,6 +10,8 @@ import SignupPage from './components/pages/auth/SignupPage';
 import PrivateRoute from './components/HOC/PrivateRoute';
 import { refreshAuth } from './redux/slices/auth/thunks';
 import Loader from './components/HOC/Loader';
+import RacesPage from './components/pages/RacesPage';
+import getAllRaceThunk from './redux/slices/race/thunk';
 import getAllCatsThunk from './redux/slices/cats/thunk';
 import ShopPage from './components/pages/ShopPage';
 import getAllProdsThunk from './redux/slices/prod/thunk';
@@ -21,6 +23,8 @@ function App(): JSX.Element {
   const status = useAppSelector((state) => state.auth.user.status);
 
   useEffect(() => {
+    void dispatch(getAllFestsThunk());
+    void dispatch(getAllRaceThunk());
     void dispatch(getAllProdsThunk());
     void dispatch(refreshAuth());
     void dispatch(getAllCatsThunk());
@@ -44,6 +48,7 @@ function App(): JSX.Element {
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },
+        { path: '/races', element: <RacesPage /> },
         { path: '/shop', element: <ShopPage />},
         {
           element: <PrivateRoute isAllowed={status === 'guest'} redirect="/" />,

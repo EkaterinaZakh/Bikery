@@ -17,16 +17,16 @@ export default function NavBar(): JSX.Element {
       ? [
           { name: 'Главная', link: '/' },
           { name: 'Фестивали', link: '/fests' },
-          { name: 'Мотопробеги', link: '/characters/favorites' },
-          { name: 'Магазин', link: '/shop' },
+          { name: 'Мотопробеги', link: '/races' },
+          { name: 'Магазин', link: '/characters/filters' },
           { name: 'Войти', link: '/login' },
           { name: 'Регистрация', link: '/signup' },
         ]
-        : [
-        { name: 'Главная', link: '/' },
-        { name: 'Фестивали', link: '/fests' },
-        { name: 'Мотопробеги', link: '/characters/favorites' },
-        { name: 'Магазин', link: '/shop' },
+      : [
+          { name: 'Главная', link: '/' },
+          { name: 'Фестивали', link: '/fests' },
+          { name: 'Мотопробеги', link: '/races' },
+          { name: 'Магазин', link: '/characters/filters' },
         ];
 
   const logoutHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
