@@ -1,21 +1,37 @@
 import React from 'react';
 import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import type { ProdType } from '../../types/prod';
 
-export default function OneProduct(): JSX.Element {
+type OneProductProps = {
+  prod: ProdType;
+};
+
+export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   return (
     <Card sx={{ display: 'flex' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
-            Шлем
+            {prod.name}
           </Typography>
+
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            10 000 р.
+            {prod.price}
           </Typography>
+
+          <Typography variant="subtitle1" color="text.secondary" component="div">
+            {prod.desc}
+          </Typography>
+
+          <Typography variant="subtitle1" color="text.secondary" component="div">
+            {prod.price}
+          </Typography>
+
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
+
           <Button href="#text-buttons">Купить</Button>
         </CardContent>
       </Box>

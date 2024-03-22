@@ -2,12 +2,16 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/auth/slice';
 import festReducer from './slices/fest/slice';
 import raceReducer from './slices/race/slice';
+import catsReduser from './slices/cats/slice';
+import prodReducer from './slices/prod/slice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     festivals: festReducer,
     motoRaces: raceReducer,
+    categories: catsReduser,
+    products: prodReducer,
   },
 });
 

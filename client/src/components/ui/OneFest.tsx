@@ -1,6 +1,7 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import type { IconButtonProps } from '@mui/material';
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -14,6 +15,8 @@ import { styled } from '@mui/material/styles';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import React from 'react';
 import type { FestType } from '../../types/fest';
+import { useAppDispatch } from '../../redux/hooks';
+import { deleteFestThunk } from '../../redux/slices/fest/thunk';
 
 type ExpandMoreProps = {
   expand: boolean;
@@ -36,10 +39,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export default function OneFest({ fest }: OneFestProps): JSX.Element {
   const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useAppDispatch()
 
   const handleExpandClick = (): void => {
     setExpanded(!expanded);
   };
+
+  const deleteHandler = (event:React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+    void dispatch(deleteFestThunk(fest.id))
+  }
 
   return (
       <Card sx={{ maxWidth: 345 }}>
@@ -54,6 +63,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
+          <Button onClick={deleteHandler} variant='outlined' color='error'>Удалить</Button>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}

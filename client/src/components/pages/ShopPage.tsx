@@ -1,5 +1,24 @@
 import React from 'react';
+import { useAppSelector } from '../../redux/hooks';
+import CatList from '../ui/CatList';
+import OneProduct from '../ui/OneProduct';
+
 
 export default function ShopPage(): JSX.Element {
-  return <div>ShopPage</div>;
+  const categories = useAppSelector((state) => state.categories.categories);
+  const prods = useAppSelector((state) => state.products.prods);
+  return (
+    <>
+    <div>
+    {categories.map((category) => 
+    <CatList key={category.id} category={category}/>)}
+    </div> 
+    <div>
+      <h3>ShopPage</h3>
+      {prods.map((el) => (
+        <OneProduct prod={el} key={el.id} />
+      ))}
+    </div>
+    </>
+  )
 }
