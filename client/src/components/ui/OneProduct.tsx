@@ -9,7 +9,7 @@ type OneProductProps = {
 
 export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   return (
-    <Card sx={{ display: 'flex' }}>
+    <Card sx={{ display: 'flex', border: '1px solid gray' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
@@ -17,15 +17,11 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           </Typography>
 
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {prod.price}
-          </Typography>
-
-          <Typography variant="subtitle1" color="text.secondary" component="div">
             {prod.desc}
           </Typography>
 
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {prod.price}
+          <Typography variant="h6" color="text.secondary" component="div">
+            {prod.price} руб.
           </Typography>
 
           <IconButton aria-label="add to favorites">
@@ -38,7 +34,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
 
       <CardMedia
         component="img"
-        sx={{ width: 151 }}
+        sx={{ width: 150 }}
         image="https://images.unsplash.com/photo-1610900656436-1baa9fbe8d05?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
       />
