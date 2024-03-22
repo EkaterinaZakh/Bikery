@@ -1,16 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/auth/slice'
+import authReducer from './slices/auth/slice';
 import festReducer from './slices/fest/slice';
+import raceReducer from './slices/race/slice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     festivals: festReducer,
+    motoRaces: raceReducer,
   },
 });
-
-
-
 
 export type StoreT = typeof store;
 // Infer the `RootState` and `AppDispatch` types from the store itself

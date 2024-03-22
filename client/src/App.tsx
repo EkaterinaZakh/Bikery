@@ -11,6 +11,8 @@ import SignupPage from './components/pages/SignupPage';
 import PrivateRoute from './components/HOC/PrivateRoute';
 import { refreshAuth } from './redux/slices/auth/thunks';
 import Loader from './components/HOC/Loader';
+import RacesPage from './components/pages/RacesPage';
+import getAllRaceThunk from './redux/slices/race/thunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,6 +20,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getAllFestsThunk());
+    void dispatch(getAllRaceThunk());
     void dispatch(refreshAuth());
   }, []);
 
@@ -38,6 +41,7 @@ function App(): JSX.Element {
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },
+        { path: '/races', element: <RacesPage /> },
         {
           element: <PrivateRoute isAllowed={status === 'guest'} redirect="/" />,
           children: [

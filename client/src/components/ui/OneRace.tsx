@@ -1,23 +1,31 @@
 import React from 'react';
 import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import type { RaceType } from '../../types/race';
 
-export default function OneRace(): JSX.Element {
+type OneRaceProps = {
+  race: RaceType;
+};
+
+export default function OneRace({ race }: OneRaceProps): JSX.Element {
   return (
     <Card sx={{ display: 'flex' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
-            Маршрут до Химок
+            {race.name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            Сложный капец
+            {/* {race.date} */}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            Длинна: миллион км
+            {race.length}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            Дата: эври дей
+            {race.desc}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary" component="div">
+            {race.rateCounter}
           </Typography>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
@@ -25,12 +33,7 @@ export default function OneRace(): JSX.Element {
         </CardContent>
       </Box>
 
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image="https://unsplash.com/photos/mountains-surrounded-by-sea-of-clouds-during-daytime-JoQ__1tkXmY"
-        alt=""
-      />
+      <CardMedia component="img" sx={{ width: 151 }} image={race.image} alt="" />
     </Card>
   );
 }
