@@ -10,7 +10,6 @@ export default function SignupPage(): JSX.Element {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.currentTarget)) as SignupForm;
-    // console.log(data);
 
     void dispatch(signupThunk(data));
   };

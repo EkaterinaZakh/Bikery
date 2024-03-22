@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import React from 'react';
+import { useAppSelector } from '../../redux/hooks';
 import OneFest from '../ui/OneFest';
-import getAllFestsThunk from '../../redux/slices/fest/thunk';
 
 export default function FestPage(): JSX.Element {
   const fests = useAppSelector((state) => state.festivals.fests);
