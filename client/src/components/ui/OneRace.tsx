@@ -1,13 +1,22 @@
 import React from 'react';
-import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { RaceType } from '../../types/race';
+import { deleteRaceThunk } from '../../redux/slices/race/thunk';
+import { useAppDispatch } from '../../redux/hooks';
 
 type OneRaceProps = {
   race: RaceType;
 };
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+    void dispatch(deleteRaceThunk(race.id));
+  };
+
   return (
     <Card sx={{ display: 'flex', marginBottom: 3 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -30,6 +39,9 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
+          <Button onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
+            Удалить
+          </Button>
         </CardContent>
       </Box>
 

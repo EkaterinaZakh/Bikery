@@ -23,8 +23,8 @@ class FestService {
 
   async deleteFestById(id: FestType['id']): Promise<void> {
     const res = await this.client.delete(`fest/${id}`);
-    if(res.status !== 200) {
-      return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`))
+    if (res.status !== 200) {
+      return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`));
     }
   }
 }

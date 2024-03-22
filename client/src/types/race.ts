@@ -19,4 +19,5 @@ export type AddRaceForm = {
   desc: string;
   length: number;
   date: Date;
+  rateCounter: number;
 };
