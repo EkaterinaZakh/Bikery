@@ -1,5 +1,5 @@
-import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { Box, Button, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { AddFestForm } from '../../types/fest';
 import { addFestThunk } from '../../redux/slices/fest/thunk';
@@ -15,8 +15,8 @@ export default function NewFestForm(): JSX.Element {
     date: new Date(),
   });
 
-  const hangleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setCarData({ ...carData, [event.target.name]: event.target.value });
+  const hangleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setCarData({ ...carData, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
