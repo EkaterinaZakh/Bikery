@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import type { FestType } from '../../../types/fest';
+import type { AddFestForm, FestType } from '../../../types/fest';
 import apiAxiosInstance from './apiAxiosInstance';
 
 class FestService {
@@ -12,6 +12,20 @@ class FestService {
         new Error(`Wrong status code (expected 200, received: ${response.status})`),
       );
     return response.data;
+  }
+
+  async createNewFest(formData: AddFestForm): Promise<FestType> {
+    const res = await this.client.post<FestType>('/fest', formData);
+    if (res.status !== 201)
+      return Promise.reject(new Error(`Wrong status code (expected 201, received: ${res.status}`));
+    return res.data;
+  }
+
+  async deleteFestById(id: FestType['id']): Promise<void> {
+    const res = await this.client.delete(`fest/${id}`);
+    if(res.status !== 200) {
+      return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`))
+    }
   }
 }
 

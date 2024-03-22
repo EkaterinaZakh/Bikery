@@ -4,13 +4,13 @@ import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
 import Root from './components/Root';
 import FestPage from './components/pages/FestPage';
-import getAllFestsThunk from './redux/slices/fest/thunk';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import LoginPage from './components/pages/LoginPage';
-import SignupPage from './components/pages/SignupPage';
+import LoginPage from './components/pages/auth/LoginPage';
+import SignupPage from './components/pages/auth/SignupPage';
 import PrivateRoute from './components/HOC/PrivateRoute';
 import { refreshAuth } from './redux/slices/auth/thunks';
 import Loader from './components/HOC/Loader';
+import { getAllFestsThunk } from './redux/slices/fest/thunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

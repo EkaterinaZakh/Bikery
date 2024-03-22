@@ -8,6 +8,14 @@ export type FestType = {
     date: Date;
   };
 
+  export type AddFestForm = {
+    name: string;
+    desc: string;
+    image: string;
+    place: string;
+    date: Date;
+  }
+
   export type FestsStateType = {
     fests: FestType[];
   }
