@@ -10,15 +10,21 @@ import SignupPage from './components/pages/auth/SignupPage';
 import PrivateRoute from './components/HOC/PrivateRoute';
 import { refreshAuth } from './redux/slices/auth/thunks';
 import Loader from './components/HOC/Loader';
+import getAllCatsThunk from './redux/slices/cats/thunk';
+import ShopPage from './components/pages/ShopPage';
+import getAllProdsThunk from './redux/slices/prod/thunk';
 import { getAllFestsThunk } from './redux/slices/fest/thunk';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.auth.user.status);
 
   useEffect(() => {
-    void dispatch(getAllFestsThunk());
+    void dispatch(getAllProdsThunk());
     void dispatch(refreshAuth());
+    void dispatch(getAllCatsThunk());
+    void dispatch(getAllFestsThunk());
   }, []);
 
   const router = createBrowserRouter([
@@ -38,6 +44,7 @@ function App(): JSX.Element {
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },
+        { path: '/shop', element: <ShopPage />},
         {
           element: <PrivateRoute isAllowed={status === 'guest'} redirect="/" />,
           children: [
