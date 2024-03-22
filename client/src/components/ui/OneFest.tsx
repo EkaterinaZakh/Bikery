@@ -66,7 +66,6 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        {/* <Button  onClick={deleteHandler} variant='outlined' color='error'>Удалить</Button> */}
         {user.isAdmin === true && (
           <Button onClick={deleteHandler} variant="outlined" color="error">
             Удалить
