@@ -23,7 +23,6 @@ function App(): JSX.Element {
   const status = useAppSelector((state) => state.auth.user.status);
 
   useEffect(() => {
-    void dispatch(getAllFestsThunk());
     void dispatch(getAllRaceThunk());
     void dispatch(getAllProdsThunk());
     void dispatch(refreshAuth());
