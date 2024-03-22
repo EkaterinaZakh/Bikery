@@ -1,18 +1,23 @@
 import type { AxiosInstance } from 'axios';
 import apiAxiosInstance from './apiAxiosInstance';
+import type { ProdType } from '../../../types/prod';
 
-
-class CharacterService {
+class ProdService {
   constructor(private client: AxiosInstance) {}
 
-//   async createNewChar(formData: AddCharacterForm): Promise<CharacterType> {
-//     const res = await this.client.post<CharacterType>('/characters', formData);
-//     if (res.status !== 201)
-//       return Promise.reject(
-//         new Error(`Wrong status code (expected 201, received: ${res.status}`),
-//       );
-//     return res.data;
-//   }
+  async getAllProds(): Promise<ProdType[]> {
+    const response = await this.client<ProdType[]>('/products');
+    if (response.status !== 200)
+      return Promise.reject(
+        new Error(`Wrong status code (expected 200, received: ${response.status})`),
+      );
+    return response.data;
+  }
+}
+
+const prodService = new ProdService(apiAxiosInstance);
+
+export default prodService;
 
 //   async getAllChars(): Promise<CharacterType[]> {
 //     const response = await this.client<CharacterType[]>('/characters');
@@ -23,6 +28,15 @@ class CharacterService {
 //         ),
 //       );
 //     return response.data;
+//   }
+
+//   async createNewChar(formData: AddCharacterForm): Promise<CharacterType> {
+//     const res = await this.client.post<CharacterType>('/characters', formData);
+//     if (res.status !== 201)
+//       return Promise.reject(
+//         new Error(`Wrong status code (expected 201, received: ${res.status}`),
+//       );
+//     return res.data;
 //   }
 
 //   async getCharById(id: CharacterType['id']): Promise<CharacterType> {
@@ -50,8 +64,4 @@ class CharacterService {
 //     if (res.status === 200) return res.data;
 //     return Promise.reject(new Error('Falied editing char'));
 //   }
-}
-
-const charService = new CharacterService(apiAxiosInstance);
-
-export default charService;
+// }

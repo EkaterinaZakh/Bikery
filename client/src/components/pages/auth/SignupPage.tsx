@@ -4,15 +4,13 @@ import type { SignupForm } from '../../../types/auth';
 import { signupThunk } from '../../../redux/slices/auth/thunks';
 import { useAppDispatch } from '../../../redux/hooks';
 
-
 export default function SignupPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const data = Object.fromEntries(new FormData (event.currentTarget)) as SignupForm;
-    // console.log(data);
-    
+    const data = Object.fromEntries(new FormData(event.currentTarget)) as SignupForm;
+
     void dispatch(signupThunk(data));
   };
 

@@ -4,7 +4,6 @@ import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
 import Root from './components/Root';
 import FestPage from './components/pages/FestPage';
-import getAllFestsThunk from './redux/slices/fest/thunk';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import LoginPage from './components/pages/auth/LoginPage';
 import SignupPage from './components/pages/auth/SignupPage';
@@ -13,15 +12,18 @@ import { refreshAuth } from './redux/slices/auth/thunks';
 import Loader from './components/HOC/Loader';
 import getAllCatsThunk from './redux/slices/cats/thunk';
 import ShopPage from './components/pages/ShopPage';
+import getAllProdsThunk from './redux/slices/prod/thunk';
+import getAllFestsThunk from './redux/slices/fest/thunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.auth.user.status);
 
   useEffect(() => {
-    void dispatch(getAllFestsThunk());
+    void dispatch(getAllProdsThunk());
     void dispatch(refreshAuth());
     void dispatch(getAllCatsThunk());
+    void dispatch(getAllFestsThunk());
   }, []);
 
   const router = createBrowserRouter([

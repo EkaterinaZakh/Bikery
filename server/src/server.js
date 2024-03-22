@@ -7,6 +7,7 @@ const authRouter = require('./routes/authRouter');
 const tokensRouter = require('./routes/tokensRouter');
 const festRouter = require('./routes/festRouter');
 const categoryRouter = require('./routes/categoryRouter');
+const prodRouter = require('./routes/prodRouter');
 require('dotenv').config();
 
 const app = express();
@@ -26,5 +27,6 @@ app.use('/api/tokens', tokensRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/fest', festRouter);
 app.use('/api/categories', categoryRouter);
+app.use('/api/products', prodRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
