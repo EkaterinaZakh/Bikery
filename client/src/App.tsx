@@ -13,7 +13,8 @@ import Loader from './components/HOC/Loader';
 import getAllCatsThunk from './redux/slices/cats/thunk';
 import ShopPage from './components/pages/ShopPage';
 import getAllProdsThunk from './redux/slices/prod/thunk';
-import getAllFestsThunk from './redux/slices/fest/thunk';
+import { getAllFestsThunk } from './redux/slices/fest/thunk';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
