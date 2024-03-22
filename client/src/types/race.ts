@@ -13,7 +13,7 @@ export type RaceStateType = {
   races: RaceType[];
 };
 
-export type AddRaceForm = {
+export type AddRaceFormType = {
   name: string;
   image: string;
   desc: string;

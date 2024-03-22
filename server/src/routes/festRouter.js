@@ -11,7 +11,6 @@ router
       order: [['id', 'DESC']],
       include: User,
     });
-    // console.log('---', fests);
     res.json(fests);
   })
 

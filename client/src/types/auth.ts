@@ -4,7 +4,6 @@ export type BackendUser = {
   id: number;
   name: string;
   email: string;
-  isAdmin: boolean;
 };
 
 export type UserType =
@@ -16,7 +15,7 @@ export type UserType =
 
 export type AuthState = {
   accessToken: string;
-  user: UserType;
+  user: UserType & {isAdmin?: boolean};
 };
 
 export type LoginForm = {

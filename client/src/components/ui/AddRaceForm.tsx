@@ -1,16 +1,16 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks';
-import { AddRaceForm } from '../../types/race';
+import type { AddRaceFormType } from '../../types/race';
 import { addRaceThunk } from '../../redux/slices/race/thunk';
 
 export default function AddRaceForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const [formData, newFormData] = useState<AddRaceForm>({
+  const [formData, newFormData] = useState<AddRaceFormType>({
     name: '',
     image: '',
     desc: '',
-    length,
+    length: 0,
     rateCounter: 0,
     date: new Date(),
   });
