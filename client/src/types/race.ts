@@ -12,3 +12,11 @@ export type RaceType = {
 export type RaceStateType = {
   races: RaceType[];
 };
+
+export type AddRaceForm = {
+  name: string;
+  image: string;
+  desc: string;
+  length: number;
+  date: Date;
+};

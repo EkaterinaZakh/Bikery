@@ -9,14 +9,14 @@ type OneRaceProps = {
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
   return (
-    <Card sx={{ display: 'flex' }}>
+    <Card sx={{ display: 'flex', marginBottom: 3 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
+        <CardContent sx={{ paddingLeft: 2 }}>
           <Typography component="div" variant="h5">
             {race.name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {/* {race.date} */}
+            {race.date}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.length}
@@ -24,16 +24,21 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.desc}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
+          {/* <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.rateCounter}
-          </Typography>
+          </Typography> */}
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
         </CardContent>
       </Box>
 
-      <CardMedia component="img" sx={{ width: 151 }} image={race.image} alt="" />
+      <CardMedia
+        component="img"
+        sx={{ width: '30%', marginLeft: 'auto' }}
+        image={race.image}
+        alt=""
+      />
     </Card>
   );
 }
