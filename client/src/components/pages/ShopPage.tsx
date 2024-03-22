@@ -5,7 +5,7 @@ import OneProduct from '../ui/OneProduct';
 
 
 export default function ShopPage(): JSX.Element {
-  const categories = useAppSelector((state) => state.categories.categories)
+  const categories = useAppSelector((state) => state.categories.categories);
   const prods = useAppSelector((state) => state.products.prods);
   return (
     <>
