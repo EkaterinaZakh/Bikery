@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import getAllProdsThunk from './thunk';
-import type { ProdStateType, ProdType } from '../../../types/prod';
+import { addProdThunk, deleteProdThunk, getAllProdsThunk } from './thunk';
+import type { ProdStateType } from '../../../types/prod';
 
 const initialState: ProdStateType = {
   prods: [],
@@ -14,6 +13,14 @@ export const prodsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllProdsThunk.fulfilled, (state, action) => {
       state.prods = action.payload;
+    });
+
+    builder.addCase(addProdThunk.fulfilled, (state, action) => {
+      state.prods.unshift(action.payload);
+    });
+
+    builder.addCase(deleteProdThunk.fulfilled, (state, action) => {
+      state.prods = state.prods?.filter((product) => product.id !== action.payload);
     });
   },
 });

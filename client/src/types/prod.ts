@@ -9,3 +9,9 @@ export type ProdType = {
 export type ProdStateType = {
   prods: ProdType[];
 };
+
+export type AddProdForm = {
+  name: string;
+  desc: string;
+  price: string;
+};
