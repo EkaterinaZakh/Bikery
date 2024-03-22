@@ -4,6 +4,7 @@ export type BackendUser = {
   id: number;
   name: string;
   email: string;
+  isAdmin: boolean;
 };
 
 export type UserType =

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,37 +6,32 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Link as RouterLink } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { logoutThunk } from '../../redux/slices/auth/thunks';
+import { useAppSelector } from '../../redux/hooks';
+import BaseModal from './BaseModal';
+import AuthList from './AuthList';
+
+type NavItem = {
+  name: string;
+  link: string;
+};
 
 export default function NavBar(): JSX.Element {
-  const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.auth.user);
-  const navs =
-    user.status === 'guest'
-      ? [
-          { name: 'Главная', link: '/' },
-          { name: 'Фестивали', link: '/fests' },
-          { name: 'Мотопробеги', link: '/characters/favorites' },
-          { name: 'Магазин', link: '/shop' },
-          { name: 'Войти', link: '/login' },
-          { name: 'Регистрация', link: '/signup' },
-        ]
-        : [
-        { name: 'Главная', link: '/' },
-        { name: 'Фестивали', link: '/fests' },
-        { name: 'Мотопробеги', link: '/characters/favorites' },
-        { name: 'Магазин', link: '/shop' },
-        ];
+  const [openModal, setOpenModal] = useState(false);
+  const navs: NavItem[] = [
+    { name: 'Главная', link: '/' },
+    { name: 'Фестивали', link: '/fests' },
+    { name: 'Мотопробеги', link: '/characters/favorites' },
+    { name: 'Магазин', link: '/shop' },
+  ];
 
-  const logoutHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    e.preventDefault();
-    void dispatch(logoutThunk());
+  const handleCloseModal = (): void => {
+    setOpenModal(false);
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar sx={{borderRadius: '10px', backgroundColor: '#15030366'}} position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
@@ -49,11 +44,16 @@ export default function NavBar(): JSX.Element {
               {nav.name}
             </Button>
           ))}
-          {user.status === 'logged' && (
-            <Button onClick={logoutHandler} color="inherit">
-              Выйти
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setOpenModal(true)}
+          >
+            {user.status !== 'logged' ? 'Присоединиться?' : 'Выйти?'}
+          </Button>
+          <BaseModal open={openModal} onClose={handleCloseModal}>
+            <AuthList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
+          </BaseModal>
         </Toolbar>
       </AppBar>
     </Box>
