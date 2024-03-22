@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, FormControl, InputLabel, Input, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import type { LoginForm, SignupForm } from '../../types/auth';
 import { loginThunk, logoutThunk, signupThunk } from '../../redux/slices/auth/thunks';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -14,6 +15,7 @@ export default function AuthList({ onSubmit, onCancel }: AuthListProps): JSX.Ele
   const [formData, setFormData] = useState({ userType: 'client' });
   const status = useAppSelector((state) => state.auth.user.status)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const paperStyle = {
     backgroundColor: '#fff',
@@ -37,6 +39,7 @@ export default function AuthList({ onSubmit, onCancel }: AuthListProps): JSX.Ele
     const data = Object.fromEntries(new FormData(event.currentTarget)) as LoginForm;
     void dispatch(loginThunk(data))
     onCancel?.()
+    event.currentTarget.reset()
   };
 
   const signupHandler = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -44,12 +47,14 @@ export default function AuthList({ onSubmit, onCancel }: AuthListProps): JSX.Ele
     const data = Object.fromEntries(new FormData(event.currentTarget)) as SignupForm;
     void dispatch(signupThunk(data)).unwrap().then(() => onSubmit?.())
     onCancel?.()
+    event.currentTarget.reset()
   };
 
   const logoutHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     void dispatch(logoutThunk());
     onCancel?.();
+    navigate('/')
   };
   
   return (

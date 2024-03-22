@@ -25,11 +25,13 @@ router
     }
   });
 
-router.route('/:id').delete(verifyAccessToken, async (req, res) => {
-  await Race.destroy({
-    where: { id: req.params.id },
+router
+  .route('/:id')
+  .delete(verifyAccessToken, async (req, res) => {
+    await Race.destroy({
+      where: { id: req.params.id },
+    });
+    res.sendStatus(200);
   });
-  res.sendStatus(200);
-});
 
 module.exports = router;

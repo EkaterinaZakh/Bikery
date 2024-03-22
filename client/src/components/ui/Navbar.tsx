@@ -21,7 +21,7 @@ export default function NavBar(): JSX.Element {
   const navs: NavItem[] = [
     { name: 'Главная', link: '/' },
     { name: 'Фестивали', link: '/fests' },
-    { name: 'Мотопробеги', link: '/characters/favorites' },
+    { name: 'Мотопробеги', link: 'races' },
     { name: 'Магазин', link: '/shop' },
   ];
 
