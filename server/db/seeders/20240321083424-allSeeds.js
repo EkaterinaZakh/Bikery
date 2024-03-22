@@ -1,3 +1,4 @@
+const { hashSync } = require('bcrypt');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -7,7 +8,8 @@ module.exports = {
         {
           name: 'admin',
           email: 'admin@admin',
-          password: '1',
+          password: hashSync('1', 10),
+          isAdmin: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

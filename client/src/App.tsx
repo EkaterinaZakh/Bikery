@@ -2,33 +2,33 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
-// import NavBar from './components/ui/Navbar';
-// import LoginPage from './components/pages/LoginPage';
-// import PrivateRoute from './components/HOC/PrivateRoute';
-// import SignupPage from './components/pages/SignupPage';
 import Root from './components/Root';
 import FestPage from './components/pages/FestPage';
 import getAllFestsThunk from './redux/slices/fest/thunk';
-import { useAppDispatch } from './redux/hooks';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import LoginPage from './components/pages/LoginPage';
+import SignupPage from './components/pages/SignupPage';
+import PrivateRoute from './components/HOC/PrivateRoute';
+import { refreshAuth } from './redux/slices/auth/thunks';
+import Loader from './components/HOC/Loader';
 
 function App(): JSX.Element {
-  // return (
-  //   <div className="App">
-  //     <NavBar/>
-  //     <h1>Hello, world!</h1>
-  //   </div>
-  // );
-
   const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.auth.user.status);
 
   useEffect(() => {
     void dispatch(getAllFestsThunk());
+    void dispatch(refreshAuth());
   }, []);
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Root />,
+      element: (
+        <Loader loading={status === 'unknown'}>
+          <Root />
+        </Loader>
+      ),
       errorElement: (
         <>
           <h1>Ошибка</h1>
@@ -38,9 +38,13 @@ function App(): JSX.Element {
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },
-
-        // { path: '/login', element: <LoginPage /> },
-        // { path: '/signup', element: <SignupPage /> },
+        {
+          element: <PrivateRoute isAllowed={status === 'guest'} redirect="/" />,
+          children: [
+            { path: '/login', element: <LoginPage /> },
+            { path: '/signup', element: <SignupPage /> },
+          ],
+        },
       ],
     },
   ]);
