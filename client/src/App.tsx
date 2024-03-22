@@ -5,9 +5,9 @@ import MainPage from './components/pages/MainPage';
 import Root from './components/Root';
 import FestPage from './components/pages/FestPage';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import LoginPage from './components/pages/auth/LoginPage';
-import SignupPage from './components/pages/auth/SignupPage';
-import PrivateRoute from './components/HOC/PrivateRoute';
+// import LoginPage from './components/pages/auth/LoginPage';
+// import SignupPage from './components/pages/auth/SignupPage';
+// import PrivateRoute from './components/HOC/PrivateRoute';
 import { refreshAuth } from './redux/slices/auth/thunks';
 import Loader from './components/HOC/Loader';
 import RacesPage from './components/pages/RacesPage';
@@ -23,7 +23,6 @@ function App(): JSX.Element {
   const status = useAppSelector((state) => state.auth.user.status);
 
   useEffect(() => {
-    void dispatch(getAllFestsThunk());
     void dispatch(getAllRaceThunk());
     void dispatch(getAllProdsThunk());
     void dispatch(refreshAuth());
@@ -50,13 +49,13 @@ function App(): JSX.Element {
         { path: '/fests', element: <FestPage /> },
         { path: '/races', element: <RacesPage /> },
         { path: '/shop', element: <ShopPage />},
-        {
-          element: <PrivateRoute isAllowed={status === 'guest'} redirect="/" />,
-          children: [
-            { path: '/login', element: <LoginPage /> },
-            { path: '/signup', element: <SignupPage /> },
-          ],
-        },
+        // {
+        //   element: <PrivateRoute isAllowed={status === 'guest'} redirect="/" />,
+        //   children: [
+        //     { path: '/login', element: <LoginPage /> },
+        //     { path: '/signup', element: <SignupPage /> },
+        //   ],
+        // },
       ],
     },
   ]);
