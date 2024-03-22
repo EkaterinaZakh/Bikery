@@ -1,27 +1,18 @@
-// import React from 'react';
-// import { Spinner } from 'reactstrap';
+import React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
-// type LoaderProps = {
-//   children: JSX.Element;
-//   loading: boolean;
-// };
+type LoaderProps = {
+  children: JSX.Element;
+  loading: boolean;
+};
 
-// export default function Loader({
-//   children,
-//   loading,
-// }: LoaderProps): JSX.Element {
-//   if (loading)
-//     return (
-//       <Spinner
-//         color="primary"
-//         style={{
-//           height: '10rem',
-//           width: '10rem',
-//         }}
-//         type="grow"
-//       >
-//         Loading...
-//       </Spinner>
-//     );
-//   return children;
-// }
+export default function Loader({ children, loading }: LoaderProps): JSX.Element {
+  if (loading)
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
+  return children;
+}

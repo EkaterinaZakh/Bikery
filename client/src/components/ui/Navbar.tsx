@@ -5,46 +5,55 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useAppDispatch } from '../../redux/hooks';
+import { Link as RouterLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutThunk } from '../../redux/slices/auth/thunks';
 
 export default function NavBar(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.auth.user);
+  const navs =
+    user.status === 'guest'
+      ? [
+          { name: 'Главная', link: '/' },
+          { name: 'Фестивали', link: '/fests' },
+          { name: 'Мотопробеги', link: '/characters/favorites' },
+          { name: 'Магазин', link: '/characters/filters' },
+          { name: 'Войти', link: '/login' },
+          { name: 'Регистрация', link: '/signup' },
+        ]
+        : [
+        { name: 'Главная', link: '/' },
+        { name: 'Фестивали', link: '/fests' },
+        { name: 'Мотопробеги', link: '/characters/favorites' },
+        { name: 'Магазин', link: '/characters/filters' },
+        ];
 
-   const dispatch = useAppDispatch()
-
-   const logoutHandler = ():void => {
-      void dispatch(logoutThunk())
-   }
+  const logoutHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    void dispatch(logoutThunk());
+  };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            {/* <MenuIcon /> */}
           </IconButton>
-          <Typography  variant="h6" component="div" sx={{ marginRight:'10px'}}>
-          <Button href='/' color="inherit">Главная</Button>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {user.status === 'logged' ? user.name : 'Гость'}
           </Typography>
-          <Typography variant="h6" component="div" sx={{ marginRight:'10px'}}>
-          <Button href='/fests' color="inherit">Фестивали</Button>
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ marginRight:'10px'}}>
-          <Button color="inherit">Байкшоп</Button>
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 20 }}>
-          <Button color="inherit">Маршруты</Button>
-          </Typography>
-          <Button href='/signup' color="inherit">Регистрация</Button>
-          <Button href='/login' color="inherit">Войти</Button>
-          <Button onClick={logoutHandler} color="inherit">Выйти</Button>
+          {navs.map((nav) => (
+            <Button key={nav.name} component={RouterLink} to={nav.link} color="inherit">
+              {nav.name}
+            </Button>
+          ))}
+          {user.status === 'logged' && (
+            <Button onClick={logoutHandler} color="inherit">
+              Выйти
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
