@@ -18,7 +18,7 @@ export default function NavBar(): JSX.Element {
           { name: 'Главная', link: '/' },
           { name: 'Фестивали', link: '/fests' },
           { name: 'Мотопробеги', link: '/characters/favorites' },
-          { name: 'Магазин', link: '/characters/filters' },
+          { name: 'Магазин', link: '/shop' },
           { name: 'Войти', link: '/login' },
           { name: 'Регистрация', link: '/signup' },
         ]
@@ -26,7 +26,7 @@ export default function NavBar(): JSX.Element {
         { name: 'Главная', link: '/' },
         { name: 'Фестивали', link: '/fests' },
         { name: 'Мотопробеги', link: '/characters/favorites' },
-        { name: 'Магазин', link: '/characters/filters' },
+        { name: 'Магазин', link: '/shop' },
         ];
 
   const logoutHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
