@@ -6,7 +6,6 @@ import BaseModal from '../ui/BaseModal';
 import EditFestList from '../ui/EditFestList';
 import { clearSelectedFest } from '../../redux/slices/fest/slice';
 
-
 export default function FestPage(): JSX.Element {
   const fests = useAppSelector((state) => state.festivals.fests);
   const selectedFest  = useAppSelector((store) => store.festivals.selectedFest)
