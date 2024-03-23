@@ -23,6 +23,8 @@ export default function NavBar(): JSX.Element {
     { name: 'Фестивали', link: '/fests' },
     { name: 'Мотопробеги', link: 'races' },
     { name: 'Магазин', link: '/shop' },
+    { name: 'Корзина', link: '/cart' },
+    { name: 'Избранное', link: '/wish' },
   ];
 
   const handleCloseModal = (): void => {
@@ -31,7 +33,7 @@ export default function NavBar(): JSX.Element {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={{borderRadius: '10px', backgroundColor: '#15030366'}} position="static">
+      <AppBar sx={{ borderRadius: '10px', backgroundColor: '#15030366' }} position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
@@ -44,11 +46,7 @@ export default function NavBar(): JSX.Element {
               {nav.name}
             </Button>
           ))}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => setOpenModal(true)}
-          >
+          <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
             {user.status !== 'logged' ? 'Присоединиться?' : 'Выйти?'}
           </Button>
           <BaseModal open={openModal} onClose={handleCloseModal}>
