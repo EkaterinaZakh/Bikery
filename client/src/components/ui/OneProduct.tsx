@@ -21,7 +21,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   };
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray' }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px'}}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardMedia
           component="img"
