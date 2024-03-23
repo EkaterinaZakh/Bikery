@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import React from 'react';
 import OneProduct from '../ui/OneProduct';
 import { useAppSelector } from '../../redux/hooks';
@@ -11,7 +11,6 @@ export default function CartPage(): JSX.Element {
       <h2 className="cart_h">Корзина</h2>
 
       <div className="cart_content">
-        {/* <h2 className="cart_h">Корзина</h2> */}
         <div className="cart_list">
           <h3>Выбранные товары </h3>
           {prods.map((el) => (

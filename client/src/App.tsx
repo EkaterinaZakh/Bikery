@@ -14,6 +14,7 @@ import ShopPage from './components/pages/ShopPage';
 import { getAllProdsThunk } from './redux/slices/prod/thunk';
 import { getAllFestsThunk } from './redux/slices/fest/thunk';
 import CartPage from './components/pages/CartPage';
+import WishListPage from './components/pages/WishListPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -47,6 +48,7 @@ function App(): JSX.Element {
         { path: '/races', element: <RacesPage /> },
         { path: '/shop', element: <ShopPage /> },
         { path: '/cart', element: <CartPage /> },
+        { path: '/wish', element: <WishListPage /> },
       ],
     },
   ]);

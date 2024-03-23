@@ -24,6 +24,7 @@ export default function NavBar(): JSX.Element {
     { name: 'Мотопробеги', link: 'races' },
     { name: 'Магазин', link: '/shop' },
     { name: 'Корзина', link: '/cart' },
+    { name: 'Избранное', link: '/wish' },
   ];
 
   const handleCloseModal = (): void => {

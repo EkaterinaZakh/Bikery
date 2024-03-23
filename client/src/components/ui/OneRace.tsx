@@ -19,7 +19,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
   };
 
   return (
-    <Card sx={{ display: 'flex', marginBottom: 3 }}>
+    <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ paddingLeft: 2 }}>
           <Typography component="div" variant="h5">
