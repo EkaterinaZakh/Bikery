@@ -25,16 +25,13 @@ export default function NewFestForm(): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '10px' }}>
-      <h3 style={{ textAlign: 'center' }}>Добавить фестиваль</h3>
+    <div style={{ margin: '10px', display: "flex", justifyContent: 'center', border: "1px solid red"}}>
 
       {user.isAdmin === true && (
         <Box
           onSubmit={submitHandler}
           component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
+          sx={{display: "flex"}}
           noValidate
           autoComplete="off"
         >
@@ -91,7 +88,7 @@ export default function NewFestForm(): JSX.Element {
               type="text"
             />
             <Button
-              style={{ marginTop: '15px', width: '15%' }}
+              style={{ marginTop: '15px' }}
               type="submit"
               variant="contained"
               color="success"

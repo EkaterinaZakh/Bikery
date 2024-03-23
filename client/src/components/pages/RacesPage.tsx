@@ -4,14 +4,16 @@ import OneRace from '../ui/OneRace';
 import AddRaceForm from '../ui/AddRaceForm';
 
 export default function RacesPage(): JSX.Element {
-  const races = useAppSelector((state) => state.motoRaces.races);
+  const races = useAppSelector((store) => store.motoRaces.races);
+  const user = useAppSelector((state) => state.auth.user);
   return (
     <div>
-      <h1>RacePage</h1>
-      <AddRaceForm />
-      {races.map((race) => (
-        <OneRace race={race} key={race.id} />
-      ))}
+      <div>{user.isAdmin === true && <AddRaceForm />},</div>
+      <div>
+        {races.map((race) => (
+          <OneRace race={race} key={race.id} />
+        ))}
+      </div>
     </div>
   );
 }

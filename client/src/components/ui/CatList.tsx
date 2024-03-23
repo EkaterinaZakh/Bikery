@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Box, Button } from '@mui/material';
 import type { CategoryType } from '../../types/cats';
 
 type OneCategoryProps = {
-    category: CategoryType;
-  };
+  category: CategoryType;
+};
 
-export default function CatList({category}: OneCategoryProps): JSX.Element {
-    
+export default function CatList({ category }: OneCategoryProps): JSX.Element {
   return (
-    <div>
-        {category.name}
-    </div>
-  )
+    <Box sx={{ marginLeft: '20px', border: "1px solid black" }}>
+      <Button>{category.name}</Button>
+    </Box>
+  );
 }
