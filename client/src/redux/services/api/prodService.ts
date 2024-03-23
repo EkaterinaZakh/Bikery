@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import apiAxiosInstance from './apiAxiosInstance';
-import type { ProdType } from '../../../types/prod';
+import type { AddProdForm, ProdType } from '../../../types/prod';
 
 class ProdService {
   constructor(private client: AxiosInstance) {}
@@ -12,6 +12,20 @@ class ProdService {
         new Error(`Wrong status code (expected 200, received: ${response.status})`),
       );
     return response.data;
+  }
+
+  async createNewProd(formData: AddProdForm): Promise<ProdType> {
+    const res = await this.client.post<ProdType>('/products', formData);
+    if (res.status !== 201)
+      return Promise.reject(new Error(`Wrond status code (expected 201, received: ${res.status}`));
+    return res.data;
+  }
+
+  async deleteProdById(id: ProdType['id']): Promise<void> {
+    const res = await this.client.delete(`/products/${id}`);
+    if (res.status !== 200) {
+      return Promise.reject(new Error(`Wrond status code (expected 200, received: ${res.status}`))
+    }
   }
 }
 

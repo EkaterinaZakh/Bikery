@@ -1,31 +1,45 @@
 import React from 'react';
 import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
 import type { ProdType } from '../../types/prod';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { deleteProdThunk } from '../../redux/slices/prod/thunk';
 
 type OneProductProps = {
   prod: ProdType;
 };
 
 export default function OneProduct({ prod }: OneProductProps): JSX.Element {
+  const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
+
+  const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    void dispatch(deleteProdThunk(prod.id));
+  };
+
   return (
-    <Card sx={{ display: 'flex' }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px'}}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <CardMedia
+          component="img"
+          sx={{ width: 150 }}
+          image="https://images.unsplash.com/photo-1533573271545-c1604421c980?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {prod.name}
           </Typography>
 
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {prod.price}
-          </Typography>
-
-          <Typography variant="subtitle1" color="text.secondary" component="div">
             {prod.desc}
           </Typography>
 
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {prod.price}
+          <Typography variant="h6" color="text.secondary" component="div">
+            {prod.price} руб.
           </Typography>
 
           <IconButton aria-label="add to favorites">
@@ -36,12 +50,24 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
         </CardContent>
       </Box>
 
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image="https://images.unsplash.com/photo-1610900656436-1baa9fbe8d05?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt=""
-      />
+      {user.isAdmin === true && (
+        <div>
+          <Button variant="outlined" startIcon={<BorderColorRoundedIcon />}>
+            Правки
+          </Button>
+
+          <Button onClick={deleteHandler} variant="outlined" startIcon={<DeleteIcon />}>
+            Удалить
+          </Button>
+        </div>
+      )}
     </Card>
   );
 }
+
+// <Button variant="outlined" startIcon={<DeleteIcon />}>
+//   Delete
+// </Button>
+// <Button variant="contained" endIcon={<SendIcon />}>
+//   Send
+// </Button>

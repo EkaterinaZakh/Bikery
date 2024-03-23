@@ -28,7 +28,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {race.date}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {race.length}
+            {race.length} Км
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.desc}

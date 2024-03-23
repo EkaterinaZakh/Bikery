@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { AddRaceForm, RaceType } from '../../../types/race';
+import type { AddRaceFormType, RaceType } from '../../../types/race';
 import raceService from '../../services/api/raceService';
 
 const getAllRaceThunk = createAsyncThunk<RaceType[]>('race/getAllRaceTnunk', () =>
   raceService.getAllRace(),
 );
 
-export const addRaceThunk = createAsyncThunk<RaceType, AddRaceForm>('races/addRaceThunk', (race) =>
+export const addRaceThunk = createAsyncThunk<RaceType, AddRaceFormType>('races/addRaceThunk', (race) =>
   raceService.addNewRace(race),
 );
 
