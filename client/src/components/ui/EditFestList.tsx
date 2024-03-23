@@ -39,7 +39,7 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
             // [event.target.date]: event.target.value, 
         });
     };
-
+//
     const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
