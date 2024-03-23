@@ -31,7 +31,7 @@ export default function NavBar(): JSX.Element {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={{borderRadius: '10px', backgroundColor: '#15030366'}} position="static">
+      <AppBar sx={{borderRadius: '10px', background: 'rgba(21, 3, 3, 0.4)'}} position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
