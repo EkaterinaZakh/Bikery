@@ -14,3 +14,6 @@ export const deleteFestThunk = createAsyncThunk<FestType['id'], FestType['id']>(
   'fest/deleteFestThunk',
   (id) => festService.deleteFestById(id).then(() => id),
 );
+
+export const editFestThunk = createAsyncThunk<FestType, FestType>(
+  'fest/editFestThunk', async (fest) => festService.editFest(fest))
