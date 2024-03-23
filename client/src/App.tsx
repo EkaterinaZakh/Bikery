@@ -13,7 +13,7 @@ import getAllCatsThunk from './redux/slices/cats/thunk';
 import ShopPage from './components/pages/ShopPage';
 import { getAllProdsThunk } from './redux/slices/prod/thunk';
 import { getAllFestsThunk } from './redux/slices/fest/thunk';
-
+import CartPage from './components/pages/CartPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -45,7 +45,8 @@ function App(): JSX.Element {
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },
         { path: '/races', element: <RacesPage /> },
-        { path: '/shop', element: <ShopPage />},
+        { path: '/shop', element: <ShopPage /> },
+        { path: '/cart', element: <CartPage /> },
       ],
     },
   ]);
