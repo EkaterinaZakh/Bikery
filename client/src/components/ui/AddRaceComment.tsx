@@ -3,8 +3,14 @@ import { Card, CardContent, Button, TextField } from '@mui/material';
 import { useAppDispatch } from '../../redux/hooks';
 import { addCommitsThunk, getAllCommitsThunk } from '../../redux/slices/comments/thunk';
 import type { OmitCommitType } from '../../types/commit';
+import type { RaceType } from '../../types/race';
 
-export default function OneComment(): JSX.Element {
+type OneRaceProps = {
+  race: RaceType;
+};
+
+export default function AddRaceComment({ race }: OneRaceProps): JSX.Element {
+
   const dispatch = useAppDispatch();
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -20,7 +26,7 @@ export default function OneComment(): JSX.Element {
 
     const data: OmitCommitType = {
       text,
-      raceId,
+      raceId: race.id, // <--- здесь использовать данные из пропсов
     };
 
     void dispatch(addCommitsThunk(data));

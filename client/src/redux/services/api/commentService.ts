@@ -15,9 +15,9 @@ class CommentService {
     return response.data;
   }
 
-  async createNewCommit(raceId: number,formData: { text: string }): Promise<CommitType> {
+  async createNewCommit(raceId: number, formData: { text: string }): Promise<CommitType> {
     const res = await this.client.post<CommitType>(`/comments/races/${raceId}`, formData); // POST /comments/races/:raceId
-    if (res.status !== 201)
+    if (res.status !== 200)
       return Promise.reject(new Error(`Wrond status code (expected 201, received: ${res.status}`));
     return res.data;
   }

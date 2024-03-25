@@ -6,7 +6,7 @@ export const getAllCommitsThunk = createAsyncThunk<CommitType[]>('fest/getAllCom
   commentService.getAllComments(),
 );
 
-export const addCommitsThunk = createAsyncThunk<CommitType, { text: string; raceId: number}>(
+export const addCommitsThunk = createAsyncThunk<CommitType, { text: string; raceId: number }>(
   'fest/addCommitsThunk',
-  ({text, raceId}) => commentService.createNewCommit(raceId, {text}),
+  ({ text, raceId }) => commentService.createNewCommit(raceId, { text }),
 );

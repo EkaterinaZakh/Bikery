@@ -51,14 +51,15 @@ router.get('/races/:raceId', async (req, res) => {
 
 router.post('/races/:raceId', verifyAccessToken, async (req, res) => {
   const { raceId } = req.params; // Правильно получаем raceId из параметров маршрута
-  const { commit } = req.body;
+  console.log(req.params);
+  const { text } = req.body;
   if (Number.isNaN(Number(raceId))) {
     // Проверяем raceId, а не id
     return res.status(400).json({ error: 'raceId is invalid' }); // Возвращаем ошибку для raceId
   }
   try {
     const newComment = await CommentRace.create({
-      text: commit,
+      text,
       userId: res.locals.user.id,
       raceId, // Используем raceId
     });
