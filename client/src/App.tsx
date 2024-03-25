@@ -15,6 +15,7 @@ import { getAllProdsThunk } from './redux/slices/prod/thunk';
 import { getAllFestsThunk } from './redux/slices/fest/thunk';
 import CartPage from './components/pages/CartPage';
 import WishListPage from './components/pages/WishListPage';
+import NotFoundPage from './components/pages/NotFoundPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -49,6 +50,7 @@ function App(): JSX.Element {
         { path: '/shop', element: <ShopPage /> },
         { path: '/cart', element: <CartPage /> },
         { path: '/wish', element: <WishListPage /> },
+        { path: '*', element: <NotFoundPage /> },
       ],
     },
   ]);
