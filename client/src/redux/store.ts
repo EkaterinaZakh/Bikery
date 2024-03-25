@@ -4,6 +4,7 @@ import festReducer from './slices/fest/slice';
 import raceReducer from './slices/race/slice';
 import catsReduser from './slices/cats/slice';
 import prodReducer from './slices/prod/slice';
+import commitsReducer from './slices/comments/slice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     motoRaces: raceReducer,
     categories: catsReduser,
     products: prodReducer,
+    comments: commitsReducer,
   },
 });
 

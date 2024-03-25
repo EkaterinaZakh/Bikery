@@ -61,7 +61,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
               </Button>
             </>
           )}
-          <OneComment />
+          <OneComment/>
         </CardContent>
       </Box>
 
