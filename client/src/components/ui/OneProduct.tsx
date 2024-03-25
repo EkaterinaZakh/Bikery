@@ -36,23 +36,18 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           <Typography component="div" variant="h5">
             {prod.name}
           </Typography>
-
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {prod.desc}
           </Typography>
-
           <Typography variant="h6" color="text.secondary" component="div">
             {prod.price} руб.
           </Typography>
-
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-
           <Button href="#text-buttons">Купить</Button>
         </CardContent>
       </Box>
-
       {user.isAdmin === true && (
         <div>
           <Button
@@ -62,7 +57,6 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           >
             Правки
           </Button>
-
           <Button onClick={deleteHandler} variant="outlined" startIcon={<DeleteIcon />}>
             Удалить
           </Button>
@@ -72,9 +66,3 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   );
 }
 
-// <Button variant="outlined" startIcon={<DeleteIcon />}>
-//   Delete
-// </Button>
-// <Button variant="contained" endIcon={<SendIcon />}>
-//   Send
-// </Button>

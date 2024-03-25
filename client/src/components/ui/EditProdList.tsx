@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editProdThunk } from '../../redux/slices/prod/thunk';
-// import type { ProdType } from '../../types/prod';
 
 type EditProdListProps = {
   onSubmit?: () => void;
@@ -25,33 +24,29 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   }, [selectedProd]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
     setProdData({
       ...prodData,
-      [e.target.name]: e.target.value,
-      [e.target.desc]: e.target.value,
-      [e.target.price]: e.target.value,
-      [e.target.image]: e.target.value,
+      [name]: value,
     });
   };
 
   const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
-      name: string;
-      desc: string;
-      price: string;
-      image: string;
+    const formData = {
+      name: prodData.name,
+      desc: prodData.desc,
+      price: prodData.price,
+      image: prodData.image,
     };
     if (!selectedProd) return;
-    void dispatch(
-      editProdThunk({
-        ...selectedProd,
-        name: formData.name,
-        desc: formData.desc,
-        price: formData.price,
-        image: formData.image,
-      }),
-    );
+    void dispatch(editProdThunk({
+      ...selectedProd,
+      name: formData.name,
+      desc: formData.desc,
+      price: formData.price,
+      image: formData.image,
+    }));
     onSubmit?.();
   };
 
@@ -70,7 +65,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               value={prodData.name}
               onChange={handleChange}
               required
-              id="outlined-required"
+              id="name-input"
               label="Название"
               placeholder="Название"
               type="text"
@@ -80,40 +75,26 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               value={prodData.desc}
               onChange={handleChange}
               required
-              id="outlined-required"
+              id="desc-input"
               label="Описание"
               placeholder="Описание"
               type="text"
             />
-            
-            {/* <TextField
-              name="image"
-              required
-              id="outlined-required"
-              label="Добавьте картинку"
-              placeholder="http://..."
-              value={prodData.image}
-              onChange={handleChange}
-              type="text"
-            /> */}
-
             <TextField
               name="image"
               required
-              id="outlined-required"
-              // label="Добавьте картинку"
-              placeholder="http://..."
-              // value={carData.image}
-              // onChange={hangleChange}
+              id="image-input"
+              label="Добавить картинку"
+              placeholder="Загрузить изображение"
               type="file"
+              onChange={handleChange}
             />
-
             <TextField
               name="price"
               value={prodData.price}
               onChange={handleChange}
               required
-              id="outlined-required"
+              id="price-input"
               label="Цена"
               placeholder="Цена"
               type="text"
@@ -123,17 +104,13 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               type="submit"
               variant="contained"
               color="success"
-              // onClick={editHandler}
             >
               Добавить
             </Button>
-
             <Button
               style={{ marginTop: '15px', width: '100px' }}
-              type="submit"
-              onClick={cancelHandler}
               variant="contained"
-              color="success"
+              onClick={cancelHandler}
             >
               Отменить
             </Button>
