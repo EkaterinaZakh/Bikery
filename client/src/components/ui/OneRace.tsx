@@ -39,8 +39,11 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <Button onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
+          <Button sx={{marginRight:'5px'}} onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
             Удалить
+          </Button>
+          <Button variant="contained">
+            Изменить
           </Button>
         </CardContent>
       </Box>
