@@ -30,5 +30,6 @@ app.use('/api/fest', festRouter);
 app.use('/api/races', raceRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/products', prodRouter);
+app.use('/api/comments', commentRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

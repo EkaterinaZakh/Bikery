@@ -11,6 +11,7 @@ export type RaceType = {
 
 export type RaceStateType = {
   races: RaceType[];
+  selectedRaces: RaceType | null;
 };
 
 export type AddRaceFormType = {

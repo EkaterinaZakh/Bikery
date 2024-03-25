@@ -4,6 +4,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { RaceType } from '../../types/race';
 import { deleteRaceThunk } from '../../redux/slices/race/thunk';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setSelectedRacesById } from '../../redux/slices/race/slice';
+import OneComment from './OneComment';
 
 type OneRaceProps = {
   race: RaceType;
@@ -41,10 +43,25 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             <FavoriteIcon />
           </IconButton>
           {user.isAdmin === true && (
-            <Button onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
-              Удалить
-            </Button>
+            <>
+              <Button
+                sx={{ marginRight: '5px' }}
+                onClick={(e) => deleteHandler(e)}
+                variant="outlined"
+                color="error"
+              >
+                Удалить
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => dispatch(setSelectedRacesById(race.id))}
+              >
+                Изменить
+              </Button>
+            </>
           )}
+          <OneComment />
         </CardContent>
       </Box>
 

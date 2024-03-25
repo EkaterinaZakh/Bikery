@@ -25,13 +25,23 @@ router
     }
   });
 
-router
-  .route('/:id')
-  .delete(verifyAccessToken, async (req, res) => {
-    await Race.destroy({
-      where: { id: req.params.id },
-    });
-    res.sendStatus(200);
+router.route('/:id').delete(verifyAccessToken, async (req, res) => {
+  await Race.destroy({
+    where: { id: req.params.id },
   });
+  res.sendStatus(200);
+});
+
+router.route('/:id').put(async (req, res) => {
+  const { id } = req.params;
+  const { name, desc, image, length, rateCounter } = req.body;
+  if (!name || !desc || !image || !length || !rateCounter) {
+    res.status(401).json({ message: 'Wrong product data' });
+    return;
+  }
+  await Race.update(req.body, { where: { id } });
+  const updateRace = await Race.findOne({ where: { id } });
+  res.json(updateRace);
+});
 
 module.exports = router;
