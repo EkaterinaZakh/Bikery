@@ -10,12 +10,16 @@ import { clearSelectedProd } from '../../redux/slices/prod/slice';
 
 export default function ShopPage(): JSX.Element {
   const dispatch = useAppDispatch();
+
   const categories = useAppSelector((state) => state.categories.categories);
-  const prods = useAppSelector((state) => state.products.prods);
+  const allProds = useAppSelector((state) => state.products.prods);
+  const selectedCat = useAppSelector((state) => state.categories.selectedCategory);
+  // if selectedFilterCategory не выбрана, то отобрази все, если выбрана, то только нужной категории
+  const prodsByCat = allProds.filter((prod) => prod.categoryId === selectedCat?.id);
   const user = useAppSelector((state) => state.auth.user);
 
   const [openModal, setOpenModal] = useState(false);
-  
+
   const selectedProd = useAppSelector((state) => state.products.selectedProd);
 
   const handleCloseModal = (): void => {
@@ -42,7 +46,8 @@ export default function ShopPage(): JSX.Element {
         <BaseModal open={!!selectedProd} onClose={handleCloseModal}>
           <EditProdList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
         </BaseModal>
-        {prods.map((el) => (
+
+        {prodsByCat.map((el) => (
           <OneProduct prod={el} key={el.id} />
         ))}
       </Box>
