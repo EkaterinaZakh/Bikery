@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import CatList from '../ui/CatList';
@@ -10,17 +10,14 @@ import { clearSelectedProd } from '../../redux/slices/prod/slice';
 
 export default function ShopPage(): JSX.Element {
   const dispatch = useAppDispatch();
-
+  const selectedCat = useAppSelector((store) => store.categories?.selectedCategory);
   const categories = useAppSelector((state) => state.categories.categories);
+  const selectedProd = useAppSelector((state) => state.products.selectedProd);
   const allProds = useAppSelector((state) => state.products.prods);
-  const selectedCat = useAppSelector((state) => state.categories.selectedCategory);
-  // if selectedFilterCategory не выбрана, то отобрази все, если выбрана, то только нужной категории
   const prodsByCat = allProds.filter((prod) => prod.categoryId === selectedCat?.id);
   const user = useAppSelector((state) => state.auth.user);
+  // if selectedFilterCategory не выбрана, то отобрази все, если выбрана, то только нужной категории
 
-  const [openModal, setOpenModal] = useState(false);
-
-  const selectedProd = useAppSelector((state) => state.products.selectedProd);
 
   const handleCloseModal = (): void => {
     void dispatch(clearSelectedProd());
@@ -29,7 +26,6 @@ export default function ShopPage(): JSX.Element {
   return (
     <>
       {user.isAdmin === true && <NewProdForm />}
-      <h3>ShopPage</h3>
       <Box sx={{ display: 'flex', justifyContent: 'center', border: '2px solid green' }}>
         {categories.map((category) => (
           <CatList key={category.id} category={category} />
@@ -46,7 +42,6 @@ export default function ShopPage(): JSX.Element {
         <BaseModal open={!!selectedProd} onClose={handleCloseModal}>
           <EditProdList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
         </BaseModal>
-
         {prodsByCat.map((el) => (
           <OneProduct prod={el} key={el.id} />
         ))}
