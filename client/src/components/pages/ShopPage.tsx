@@ -14,7 +14,6 @@ export default function ShopPage(): JSX.Element {
   const categories = useAppSelector((state) => state.categories.categories);
   const allProds = useAppSelector((state) => state.products.prods);
   const selectedCat = useAppSelector((state) => state.categories.selectedCategory);
-  // if selectedFilterCategory не выбрана, то отобрази все, если выбрана, то только нужной категории
   const prodsByCat = allProds.filter((prod) => prod.categoryId === selectedCat?.id);
   const user = useAppSelector((state) => state.auth.user);
 
@@ -47,9 +46,9 @@ export default function ShopPage(): JSX.Element {
           <EditProdList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
         </BaseModal>
 
-        {prodsByCat.map((el) => (
-          <OneProduct prod={el} key={el.id} />
-        ))}
+        {selectedCat
+          ? prodsByCat.map((el) => <OneProduct prod={el} key={el.id} />)
+          : allProds.map((el) => <OneProduct prod={el} key={el.id} />)}
       </Box>
     </>
   );

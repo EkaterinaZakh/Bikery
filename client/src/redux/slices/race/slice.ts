@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { RaceStateType, RaceType } from '../../../types/race';
-import getAllRaceThunk, { addRaceThunk, deleteRaceThunk } from './thunk';
+import getAllRaceThunk, { addRaceThunk, addRatingThunk, deleteRaceThunk } from './thunk';
 
 const initialState: RaceStateType = {
   races: [],
@@ -25,6 +25,10 @@ export const raceSlice = createSlice({
 
     builder.addCase(deleteRaceThunk.fulfilled, (state, action) => {
       if (state.races) state.races = state.races.filter((el) => el.id !== action.payload);
+    });
+    builder.addCase(addRatingThunk.fulfilled, (state, action) => {
+      const rate = action.payload;
+      state.races = state.races.map((el) => (el.id === rate.raceId ? el.rates.push(rate) : el));
     });
   },
 });

@@ -1,5 +1,5 @@
 const express = require('express');
-const { Product, Category } = require('../../db/models');
+const { Product } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const prodRouter = express.Router();
@@ -10,16 +10,6 @@ prodRouter.route('/').get(async (req, res) => {
   });
   res.json(products);
 });
-
-// prodRouter.route('/').get(async (req, res) => {
-//   const { category } = req.body;
-
-//   const products = await Product.findAll({
-//     include: [{ model: Category, where: { name: category } }],
-//     order: [['id', 'DESC']],
-//   });
-//   res.json(products);
-// });
 
 prodRouter.route('/').post(verifyAccessToken, async (req, res) => {
   try {

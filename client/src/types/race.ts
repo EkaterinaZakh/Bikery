@@ -1,3 +1,5 @@
+import type { SetRating } from './rating';
+
 export type RaceType = {
   id: number;
   name: string;
@@ -7,6 +9,7 @@ export type RaceType = {
   userId: number;
   date: Date;
   rateCounter: number;
+  RacerRatings: SetRating[];
 };
 
 export type RaceStateType = {

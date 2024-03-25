@@ -1,5 +1,5 @@
 const express = require('express');
-const { Race, User } = require('../../db/models');
+const { Race, User, RaceRating } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router
   .get(async (req, res) => {
     const races = await Race.findAll({
       order: [['id', 'DESC']],
-      include: User,
+      include: [User, RaceRating],
     });
 
     res.json(races);
@@ -25,13 +25,22 @@ router
     }
   });
 
-router
-  .route('/:id')
-  .delete(verifyAccessToken, async (req, res) => {
-    await Race.destroy({
-      where: { id: req.params.id },
-    });
-    res.sendStatus(200);
+router.route('/:id').delete(verifyAccessToken, async (req, res) => {
+  await Race.destroy({
+    where: { id: req.params.id },
   });
+  res.sendStatus(200);
+});
+
+router.route('/:id/rating').post(async (req, res) => {
+  try {
+    const newRate = await RaceRating.create(req.body);
+    const newRateWithUser = RaceRating.findOne({ where: { id: newRate.id }, include: User });
+    res.status(201).json(newRateWithUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error while creating' });
+  }
+});
 
 module.exports = router;

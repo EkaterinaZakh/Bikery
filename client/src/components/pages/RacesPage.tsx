@@ -8,7 +8,7 @@ export default function RacesPage(): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
   return (
     <div>
-      <div>{user.isAdmin === true && <AddRaceForm />},</div>
+      <div>{user.status === 'logged' && <AddRaceForm />},</div>
       <div>
         {races.map((race) => (
           <OneRace race={race} key={race.id} />
