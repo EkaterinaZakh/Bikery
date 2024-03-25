@@ -7,26 +7,40 @@ import { addFestThunk } from '../../redux/slices/fest/thunk';
 export default function NewFestForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.auth.user);
-  const [carData, setCarData] = useState<AddFestForm>({
+  const [festData, setFestData] = useState<AddFestForm>({
     name: '',
     desc: '',
     image: '',
     place: '',
-    date: new Date(),
+    date: new Date().toISOString().slice(0, 10)
   });
 
-  const hangleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setCarData({ ...carData, [e.target.name]: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setFestData({ ...festData, [e.target.name]: e.target.value });
+  };
+
+  const resetForm = ():void => {
+    setFestData({
+      name: '',
+      desc: '',
+      image: '',
+      place: '',
+      date: new Date().toISOString().slice(0, 10),
+    });
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    void dispatch(addFestThunk(carData));
+    const formData = {
+      ...festData,
+      date: festData.date
+    };
+    void dispatch(addFestThunk(formData));
+    resetForm();
   };
 
   return (
     <div style={{ margin: '10px', display: "flex", justifyContent: 'center', border: "1px solid red"}}>
-
       {user.isAdmin === true && (
         <Box
           onSubmit={submitHandler}
@@ -42,8 +56,8 @@ export default function NewFestForm(): JSX.Element {
               id="outlined-required"
               label="Название"
               placeholder="Название"
-              value={carData.name}
-              onChange={hangleChange}
+              value={festData.name}
+              onChange={handleChange}
               type="text"
             />
             <TextField
@@ -52,8 +66,8 @@ export default function NewFestForm(): JSX.Element {
               id="outlined-required"
               label="Описание"
               placeholder="Описание"
-              value={carData.desc}
-              onChange={hangleChange}
+              value={festData.desc}
+              onChange={handleChange}
               type="text"
             />
             <TextField
@@ -62,19 +76,8 @@ export default function NewFestForm(): JSX.Element {
               id="outlined-required"
               label="Добавьте картинку"
               placeholder="http://..."
-              value={carData.image}
-              onChange={hangleChange}
-              type="text"
-            />
-
-            <TextField
-              name="date"
-              required
-              id="outlined-required"
-              label="Дата проведения"
-              placeholder="Дата проведения"
-              value={carData.date}
-              onChange={hangleChange}
+              value={festData.image}
+              onChange={handleChange}
               type="text"
             />
             <TextField
@@ -83,9 +86,19 @@ export default function NewFestForm(): JSX.Element {
               id="outlined-required"
               label="Место"
               placeholder="Место"
-              value={carData.place}
-              onChange={hangleChange}
+              value={festData.place}
+              onChange={handleChange}
               type="text"
+            />
+            <TextField
+              name="date"
+              required
+              id="outlined-required"
+              label="Дата проведения"
+              placeholder="yyyy-mm-dd"
+              value={festData.date}
+              onChange={handleChange}
+              type="date"
             />
             <Button
               style={{ marginTop: '15px' }}
