@@ -25,32 +25,45 @@ router
     }
   });
 
-router
-  .route('/:id')
+router.route('/:id')
   .delete(verifyAccessToken, async (req, res) => {
-    await Fest.destroy({
-      where: { id: req.params.id },
-    });
-    res.sendStatus(200);
+    try {
+      await Fest.destroy({
+        where: { id: req.params.id },
+      });
+      res.sendStatus(200);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'ERROR DELETING FEST' });
+    }
   })
   .put(verifyAccessToken, async (req, res) => {
     try {
-      const targetChar = await Fest.findOne({ where: { id: req.params.id }, include: User });
-      for (const key in req.body) {
-        if (Object.hasOwnProperty.call(req.body, key)) {
-          targetChar[key] = req.body[key];
-        }
+      const targetFest = await Fest.findOne({ where: { id: req.params.id }, include: User });
+      if (!targetFest) {
+        res.status(404).json({ message: 'Fest not found' });
       }
-      await targetChar.save();
-      res.json(targetChar);
+      Object.keys(req.body).forEach((key) => {
+        targetFest[key] = req.body[key];
+      });
+      await targetFest.save();
+      res.json(targetFest);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: 'ERROR EDITING CHAR' });
+      res.status(500).json({ message: 'ERROR UPDATING FEST' });
     }
   })
   .get(async (req, res) => {
-    const char = await Fest.findOne({ where: { id: req.params.id }, include: User });
-    res.json(char);
+    try {
+      const fest = await Fest.findOne({ where: { id: req.params.id }, include: User });
+      if (!fest) {
+        return res.status(404).json({ message: 'Fest not found' });
+      }
+      return res.json(fest);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: 'ERROR GETTING FEST' });
+    }
   });
 
 module.exports = router;

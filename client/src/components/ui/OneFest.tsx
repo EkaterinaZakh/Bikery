@@ -17,6 +17,7 @@ import React from 'react';
 import type { FestType } from '../../types/fest';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteFestThunk } from '../../redux/slices/fest/thunk';
+import { setSelectedFestById } from '../../redux/slices/fest/slice';
 
 type ExpandMoreProps = {
   expand: boolean;
@@ -40,8 +41,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 export default function OneFest({ fest }: OneFestProps): JSX.Element {
   const [expanded, setExpanded] = React.useState(false);
   const user = useAppSelector((store) => store.auth.user);
-  console.log(user);
-
   const dispatch = useAppDispatch();
 
   const handleExpandClick = (): void => {
@@ -67,9 +66,18 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
           <FavoriteIcon />
         </IconButton>
         {user.isAdmin === true && (
-          <Button onClick={deleteHandler} variant="outlined" color="error">
+          <>
+            <Button onClick={deleteHandler} variant="outlined" color="error">
             Удалить
-          </Button>
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => dispatch(setSelectedFestById(fest.id))}
+                >
+            Изменить
+            </Button>
+          </>
         )}
         <ExpandMore
           expand={expanded}

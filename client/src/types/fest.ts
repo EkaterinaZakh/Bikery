@@ -18,4 +18,5 @@ export type FestType = {
 
   export type FestsStateType = {
     fests: FestType[];
+    selectedFest: FestType | null;
   }
