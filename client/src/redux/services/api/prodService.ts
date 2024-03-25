@@ -24,8 +24,14 @@ class ProdService {
   async deleteProdById(id: ProdType['id']): Promise<void> {
     const res = await this.client.delete(`/products/${id}`);
     if (res.status !== 200) {
-      return Promise.reject(new Error(`Wrond status code (expected 200, received: ${res.status}`))
+      return Promise.reject(new Error(`Wrond status code (expected 200, received: ${res.status}`));
     }
+  }
+
+  async editProd(editedProd: ProdType): Promise<ProdType> {
+    const res = await this.client.put<ProdType>(`/products/${editedProd.id}`, editedProd);
+    if (res.status === 200) return res.data;
+    return Promise.reject(new Error('Failed editing product'));
   }
 }
 
