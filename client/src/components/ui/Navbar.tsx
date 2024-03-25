@@ -49,9 +49,11 @@ export default function NavBar(): JSX.Element {
           <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
             {user.status !== 'logged' ? 'Присоединиться?' : 'Выйти?'}
           </Button>
+
           <BaseModal open={openModal} onClose={handleCloseModal}>
             <AuthList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
           </BaseModal>
+          
         </Toolbar>
       </AppBar>
     </Box>
