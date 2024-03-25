@@ -28,31 +28,26 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardMedia
           component="img"
-          sx={{ width: 150 }}
-          image="https://images.unsplash.com/photo-1533573271545-c1604421c980?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          sx={{ width: "280px" }}
+          image={prod.image}
           alt=""
         />
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {prod.name}
           </Typography>
-
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {prod.desc}
           </Typography>
-
           <Typography variant="h6" color="text.secondary" component="div">
             {prod.price} руб.
           </Typography>
-
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-
           <Button href="#text-buttons">Купить</Button>
         </CardContent>
       </Box>
-
       {user.isAdmin === true && (
         <div>
           <Button
@@ -62,7 +57,6 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           >
             Правки
           </Button>
-
           <Button onClick={deleteHandler} variant="outlined" startIcon={<DeleteIcon />}>
             Удалить
           </Button>
@@ -72,9 +66,3 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   );
 }
 
-// <Button variant="outlined" startIcon={<DeleteIcon />}>
-//   Delete
-// </Button>
-// <Button variant="contained" endIcon={<SendIcon />}>
-//   Send
-// </Button>

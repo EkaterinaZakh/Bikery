@@ -1,46 +1,44 @@
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Products', {
+    await queryInterface.createTable('CommentFests', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
-      },
-      desc: {
-        type: Sequelize.STRING,
-      },
-      price: {
-        type: Sequelize.INTEGER,
-      },
-      image: {
-        type: Sequelize.STRING,
-      },
-      categoryId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Categories',
+          model: 'Users',
           key: 'id',
         },
         onDelete: 'CASCADE',
       },
+      festId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Fests',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
+      text: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Products');
-  },
+    await queryInterface.dropTable('CommentFests');
+  }
 };

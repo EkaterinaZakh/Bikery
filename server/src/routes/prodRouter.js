@@ -12,6 +12,7 @@ prodRouter.route('/').get(async (req, res) => {
 });
 
 prodRouter.route('/').post(verifyAccessToken, async (req, res) => {
+  
   try {
     const newProd = await Product.create({ ...req.body, userId: res.locals.user.id });
     res.status(201).json(newProd);
@@ -36,8 +37,8 @@ prodRouter.route('/:id').delete(async (req, res) => {
 
 prodRouter.route('/:id').put(async (req, res) => {
   const { id } = req.params;
-  const { name, desc, price } = req.body;
-  if (!name || !desc || !price) {
+  const { name, desc, price, image } = req.body;
+  if (!name || !desc || !price || !image) {
     res.status(401).json({ message: 'Wrong product data' });
     return;
   }
@@ -45,5 +46,15 @@ prodRouter.route('/:id').put(async (req, res) => {
   const updatedProduct = await Product.findOne({ where: { id } });
   res.json(updatedProduct);
 });
+
+// prodRouter.router('/').post(fileMiddleware.single('avatar'), (req, res) => {
+//   try {
+//     if(req,file) {
+//       res.json(req.file)
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 module.exports = prodRouter;

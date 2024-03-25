@@ -123,6 +123,8 @@ module.exports = {
           name: 'Мотокуртка HAWK MOTO DISCOVERY',
           desc: 'Туристический мотокостюм «Discovery», материал: ткань Cordura D600',
           price: 25100,
+          image:
+            'https://images.unsplash.com/photo-1571819507488-0e1dfe7cc22d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           categoryId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -131,6 +133,8 @@ module.exports = {
           name: 'Шлем AIROH HUNTER',
           desc: 'Шлем HUNTER (XXL,SOUL ANTHRACITE MATT)',
           price: 16700,
+          image:
+            'https://images.unsplash.com/photo-1571819507488-0e1dfe7cc22d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           categoryId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -139,6 +143,8 @@ module.exports = {
           name: 'Мотоботы DAINESE TORQUE 3 OUT',
           desc: 'Мотоботы TORQUE 3 OUT (45,BLACK/FLUO-RED)',
           price: 44200,
+          image:
+            'https://images.unsplash.com/photo-1571819507488-0e1dfe7cc22d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           categoryId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),

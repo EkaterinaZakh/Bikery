@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button } from '@mui/material';
 import type { CategoryType } from '../../types/cats';
 import { useAppDispatch } from '../../redux/hooks';
-import { setSelecteCategory } from '../../redux/slices/cats/slice';
+import { setSelectedCategory } from '../../redux/slices/cats/slice';
 
 type OneCategoryProps = {
   category: CategoryType;
@@ -11,7 +11,7 @@ type OneCategoryProps = {
 export default function CatList({ category }: OneCategoryProps): JSX.Element {
   const dispatch = useAppDispatch();
   const setCategoryhandler = (): void => {
-    dispatch(setSelecteCategory(category.id));
+    dispatch(setSelectedCategory(category.id));
   };
 
   return (

@@ -4,6 +4,7 @@ const { User } = require('../../db/models');
 const generateTokens = require('../utils/generateTokens');
 const cookiesConfig = require('../config/cookiesConfig');
 const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
+const sendEmailNotification = require('../utils/sendEmailNotification');
 
 const authRouter = Router();
 
@@ -17,6 +18,8 @@ authRouter.post('/signup', async (req, res) => {
       where: { email },
       defaults: { name, password: await bcrypt.hash(password, 10), isAdmin: false },
     });
+
+    await sendEmailNotification(email, name);
 
     if (!created) {
       return res.status(403).json({ message: 'User already exists' });

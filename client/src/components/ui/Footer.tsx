@@ -7,11 +7,11 @@ export default function Footer(): JSX.Element {
       sx={{
         backgroundColor: 'rgba(27, 4, 4, 0.9)',
         color: 'white',
-        margin: '0 5px',
+        margin: '0px',
         padding: '1% 0',
-        position: 'fixed',
+        position: 'relative',
         bottom: 0,
-        width: '98%',
+        width: '100%',
       }}
       component="footer"
     >

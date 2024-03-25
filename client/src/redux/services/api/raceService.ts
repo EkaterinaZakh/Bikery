@@ -35,6 +35,12 @@ class RaceService {
       return Promise.reject(new Error(`Wrong status code (expected 201, received: ${res.status}`));
     }
     return res.data;
+
+  async editRace(editedRace: RaceType): Promise<RaceType> {
+    const res = await this.client.put<RaceType>(`/races/${editedRace.id}`, editedRace);
+    if (res.status === 200) return res.data;
+    return Promise.reject(new Error('Failed editing races'));
+
   }
 }
 
