@@ -34,4 +34,16 @@ prodRouter.route('/:id').delete(async (req, res) => {
   }
 });
 
+prodRouter.route('/:id').put(async (req, res) => {
+  const { id } = req.params;
+  const { name, desc, price } = req.body;
+  if (!name || !desc || !price) {
+    res.status(401).json({ message: 'Wrong product data' });
+    return;
+  }
+  await Product.update(req.body, { where: { id } });
+  const updatedProduct = await Product.findOne({ where: { id } });
+  res.json(updatedProduct);
+});
+
 module.exports = prodRouter;
