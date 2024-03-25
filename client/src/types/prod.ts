@@ -3,6 +3,7 @@ export type ProdType = {
   name: string;
   desc: string;
   price: string;
+  image: string;
   categoryId: number;
 };
 
@@ -15,4 +16,5 @@ export type AddProdForm = {
   name: string;
   desc: string;
   price: string;
+  image: string;
 };
