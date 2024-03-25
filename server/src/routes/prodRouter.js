@@ -22,6 +22,7 @@ prodRouter.route('/').get(async (req, res) => {
 // });
 
 prodRouter.route('/').post(verifyAccessToken, async (req, res) => {
+  
   try {
     const newProd = await Product.create({ ...req.body, userId: res.locals.user.id });
     res.status(201).json(newProd);
