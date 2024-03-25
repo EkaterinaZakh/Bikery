@@ -12,7 +12,6 @@ type EditProdListProps = {
 export default function EditProdList({ onSubmit, onCancel }: EditProdListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const selectedProd = useAppSelector((state) => state.products.selectedProd);
-  // console.log('---', selectedProd);
 
   const [prodData, setProdData] = useState({
     name: '',
