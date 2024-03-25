@@ -17,6 +17,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     name: '',
     desc: '',
     price: '',
+    image: '',
   });
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
       [e.target.name]: e.target.value,
       [e.target.desc]: e.target.value,
       [e.target.price]: e.target.value,
+      [e.target.image]: e.target.value,
     });
   };
 
@@ -38,6 +40,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
       name: string;
       desc: string;
       price: string;
+      image: string;
     };
     if (!selectedProd) return;
     void dispatch(
@@ -46,6 +49,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
         name: formData.name,
         desc: formData.desc,
         price: formData.price,
+        image: formData.image,
       }),
     );
     onSubmit?.();
@@ -56,8 +60,8 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   };
 
   return (
-    <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '350px' }}>
-      <h3 style={{ textAlign: 'center' }}>Добавить продукт:</h3>
+    <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '380px' }}>
+      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Добавить продукт:</h3>
       <form onSubmit={editHandler}>
         <Box>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -81,16 +85,28 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Описание"
               type="text"
             />
+            
             {/* <TextField
-        name="image"
-        required
-        id="outlined-required"
-        label="Добавьте картинку"
-        placeholder="http://..."
-        value={carData.image}
-        onChange={hangleChange}
-        type="text"
-      /> */}
+              name="image"
+              required
+              id="outlined-required"
+              label="Добавьте картинку"
+              placeholder="http://..."
+              value={prodData.image}
+              onChange={handleChange}
+              type="text"
+            /> */}
+
+            <TextField
+              name="image"
+              required
+              id="outlined-required"
+              // label="Добавьте картинку"
+              placeholder="http://..."
+              // value={carData.image}
+              // onChange={hangleChange}
+              type="file"
+            />
 
             <TextField
               name="price"
@@ -103,7 +119,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               type="text"
             />
             <Button
-              style={{ marginTop: '15px', width: '15%' }}
+              style={{ marginTop: '15px', width: '100px' }}
               type="submit"
               variant="contained"
               color="success"
@@ -113,7 +129,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
             </Button>
 
             <Button
-              style={{ marginTop: '15px', width: '15%' }}
+              style={{ marginTop: '15px', width: '100px' }}
               type="submit"
               onClick={cancelHandler}
               variant="contained"

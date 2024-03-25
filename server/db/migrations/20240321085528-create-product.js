@@ -17,6 +17,9 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER,
       },
+      image: {
+        type: Sequelize.STRING,
+      },
       categoryId: {
         type: Sequelize.INTEGER,
         references: {
