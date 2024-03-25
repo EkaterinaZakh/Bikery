@@ -10,7 +10,7 @@ const festRouter = require('./routes/festRouter');
 const raceRouter = require('./routes/raceRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const prodRouter = require('./routes/prodRouter');
-const uploadRouter = require('./routes/uploadRouter');
+// const uploadRouter = require('./routes/uploadRouter');
 require('dotenv').config();
 
 const app = express();
