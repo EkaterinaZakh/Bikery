@@ -1,5 +1,5 @@
 const express = require('express');
-const { Product } = require('../../db/models');
+const { Product, Category } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const prodRouter = express.Router();
@@ -10,6 +10,16 @@ prodRouter.route('/').get(async (req, res) => {
   });
   res.json(products);
 });
+
+// prodRouter.route('/').get(async (req, res) => {
+//   const { category } = req.body;
+
+//   const products = await Product.findAll({
+//     include: [{ model: Category, where: { name: category } }],
+//     order: [['id', 'DESC']],
+//   });
+//   res.json(products);
+// });
 
 prodRouter.route('/').post(verifyAccessToken, async (req, res) => {
   try {
@@ -36,8 +46,8 @@ prodRouter.route('/:id').delete(async (req, res) => {
 
 prodRouter.route('/:id').put(async (req, res) => {
   const { id } = req.params;
-  const { name, desc, price } = req.body;
-  if (!name || !desc || !price) {
+  const { name, desc, price, image } = req.body;
+  if (!name || !desc || !price || !image) {
     res.status(401).json({ message: 'Wrong product data' });
     return;
   }
@@ -45,5 +55,15 @@ prodRouter.route('/:id').put(async (req, res) => {
   const updatedProduct = await Product.findOne({ where: { id } });
   res.json(updatedProduct);
 });
+
+// prodRouter.router('/').post(fileMiddleware.single('avatar'), (req, res) => {
+//   try {
+//     if(req,file) {
+//       res.json(req.file)
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 module.exports = prodRouter;

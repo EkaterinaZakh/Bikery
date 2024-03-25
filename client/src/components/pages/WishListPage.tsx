@@ -1,8 +1,8 @@
 import React from 'react';
+import { Button } from '@mui/material';
 import { useAppSelector } from '../../redux/hooks';
 import OneRace from '../ui/OneRace';
 import OneFest from '../ui/OneFest';
-import { Button } from '@mui/material';
 
 export default function WishListPage(): JSX.Element {
   const fests = useAppSelector((state) => state.festivals.fests);
