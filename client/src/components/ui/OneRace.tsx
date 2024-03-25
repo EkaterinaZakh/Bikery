@@ -4,6 +4,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { RaceType } from '../../types/race';
 import { deleteRaceThunk } from '../../redux/slices/race/thunk';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setSelectedRacesById } from '../../redux/slices/race/slice';
+import AddRaceComment from './AddRaceComment';
+import OneRaceComment from './OneRaceComment';
 
 type OneRaceProps = {
   race: RaceType;
@@ -11,6 +14,7 @@ type OneRaceProps = {
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
+  const comments = useAppSelector((state) => state.comments.commits);
   const dispatch = useAppDispatch();
 
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -41,10 +45,28 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             <FavoriteIcon />
           </IconButton>
           {user.isAdmin === true && (
-            <Button onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
-              Удалить
-            </Button>
+            <>
+              <Button
+                sx={{ marginRight: '5px' }}
+                onClick={(e) => deleteHandler(e)}
+                variant="outlined"
+                color="error"
+              >
+                Удалить
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => dispatch(setSelectedRacesById(race.id))}
+              >
+                Изменить
+              </Button>
+            </>
           )}
+          {comments.map((comment) => (
+            <OneRaceComment key={comment.id} comment={comment} />
+          ))}
+          <AddRaceComment race={race} />
         </CardContent>
       </Box>
 

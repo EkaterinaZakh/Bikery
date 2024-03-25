@@ -10,6 +10,7 @@ const festRouter = require('./routes/festRouter');
 const raceRouter = require('./routes/raceRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const prodRouter = require('./routes/prodRouter');
+const commentRouter = require('./routes/commentRouter');
 const uploadRouter = require('./routes/uploadRouter');
 require('dotenv').config();
 
@@ -33,6 +34,7 @@ app.use('/api/fest', festRouter);
 app.use('/api/races', raceRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/products', prodRouter);
+app.use('/api/comments', commentRouter);
 // app.use('/api/upload', uploadRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

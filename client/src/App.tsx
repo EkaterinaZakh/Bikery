@@ -16,6 +16,7 @@ import { getAllFestsThunk } from './redux/slices/fest/thunk';
 import CartPage from './components/pages/CartPage';
 import WishListPage from './components/pages/WishListPage';
 import NotFoundPage from './components/pages/NotFoundPage';
+import { getAllCommitsThunk } from './redux/slices/comments/thunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ function App(): JSX.Element {
     void dispatch(refreshAuth());
     void dispatch(getAllCatsThunk());
     void dispatch(getAllFestsThunk());
+    void dispatch(getAllCommitsThunk());
   }, []);
 
   const router = createBrowserRouter([
