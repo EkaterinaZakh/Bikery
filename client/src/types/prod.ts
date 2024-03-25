@@ -8,6 +8,7 @@ export type ProdType = {
 
 export type ProdStateType = {
   prods: ProdType[];
+  selectedProd: ProdType | null;
 };
 
 export type AddProdForm = {

@@ -16,4 +16,8 @@ export const deleteProdThunk = createAsyncThunk<ProdType['id'], ProdType['id']>(
   async (id) => prodService.deleteProdById(id).then(() => id),
 );
 
+export const editProdThunk = createAsyncThunk<ProdType, ProdType>('prod/edit', async (prod) =>
+  prodService.editProd(prod),
+);
+
 export default getAllProdsThunk;
