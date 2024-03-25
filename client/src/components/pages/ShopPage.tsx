@@ -49,11 +49,3 @@ export default function ShopPage(): JSX.Element {
     </>
   );
 }
-
-{
-  /* // {user.isAdmin === true ? && ( */
-}
-{
-  /* //   <NewProdForm />
-// )} */
-}

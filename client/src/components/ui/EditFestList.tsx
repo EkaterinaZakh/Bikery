@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editFestThunk } from '../../redux/slices/fest/thunk';
 
@@ -10,7 +10,6 @@ type EditListProps = {
 const boxStyle = {
     backgroundColor: '#fff',
     border: '2px solid #000',
-    boxShadow: 24,
     padding: '16px',
     width: 300,
 };
@@ -23,41 +22,27 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
         desc: '',
         image: '',
         place: '',
-        // date: '',
+        date: '',
     });
 
     useEffect(() => {
-        if (selectedFest) setFestData(selectedFest);
+        if (selectedFest) setFestData(selectedFest); // скопируй и преобразуй дату к строке
     }, [selectedFest]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setFestData({ ...festData, 
-            [event.target.name]: event.target.value,
-            [event.target.desc]: event.target.value,
-            [event.target.image]: event.target.value,
-            [event.target.place]: event.target.value,
-            // [event.target.date]: event.target.value, 
-        });
+        const { name, value } = event.target;
+        setFestData((prevData) => ({ ...prevData, [name]: value }));
     };
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
-            name: string;
-            desc: string;
-            image: string;
-            place: string;
-            date: string;
-        };
-        if (!selectedFest) return
-        void dispatch(editFestThunk({
+        if (!selectedFest) return;
+        const formData = {
             ...selectedFest,
-            name: formData.name,
-            desc: formData.desc,
-            image: formData.image,
-            place: formData.place,
-            // date: formData.date,
-        }));
+            ...festData,
+            date: festData.date || new Date().toISOString().slice(0, 10),
+        };
+        void dispatch(editFestThunk(formData)); 
         onSubmit?.();
     };
 
@@ -66,9 +51,8 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
     };
 
     return (
-        <Box
-            as="form"
-            sx={boxStyle}
+        <form
+            style={boxStyle}
             noValidate
             autoComplete="off"
             onSubmit={submitHandler}
@@ -114,6 +98,16 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
                     onChange={handleChange}
                     type="text"
                 />
+                <TextField
+                    name="date"
+                    required
+                    id="outlined-required"
+                    label="Дата"
+                    placeholder="yyyy-mm-dd"
+                    value={festData.date}
+                    onChange={handleChange}
+                    type="date"
+                />
                 <Button
                     style={{ marginTop: '15px', width: '15%' }}
                     type="submit"
@@ -131,6 +125,6 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
                     Отменить
                 </Button>
             </div>
-        </Box>
+        </form>
     );
 }

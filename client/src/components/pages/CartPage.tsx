@@ -20,9 +20,9 @@ export default function CartPage(): JSX.Element {
         <div className="cart_order">
           <h3>Детали доставки </h3>
           <p>Адрес доставки</p>
-          <div className="line"></div>
+          <div className="line" />
           <p>Способ оплаты</p>
-          <div className="line"></div>
+          <div className="line" />
           <p>Итого:</p>
           <Button variant="outlined" color="info">
             Оплатить

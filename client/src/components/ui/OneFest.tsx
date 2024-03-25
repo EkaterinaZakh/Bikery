@@ -41,6 +41,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 export default function OneFest({ fest }: OneFestProps): JSX.Element {
   const [expanded, setExpanded] = React.useState(false);
   const user = useAppSelector((store) => store.auth.user);
+  const formattedDate = new Date (fest.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   const dispatch = useAppDispatch();
 
   const handleExpandClick = (): void => {
@@ -54,11 +55,14 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardHeader title={fest.name} subheader="Дата проведения" />
+      <CardHeader title={fest.name} />
       <CardMedia component="img" height="194" image={fest.image} alt="" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {fest.desc}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {formattedDate}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
