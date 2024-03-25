@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { RaceType } from '../../types/race';
 import { deleteRaceThunk } from '../../redux/slices/race/thunk';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import Rate from './Rate';
 import { setSelectedRacesById } from '../../redux/slices/race/slice';
 import AddRaceComment from './AddRaceComment';
 import OneRaceComment from './OneRaceComment';
@@ -21,6 +22,8 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     event.preventDefault();
     void dispatch(deleteRaceThunk(race.id));
   };
+ 
+
 
   return (
     <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>
@@ -33,7 +36,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {/* {race.date} */}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {race.length} Км
+            {race.length}Км
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.desc}
@@ -63,6 +66,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
               </Button>
             </>
           )}
+          <Rate rates={race.RaceRatings} race={race} />
           {comments.map((comment) => (
             <OneRaceComment key={comment.id} comment={comment} />
           ))}
