@@ -3,13 +3,14 @@ import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } fro
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { RaceType } from '../../types/race';
 import { deleteRaceThunk } from '../../redux/slices/race/thunk';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 type OneRaceProps = {
   race: RaceType;
 };
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
+  const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -18,14 +19,14 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
   };
 
   return (
-    <Card sx={{ display: 'flex', marginBottom: 3 }}>
+    <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ paddingLeft: 2 }}>
           <Typography component="div" variant="h5">
             {race.name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {race.date}
+            {/* {race.date} */}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.length} Км
@@ -39,12 +40,11 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <Button sx={{marginRight:'5px'}} onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
-            Удалить
-          </Button>
-          <Button variant="contained">
-            Изменить
-          </Button>
+          {user.isAdmin === true && (
+            <Button onClick={(e) => deleteHandler(e)} variant="outlined" color="error">
+              Удалить
+            </Button>
+          )}
         </CardContent>
       </Box>
 

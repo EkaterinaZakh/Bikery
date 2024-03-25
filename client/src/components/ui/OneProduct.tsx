@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import type { ProdType } from '../../types/prod';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteProdThunk } from '../../redux/slices/prod/thunk';
+import { setSelectedProdById } from '../../redux/slices/prod/slice';
 
 type OneProductProps = {
   prod: ProdType;
@@ -21,7 +22,9 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   };
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px'}}>
+    <Card
+      sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px' }}
+    >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardMedia
           component="img"
@@ -52,7 +55,11 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
 
       {user.isAdmin === true && (
         <div>
-          <Button variant="outlined" startIcon={<BorderColorRoundedIcon />}>
+          <Button
+            variant="outlined"
+            startIcon={<BorderColorRoundedIcon />}
+            onClick={() => dispatch(setSelectedProdById(prod.id))}
+          >
             Правки
           </Button>
 
