@@ -19,7 +19,7 @@ export default function FestPage(): JSX.Element {
     <div>
       <NewFestForm />
       <BaseModal open={!!selectedFest} onClose={handleCloseModal}>
-        <EditFestList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
+        <EditFestList onSubmit={handleCloseModal}/>
       </BaseModal>
       {fests.map((fest) => (
         <OneFest fest={fest} key={fest.id} />

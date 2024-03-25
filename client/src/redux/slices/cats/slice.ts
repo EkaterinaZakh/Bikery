@@ -12,7 +12,7 @@ export const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    setSelecteCategory: (state, action: PayloadAction<CategoryType['id']>) => {
+    setSelectedCategory: (state, action: PayloadAction<CategoryType['id']>) => {
       const selectedCategory = state.categories.find((cat) => cat.id === action.payload);
       if (selectedCategory) state.selectedCategory = selectedCategory;
     },
@@ -24,6 +24,6 @@ export const categoriesSlice = createSlice({
   },
 });
 
-export const { setSelecteCategory } = categoriesSlice.actions;
+export const { setSelectedCategory } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
