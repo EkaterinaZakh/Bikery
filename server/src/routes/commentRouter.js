@@ -25,33 +25,6 @@ router.get('/races/:raceId', async (req, res) => {
   }
 });
 
-// :id -> /races/:raceId
-// router.post('/races/:raceId', verifyAccessToken, async (req, res) => {
-//   const { id } = req.params;
-//   const { commit } = req.body;
-//   if (Number.isNaN(Number(id))) {
-//     return res.status(400).json({ error: 'id is invalid' });
-//   }
-//   try {
-//     const newComment = await CommentRace.create({
-//       text: commit,
-//       userId: res.locals.user.id,
-//       raceId: id,
-//     });
-//     const commentWithAuthor = await CommentRace.findOne({
-//       where: { id: newComment.id },
-//       include: {
-//         model: User,
-//         attributes: ['id', 'name'],
-//       },
-//     });
-//     res.json(commentWithAuthor);
-//   } catch (error) {
-//     console.log(error);
-//     res.sendStatus(500);
-//   }
-// });
-
 router.post('/races/:raceId', verifyAccessToken, async (req, res) => {
   const { raceId } = req.params; // Правильно получаем raceId из параметров маршрута
   console.log(req.params);

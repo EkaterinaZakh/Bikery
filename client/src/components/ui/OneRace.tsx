@@ -15,9 +15,8 @@ type OneRaceProps = {
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
-  // список комментов получить из race.CommentRaces <--- комменты конкректно к данной гонке
-  // const allComments = useAppSelector((state) => state.comments.commits);
-  // const comments = allComments; // .filter() // raceId
+  const comments = useAppSelector((state) => state.comments.commits);
+  // список комментов получить из race.CommentRaces <--- комменты конкректно к данной
   const commentsForRace = race.CommentRaces || [];
 
   const dispatch = useAppDispatch();
@@ -69,7 +68,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             </>
           )}
           <Rate rates={race.RaceRatings} race={race} />
-          {comments.map((comment) => (
+          {commentsForRace.map((comment) => (
             <OneRaceComment key={comment.id} comment={comment} />
           ))}
           <AddRaceComment race={race} />
