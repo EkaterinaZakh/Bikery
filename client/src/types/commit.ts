@@ -5,6 +5,17 @@ export type CommitType = {
   text: string;
 };
 
+export type FestCommitType = {
+  id: number;
+  userId: number;
+  festId: number;
+  text: string;
+};
+
+export type FestCommitStateType = {
+  festcomments: FestCommitType[];
+};
+
 export type AddCommitForm = {
   commits: CommitType[];
 };
@@ -14,3 +25,5 @@ export type CommitsStateType = {
 };
 
 export type OmitCommitType = Omit<CommitType, 'id' | 'userId'>;
+
+export type OmitFestCommitType = Omit<FestCommitType, 'id' | 'userId'>;
