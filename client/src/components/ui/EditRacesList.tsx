@@ -24,8 +24,8 @@ export default function EditRacesList({ onSubmit,onCancel }: EditRacesProps): JS
     desc: '',
     image: '',
     length: 0,
-    //  date: '',
     rateCounter: 0,
+    //  date: '',
   });
 
   useEffect(() => {

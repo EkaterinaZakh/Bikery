@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import type { ProdType } from '../../types/prod';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteProdThunk } from '../../redux/slices/prod/thunk';
-import { setSelectedProdById } from '../../redux/slices/prod/slice';
+import { openEditModal, setSelectedProdById } from '../../redux/slices/prod/slice';
 
 type OneProductProps = {
   prod: ProdType;
@@ -50,15 +50,22 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
       </Box>
       {user.isAdmin === true && (
         <div>
+          <Button onClick={deleteHandler} variant="outlined" startIcon={<DeleteIcon />}>
+            Удалить
+          </Button>
           <Button
             variant="outlined"
             startIcon={<BorderColorRoundedIcon />}
-            onClick={() => dispatch(setSelectedProdById(prod.id))}
+            onClick={() => dispatch(openEditModal(prod.id))}
           >
             Правки
           </Button>
-          <Button onClick={deleteHandler} variant="outlined" startIcon={<DeleteIcon />}>
-            Удалить
+          <Button
+            variant='outlined'
+            startIcon={<BorderColorRoundedIcon />}
+            onClick={() => dispatch(setSelectedProdById(prod.id))}
+          >
+            Подробное описание
           </Button>
         </div>
       )}
