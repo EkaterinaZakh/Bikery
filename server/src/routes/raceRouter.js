@@ -1,5 +1,5 @@
 const express = require('express');
-const { Race, User, RaceRating } = require('../../db/models');
+const { Race, User, CommentRace, RaceRating } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router
   .get(async (req, res) => {
     const races = await Race.findAll({
       order: [['id', 'DESC']],
-      include: [User, RaceRating],
+      include: [User, CommentRace, RaceRating],
     });
 
     res.json(races);
@@ -17,7 +17,10 @@ router
   .post(verifyAccessToken, async (req, res) => {
     try {
       const newRace = await Race.create({ ...req.body, userId: res.locals.user.id });
-      const newRaceWithUser = Race.findOne({ where: { id: newRace.id }, include: User });
+      const newRaceWithUser = await Race.findOne({
+        where: { id: newRace.id },
+        include: [User, RaceRating, CommentRace],
+      });
       res.status(201).json(newRaceWithUser);
     } catch (error) {
       console.log(error);
@@ -35,7 +38,7 @@ router.route('/:id').delete(verifyAccessToken, async (req, res) => {
 router.route('/:id/rating').post(async (req, res) => {
   try {
     const newRate = await RaceRating.create(req.body);
-    const newRateWithUser = RaceRating.findOne({ where: { id: newRate.id }, include: User });
+    const newRateWithUser = await RaceRating.findOne({ where: { id: newRate.id }, include: User });
     res.status(201).json(newRateWithUser);
   } catch (error) {
     console.log(error);

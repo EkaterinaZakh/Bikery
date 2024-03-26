@@ -4,6 +4,9 @@ const { User, CommentRace } = require('../../db/models');
 
 const router = express.Router();
 
+// написать эндпоинт, который вытащит вообще все комменты
+// GET /api/comments
+
 // /:id -> /races/:raceId
 router.get('/races/:raceId', async (req, res) => {
   const { id } = req.params;

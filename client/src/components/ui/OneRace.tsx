@@ -15,15 +15,24 @@ type OneRaceProps = {
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
-  const comments = useAppSelector((state) => state.comments.commits);
+  // список комментов получить из race.CommentRaces <--- комменты конкректно к данной гонке
+  // const allComments = useAppSelector((state) => state.comments.commits);
+  // const comments = allComments; // .filter() // raceId
+  const commentsForRace = race.CommentRaces || [];
+
+  const formattedDate = new Date(race.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
   const dispatch = useAppDispatch();
 
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     void dispatch(deleteRaceThunk(race.id));
   };
- 
 
+  console.log(race);
 
   return (
     <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>
@@ -33,7 +42,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {race.name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {/* {race.date} */}
+            {formattedDate}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.length}Км
@@ -67,7 +76,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             </>
           )}
           <Rate rates={race.RaceRatings} race={race} />
-          {comments.map((comment) => (
+          {commentsForRace.map((comment) => (
             <OneRaceComment key={comment.id} comment={comment} />
           ))}
           <AddRaceComment race={race} />

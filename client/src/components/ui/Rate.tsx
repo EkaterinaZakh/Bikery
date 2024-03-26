@@ -21,7 +21,7 @@ type RatePropsType = {
   rates: SetRating[];
 };
 
-function getLabelText(value: number) {
+function getLabelText(value: number): string {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
@@ -30,22 +30,27 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
   const dispatch = useAppDispatch();
   const [value, setValue] = React.useState<number>(0);
 
+  const hasVoted =
+    !user.isAdmin && user.status === 'logged' && rates.some((rate) => rate.userId === user.id);
+
   const totalRating = rates.reduce((acc, el) => acc + el.starsCount, 0);
   const averageRating = rates.length > 0 ? totalRating / rates.length : 0;
 
   React.useEffect(() => {
     setValue(averageRating);
-  }, [totalRating]);
+  }, [averageRating]);
 
-  const rateHandler = (e: React.FormEvent<HTMLFormElement>, rating: number): void => {
-    e.preventDefault();
-    void dispatch(addRatingThunk({ userId: user.id, raceId: race.id, starsCount: rating }));
-    setValue(averageRating);
+  const rateHandler = (rating: null | number): void => {
+    if (!hasVoted && !user.isAdmin && user.status === 'logged') {
+      void dispatch(addRatingThunk({ userId: user.id, raceId: race.id, starsCount: rating ?? 0 }));
+      setValue(averageRating);
+    } else {
+      alert('Вы уже проголосовали за эту гонку. Голосование доступно только один раз');
+    }
   };
 
   const [hover, setHover] = React.useState(-1);
   return (
-    // <form onChange={}></form>
     <Box
       sx={{
         width: 200,
@@ -58,10 +63,11 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
         value={value}
         precision={0.5}
         getLabelText={getLabelText}
-        onChange={(e) => rateHandler(e, e.currentTarget.value)}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
+        onChange={(_e, rating) => rateHandler(rating)}
+        // onChangeActive={(newHover) => {
+        //   setHover(newHover);
+        // }}
+        readOnly={hasVoted}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
       {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}

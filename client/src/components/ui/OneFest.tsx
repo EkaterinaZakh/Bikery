@@ -1,19 +1,37 @@
 import React from 'react';
-import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography, Button } from '@mui/material';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  IconButton,
+  Typography,
+  Button,
+} from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteFestThunk } from '../../redux/slices/fest/thunk';
 import { setSelectedFestById } from '../../redux/slices/fest/slice';
 import type { FestType } from '../../types/fest';
+import AddRaceComment from './AddRaceComment';
+import AddFestComment from './AddFestComment';
+import OneFestComment from './OneFestComment';
 
 type OneFestProps = {
-  fest: FestType
-}
+  fest: FestType;
+};
 
-export default function OneFest({ fest }:OneFestProps ): JSX.Element {
+export default function OneFest({ fest }: OneFestProps): JSX.Element {
+  const commentsForfest = fest.CommentFest || [];
+
   const [expanded, setExpanded] = React.useState(false);
   const user = useAppSelector((store) => store.auth.user);
-  const formattedDate = new Date(fest.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const formattedDate = new Date(fest.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
   const dispatch = useAppDispatch();
 
   const handleExpandClick = (): void => {
@@ -55,17 +73,18 @@ export default function OneFest({ fest }:OneFestProps ): JSX.Element {
             </Button>
           </>
         )}
-        <IconButton
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
+        <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
           {expanded ? 'Скрыть' : 'Подробнее'}
         </IconButton>
       </CardActions>
       {expanded && (
         <CardContent>
-          <Typography paragraph>Подробное описание</Typography>
+          <Typography paragraph>
+            {commentsForfest.map((comment) => (
+              <OneFestComment key={comment.id} comment={comment} />
+            ))}
+            <AddFestComment fest={fest} />
+          </Typography>
         </CardContent>
       )}
     </Card>
