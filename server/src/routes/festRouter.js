@@ -1,5 +1,5 @@
 const express = require('express');
-const { Fest, User } = require('../../db/models');
+const { Fest, User, CommentFest } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router
   .get(async (req, res) => {
     const fests = await Fest.findAll({
       order: [['id', 'DESC']],
-      include: User,
+      include: [User, { model: CommentFest, include: User }],
     });
     res.json(fests);
   })

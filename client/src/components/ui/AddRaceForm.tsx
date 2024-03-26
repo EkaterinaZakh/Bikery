@@ -83,15 +83,7 @@ export default function AddRaceForm(): JSX.Element {
             onChange={hangleChange}
             value={formData.length}
           />
-          <TextField
-            name="rateCounter"
-            required
-            id="outlined-required"
-            label="Рейтинг"
-            placeholder="Рейтинг"
-            onChange={hangleChange}
-            value={formData.rateCounter}
-          />
+
           <Button
             style={{ marginTop: '15px', width: '15%' }}
             type="submit"

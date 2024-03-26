@@ -26,8 +26,7 @@ router.post('/fests/:festId', verifyAccessToken, async (req, res) => {
   console.log(req.params);
   const { text } = req.body;
   if (Number.isNaN(Number(festId))) {
-    // Проверяем raceId, а не id
-    return res.status(400).json({ error: 'raceId is invalid' }); // Возвращаем ошибку для festId
+    return res.status(400).json({ error: 'festId is invalid' }); // Возвращаем ошибку для festId
   }
   try {
     const newComment = await CommentFest.create({

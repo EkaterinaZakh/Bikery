@@ -1,5 +1,7 @@
 const express = require('express');
-const { Race, User, CommentRace, RaceRating } = require('../../db/models');
+const {
+  Race, User, CommentRace, RaceRating,
+} = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const router = express.Router();
@@ -47,7 +49,9 @@ router.route('/:id/rating').post(async (req, res) => {
 
   router.route('/:id').put(async (req, res) => {
     const { id } = req.params;
-    const { name, desc, image, length, rateCounter } = req.body;
+    const {
+      name, desc, image, length, rateCounter,
+    } = req.body;
     if (!name || !desc || !image || !length || !rateCounter) {
       res.status(401).json({ message: 'Wrong product data' });
       return;
