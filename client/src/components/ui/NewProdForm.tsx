@@ -1,52 +1,16 @@
-import React, { useCallback, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Box, Button, TextField } from '@mui/material';
-import { useAppDispatch } from '../../redux/hooks';
 import { addProdThunk } from '../../redux/slices/prod/thunk';
-import type { AddProdForm } from '../../types/prod';
-// import Button from '@mui/material/Button';
-// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { styled } from '@mui/material/styles';
-// import logo from '../../../public/logo.jpg';
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
+import { useAppDispatch } from '../../redux/hooks';
 
 export default function NewProdForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.currentTarget)) as AddProdForm;
-    void dispatch(
-      addProdThunk({
-        name: formData.name,
-        desc: formData.price,
-        price: formData.price,
-        image: formData.image,
-      }),
-    );
+    const formData = new FormData(e.currentTarget); // as AddProdForm;
+    void dispatch(addProdThunk(formData));
   };
-
-  // const [prodPic, setProdPic] = useState(user?.img || '/logo.jpg');
-
-  // const editProdPic = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const res = await axios.patch('/api/account/profilepic', formData);
-  //   if (res.status === 200) {
-  //     setProdPic(res.data.image);
-  //   }
-  // };
 
   return (
     <div style={{ margin: '10px' }}>
@@ -74,18 +38,16 @@ export default function NewProdForm(): JSX.Element {
               sx={{ margin: '5px' }}
             />
 
-            {/* <form onSubmit={editProdPic}> */}
-              <TextField
-                name="image"
-                required
-                id="outlined-required"
-                // label="Добавьте картинку"
-                // placeholder="http://..."
-                // value={carData.image}
-                // onChange={hangleChange}
-                type="file"
-              />
-            {/* </form> */}
+            {/* <TextField name='categodyId'>
+              <Box sx={{ margin: '5px' }}>
+                <label htmlFor="language">Категория продукта:</label>
+                <select name="categoryId" id="language">
+                  <option value="1">Куртки</option>
+                  <option value="2">Шлемы</option>
+                  <option value="3">Обувь</option>
+                </select>
+              </Box>
+            </TextField> */}
 
             <TextField
               name="price"
@@ -95,6 +57,27 @@ export default function NewProdForm(): JSX.Element {
               placeholder="Цена"
               type="text"
               sx={{ margin: '5px' }}
+            />
+
+            <TextField
+              name="categoryId"
+              required
+              id="outlined-required"
+              label="Категория"
+              placeholder="Категория"
+              type="text"
+              sx={{ margin: '5px' }}
+            />
+
+            <TextField
+              name="image"
+              required
+              id="outlined-required"
+              // label="Добавьте картинку"
+              // placeholder="http://..."
+              // value={carData.image}
+              // onChange={hangleChange}
+              type="file"
             />
             <Button
               style={{ marginTop: '15px', width: '15%', margin: '5px' }}
@@ -110,6 +93,26 @@ export default function NewProdForm(): JSX.Element {
     </div>
   );
 }
+
+// import { Dropdown } from '@mui/base/Dropdown';
+// import { MenuButton } from '@mui/base/MenuButton';
+// import { Menu } from '@mui/base/Menu';
+// import { MenuItem } from '@mui/base/MenuItem';
+
+// const createHandleMenuClick = (menuItem: string) => () => {
+//   console.log(`Clicked on ${menuItem}`);
+// };
+
+// {
+/* <div className="dropdown">
+<button className="dropbtn">Категория продукта</button>
+<div className="dropdown-content">
+  <a href="#">Куртки</a>
+  <a href="#">Шлемы</a>
+  <a href="#">Обувь</a>
+</div>
+</div> */
+// }
 
 // import * as React from 'react';
 // import { styled } from '@mui/material/styles';

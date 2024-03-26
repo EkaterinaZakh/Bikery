@@ -42,9 +42,14 @@ export default function ShopPage(): JSX.Element {
         <BaseModal open={!!selectedProd} onClose={handleCloseModal}>
           <EditProdList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
         </BaseModal>
-        {prodsByCat.map((el) => (
+        {selectedCat
+          ? prodsByCat.map((el) => <OneProduct prod={el} key={el.id} />)
+          : allProds.map((el) => <OneProduct prod={el} key={el.id} />)}
+        
+        {/* {prodsByCat.map((el) => (
           <OneProduct prod={el} key={el.id} />
-        ))}
+        ))} */}
+
       </Box>
     </>
   );

@@ -18,15 +18,24 @@ export default function RacesPage(): JSX.Element {
 
   return (
     <div>
-      {user.isAdmin === true && <AddRaceForm />}
+
+      <div>{user.status === 'logged' && <AddRaceForm />},</div>
+      <div>
+        {races.map((race) => (
+          <OneRace race={race} key={race.id} />
+        ))}
+      </div>
+
+      {/* {user.isAdmin === true && <AddRaceForm />} */}
       {user.isAdmin === true && user.status === 'logged' && (
         <BaseModal open={!!selectedRaces} onClose={handleCloseModal}>
           <EditRacesList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
         </BaseModal>
       )}
-      {races.map((race) => (
+      {/* {races.map((race) => (
         <OneRace race={race} key={race.id} />
-      ))}
+      ))} */}
+
     </div>
   );
 }
