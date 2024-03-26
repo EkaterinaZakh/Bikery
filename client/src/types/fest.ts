@@ -5,7 +5,7 @@ export type FestType = {
     image: string;
     place: string;
     userId: number;
-    date: Date;
+    date: string;
   };
 
   export type AddFestForm = {
@@ -13,7 +13,7 @@ export type FestType = {
     desc: string;
     image: string;
     place: string;
-    date: Date;
+    date: string;
   }
 
   export type FestsStateType = {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editProdThunk } from '../../redux/slices/prod/thunk';
-// import type { ProdType } from '../../types/prod';
 
 type EditProdListProps = {
   onSubmit?: () => void;
@@ -12,12 +11,12 @@ type EditProdListProps = {
 export default function EditProdList({ onSubmit, onCancel }: EditProdListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const selectedProd = useAppSelector((state) => state.products.selectedProd);
-  // console.log('---', selectedProd);
 
   const [prodData, setProdData] = useState({
     name: '',
     desc: '',
     price: '',
+    image: '',
   });
 
   useEffect(() => {
@@ -25,30 +24,29 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   }, [selectedProd]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
     setProdData({
       ...prodData,
-      [e.target.name]: e.target.value,
-      [e.target.desc]: e.target.value,
-      [e.target.price]: e.target.value,
+      [name]: value,
     });
   };
 
   const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
-      name: string;
-      desc: string;
-      price: string;
+    const formData = {
+      name: prodData.name,
+      desc: prodData.desc,
+      price: prodData.price,
+      image: prodData.image,
     };
     if (!selectedProd) return;
-    void dispatch(
-      editProdThunk({
-        ...selectedProd,
-        name: formData.name,
-        desc: formData.desc,
-        price: formData.price,
-      }),
-    );
+    void dispatch(editProdThunk({
+      ...selectedProd,
+      name: formData.name,
+      desc: formData.desc,
+      price: formData.price,
+      image: formData.image,
+    }));
     onSubmit?.();
   };
 
@@ -57,8 +55,8 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   };
 
   return (
-    <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '350px' }}>
-      <h3 style={{ textAlign: 'center' }}>Добавить продукт:</h3>
+    <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '380px' }}>
+      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Добавить продукт:</h3>
       <form onSubmit={editHandler}>
         <Box>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -67,7 +65,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               value={prodData.name}
               onChange={handleChange}
               required
-              id="outlined-required"
+              id="name-input"
               label="Название"
               placeholder="Название"
               type="text"
@@ -77,48 +75,42 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               value={prodData.desc}
               onChange={handleChange}
               required
-              id="outlined-required"
+              id="desc-input"
               label="Описание"
               placeholder="Описание"
               type="text"
             />
-            {/* <TextField
-        name="image"
-        required
-        id="outlined-required"
-        label="Добавьте картинку"
-        placeholder="http://..."
-        value={carData.image}
-        onChange={hangleChange}
-        type="text"
-      /> */}
-
+            <TextField
+              name="image"
+              required
+              id="image-input"
+              label="Добавить картинку"
+              placeholder="Загрузить изображение"
+              type="file"
+              onChange={handleChange}
+            />
             <TextField
               name="price"
               value={prodData.price}
               onChange={handleChange}
               required
-              id="outlined-required"
+              id="price-input"
               label="Цена"
               placeholder="Цена"
               type="text"
             />
             <Button
-              style={{ marginTop: '15px', width: '15%' }}
+              style={{ marginTop: '15px', width: '100px' }}
               type="submit"
               variant="contained"
               color="success"
-              // onClick={editHandler}
             >
               Добавить
             </Button>
-
             <Button
-              style={{ marginTop: '15px', width: '15%' }}
-              type="submit"
-              onClick={cancelHandler}
+              style={{ marginTop: '15px', width: '100px' }}
               variant="contained"
-              color="success"
+              onClick={cancelHandler}
             >
               Отменить
             </Button>

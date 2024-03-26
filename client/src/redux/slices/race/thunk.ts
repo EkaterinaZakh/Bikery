@@ -20,4 +20,7 @@ export const deleteRaceThunk = createAsyncThunk<RaceType['id'], RaceType['id']>(
 export const addRatingThunk = createAsyncThunk<SetRating, SetRating>('races/setRateThunk', (rate) =>
   raceService.setRaceRating(rate),
 );
+
+export const editRaceThunk = createAsyncThunk<RaceType, RaceType>('races/editRaceThunk', async(race) => raceService.editRace(race))
+
 export default getAllRaceThunk;

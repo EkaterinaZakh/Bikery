@@ -2,7 +2,8 @@ export type ProdType = {
   id: number;
   name: string;
   desc: string;
-  price: string;
+  price: number;
+  image: string;
   categoryId: number;
 };
 
@@ -14,5 +15,7 @@ export type ProdStateType = {
 export type AddProdForm = {
   name: string;
   desc: string;
-  price: string;
+  price: number;
+  image: string;
+  categoryId: number;
 };

@@ -1,8 +1,13 @@
 const express = require('express');
+const sharp = require('sharp');
+const fs = require('fs/promises');
 const { Product } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
+const upload = require('../middlewares/upload');
 
 const prodRouter = express.Router();
+
+// const {Product} = require('../../../client/public/')
 
 prodRouter.route('/').get(async (req, res) => {
   const products = await Product.findAll({
@@ -11,12 +16,42 @@ prodRouter.route('/').get(async (req, res) => {
   res.json(products);
 });
 
-prodRouter.route('/').post(verifyAccessToken, async (req, res) => {
+prodRouter.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
+  const { name, desc, price, categoryId } = req.body;
+
+  if (!name || !desc || !req.file || !price || !categoryId) {
+    return res.status(400).json({ message: 'Заполните все поля' });
+  }
+
+  // if (!req.file) {
+  //   return res.status(400).json({ message: 'Картинка не найдена' });
+  // }
+
   try {
-    const newProd = await Product.create({ ...req.body, userId: res.locals.user.id });
+    // Имя файла для сохранения
+    const imageName = `${Date.now()}.jpeg`;
+    // const imageName = `${Date.now()}.webp`;
+
+    // Обработка и сохранение файла с новым именем
+    // const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
+    const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+
+    await fs.writeFile(`./public/img/${imageName}`, outputBuffer);
+    // await fs.writeFile(`../../../client/public/img/${imageName}`, outputBuffer);
+
+    const newProd = await Product.create({
+      name,
+      desc,
+      price,
+      image: imageName,
+      categoryId,
+      // userId: res.locals.user.id,
+    });
     res.status(201).json(newProd);
+    // return res.sendStatus(200);
   } catch (error) {
-    res.status(500).json({ meassage: 'Erroe while creating new Product' });
+    // console.log(error);
+    res.status(500).json({ meassage: 'Ошибка при создании нового товара' });
   }
 });
 
@@ -37,7 +72,7 @@ prodRouter.route('/:id').delete(async (req, res) => {
 prodRouter.route('/:id').put(async (req, res) => {
   const { id } = req.params;
   const { name, desc, price } = req.body;
-  if (!name || !desc || !price) {
+  if (!name || !desc || !price || !req.file) {
     res.status(401).json({ message: 'Wrong product data' });
     return;
   }
@@ -47,3 +82,13 @@ prodRouter.route('/:id').put(async (req, res) => {
 });
 
 module.exports = prodRouter;
+
+// prodRouter.route('/').get(async (req, res) => {
+//   const { category } = req.body;
+
+//   const products = await Product.findAll({
+//     include: [{ model: Category, where: { name: category } }],
+//     order: [['id', 'DESC']],
+//   });
+//   res.json(products);
+// });

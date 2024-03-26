@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import apiAxiosInstance from './apiAxiosInstance';
-import type { AddProdForm, ProdType } from '../../../types/prod';
+import type { ProdType } from '../../../types/prod';
 
 class ProdService {
   constructor(private client: AxiosInstance) {}
@@ -14,8 +14,12 @@ class ProdService {
     return response.data;
   }
 
-  async createNewProd(formData: AddProdForm): Promise<ProdType> {
-    const res = await this.client.post<ProdType>('/products', formData);
+  async createNewProd(formData: FormData): Promise<ProdType> {
+    const res = await this.client.post<ProdType>('/products/add', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // header multipart formdata
+      },
+    });
     if (res.status !== 201)
       return Promise.reject(new Error(`Wrond status code (expected 201, received: ${res.status}`));
     return res.data;

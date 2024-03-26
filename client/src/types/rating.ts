@@ -4,3 +4,7 @@ export type SetRating = {
   raceId: number;
   starsCount: number;
 };
+
+export type RatesStateType = {
+  rates: SetRating[];
+};

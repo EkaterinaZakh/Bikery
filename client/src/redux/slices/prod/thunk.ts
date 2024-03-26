@@ -6,7 +6,7 @@ export const getAllProdsThunk = createAsyncThunk<ProdType[]>('prod/getAllProdsTh
   prodService.getAllProds(),
 );
 
-export const addProdThunk = createAsyncThunk<ProdType, AddProdForm>(
+export const addProdThunk = createAsyncThunk<ProdType, FormData>(
   'prod/addProdThunk',
   async (prod) => prodService.createNewProd(prod),
 );
