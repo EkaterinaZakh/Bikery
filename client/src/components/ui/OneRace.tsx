@@ -15,7 +15,11 @@ type OneRaceProps = {
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
-  const comments = useAppSelector((state) => state.comments.commits);
+  // список комментов получить из race.CommentRaces <--- комменты конкректно к данной гонке
+  // const allComments = useAppSelector((state) => state.comments.commits);
+  // const comments = allComments; // .filter() // raceId
+  const commentsForRace = race.CommentRaces || [];
+
   const dispatch = useAppDispatch();
 
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
