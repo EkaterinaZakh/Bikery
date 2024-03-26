@@ -39,10 +39,13 @@ export const festsSlice = createSlice({
       );
     });
     builder.addCase(addFestCommentThunk.fulfilled, (state, action) => {
-      const { festId, text } = action.payload;
+      const { festId, userId, text, User } = action.payload;
       const festToUpdate = state.fests.find((el) => el.id === festId);
       if (festToUpdate) {
-        festToUpdate.CommentFest = [...(festToUpdate.CommentFest || []), { text }];
+        festToUpdate.CommentFests = [
+          ...(festToUpdate.CommentFests || []),
+          { text, userId, festId, User },
+        ];
       }
     });
   },
