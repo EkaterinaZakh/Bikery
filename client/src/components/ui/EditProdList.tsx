@@ -40,13 +40,15 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
       image: prodData.image,
     };
     if (!selectedProd) return;
-    void dispatch(editProdThunk({
-      ...selectedProd,
-      name: formData.name,
-      desc: formData.desc,
-      price: formData.price,
-      image: formData.image,
-    }));
+    void dispatch(
+      editProdThunk({
+        ...selectedProd,
+        name: formData.name,
+        desc: formData.desc,
+        price: formData.price,
+        image: formData.image,
+      }),
+    );
     onSubmit?.();
   };
 
@@ -56,7 +58,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
 
   return (
     <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '380px' }}>
-      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Добавить продукт:</h3>
+      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Редактировать продукт:</h3>
       <form onSubmit={editHandler}>
         <Box>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -70,6 +72,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Название"
               type="text"
             />
+
             <TextField
               name="desc"
               value={prodData.desc}
@@ -80,15 +83,26 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Описание"
               type="text"
             />
-            <TextField
+
+            {/* <TextField
               name="image"
               required
               id="image-input"
-              label="Добавить картинку"
+              // label="Добавить картинку"
               placeholder="Загрузить изображение"
               type="file"
               onChange={handleChange}
+            /> */}
+
+            <TextField
+              name="image"
+              // value={prodData.image}
+              // onChange={handleChange}
+              required
+              id="outlined-required"
+              type="file"
             />
+
             <TextField
               name="price"
               value={prodData.price}
@@ -99,6 +113,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Цена"
               type="text"
             />
+
             <Button
               style={{ marginTop: '15px', width: '100px' }}
               type="submit"
@@ -107,6 +122,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
             >
               Добавить
             </Button>
+
             <Button
               style={{ marginTop: '15px', width: '100px' }}
               variant="contained"

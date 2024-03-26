@@ -22,8 +22,6 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     event.preventDefault();
     void dispatch(deleteRaceThunk(race.id));
   };
- 
-
 
   return (
     <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>
@@ -66,7 +64,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
               </Button>
             </>
           )}
-          <Rate rates={race.RaceRatings} race={race} />
+          <Rate rates={race.RacerRatings} race={race} />
           {comments.map((comment) => (
             <OneRaceComment key={comment.id} comment={comment} />
           ))}

@@ -21,7 +21,7 @@ type RatePropsType = {
   rates: SetRating[];
 };
 
-function getLabelText(value: number) {
+function getLabelText(value: number): string {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
@@ -37,8 +37,7 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
     setValue(averageRating);
   }, [totalRating]);
 
-  const rateHandler = (e: React.FormEvent<HTMLFormElement>, rating: number): void => {
-    e.preventDefault();
+  const rateHandler = (rating: null | number): void => {
     void dispatch(addRatingThunk({ userId: user.id, raceId: race.id, starsCount: rating }));
     setValue(averageRating);
   };
@@ -58,7 +57,7 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
         value={value}
         precision={0.5}
         getLabelText={getLabelText}
-        onChange={(e) => rateHandler(e, e.currentTarget.value)}
+        onChange={(_e, rating) => rateHandler(rating)}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
