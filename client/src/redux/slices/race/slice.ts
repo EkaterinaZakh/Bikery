@@ -7,6 +7,7 @@ import getAllRaceThunk, {
   editRaceThunk,
   deleteRaceThunk,
 } from './thunk';
+import { addCommitsThunk } from '../comments/thunk';
 
 const initialState: RaceStateType = {
   races: [],
@@ -42,7 +43,8 @@ export const raceSlice = createSlice({
 
     builder.addCase(addRatingThunk.fulfilled, (state, action) => {
       const rate = action.payload;
-      state.races.map((el) => (el.id === rate.raceId ? el.RacerRatings.push(rate) : el));
+
+      state.races.map((el) => (el.id === rate.raceId ? el.RaceRatings.push(rate) : el));
     });
 
     builder.addCase(editRaceThunk.fulfilled, (state, action) => {
@@ -50,6 +52,14 @@ export const raceSlice = createSlice({
       state.races = state.races.map((race) =>
         race.id === action.payload.id ? action.payload : race,
       );
+    });
+    // addCommitsThunk -> добавить action.payload в комменты к определенной race
+    builder.addCase(addCommitsThunk.fulfilled, (state, action) => {
+      const { raceId, text } = action.payload;
+      const raceToUpdate = state.races.find((race) => race.id === raceId);
+      if (raceToUpdate) {
+        raceToUpdate.CommentRaces = [...(raceToUpdate.CommentRaces || []), { text }];
+      }
     });
   },
 });

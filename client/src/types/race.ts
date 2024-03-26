@@ -1,3 +1,4 @@
+import type { CommitType } from './commit';
 import type { SetRating } from './rating';
 
 export type RaceType = {
@@ -7,9 +8,11 @@ export type RaceType = {
   image: string;
   length: number;
   userId: number;
-  date: Date;
+  date: string;
   rateCounter: number;
-  RacerRatings: SetRating[];
+  RaceRatings: SetRating[];
+  // дописать, что сюда придут комменты CommentRaces?: комменты[]
+  CommentRaces?: CommitType[];
 };
 
 export type RaceStateType = {
@@ -22,6 +25,6 @@ export type AddRaceFormType = {
   image: string;
   desc: string;
   length: number;
-  date: Date;
+  date: string;
   rateCounter: number;
 };

@@ -6,7 +6,7 @@ type OneComentProps = {
   comment: CommitType;
 };
 
-export default function OneRaceComment({ comment }: OneComentProps): JSX.Element {
+export default function OneFestComment({ comment }: OneComentProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
   return (
     <div>
