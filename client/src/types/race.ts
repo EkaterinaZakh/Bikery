@@ -1,3 +1,5 @@
+import type { CommitType } from './commit';
+
 export type RaceType = {
   id: number;
   name: string;
@@ -7,6 +9,8 @@ export type RaceType = {
   userId: number;
   date: Date;
   rateCounter: number;
+  // дописать, что сюда придут комменты CommentRaces?: комменты[]
+  CommentRaces?: CommitType[];
 };
 
 export type RaceStateType = {

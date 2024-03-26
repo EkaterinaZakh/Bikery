@@ -1,5 +1,5 @@
 const express = require('express');
-const { Race, User } = require('../../db/models');
+const { Race, User, CommentRace } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router
   .get(async (req, res) => {
     const races = await Race.findAll({
       order: [['id', 'DESC']],
-      include: User,
+      include: [User, CommentRace],
     });
 
     res.json(races);
