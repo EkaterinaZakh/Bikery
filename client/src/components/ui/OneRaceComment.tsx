@@ -1,12 +1,17 @@
 import React from 'react';
 import type { CommitType } from '../../types/commit';
+import { useAppSelector } from '../../redux/hooks';
 
 type OneComentProps = {
   comment: CommitType;
 };
 
 export default function OneRaceComment({ comment }: OneComentProps): JSX.Element {
-  console.log(comment);
-
-  return <div>{comment.text}</div>;
+  const user = useAppSelector((state) => state.auth.user);
+  return (
+    <div>
+      {user.status === 'logged' ? `${user.name} : ${comment.text}` : null}
+      {/* {comment.text} */}
+    </div>
+  );
 }

@@ -1,3 +1,4 @@
+import type { CommitType } from './commit';
 import type { SetRating } from './rating';
 
 export type RaceType = {
@@ -9,6 +10,8 @@ export type RaceType = {
   userId: number;
   date: Date;
   rateCounter: number;
+  // дописать, что сюда придут комменты CommentRaces?: комменты[]
+  CommentRaces?: CommitType[];
   RacerRatings: SetRating[];
 };
 
