@@ -42,16 +42,18 @@ router.route('/:id/rating').post(async (req, res) => {
     res.status(500).json({ message: 'Error while creating' });
   }
 
-router.route('/:id').put(async (req, res) => {
-  const { id } = req.params;
-  const { name, desc, image, length, rateCounter } = req.body;
-  if (!name || !desc || !image || !length || !rateCounter) {
-    res.status(401).json({ message: 'Wrong product data' });
-    return;
-  }
-  await Race.update(req.body, { where: { id } });
-  const updateRace = await Race.findOne({ where: { id } });
-  res.json(updateRace);
+  router.route('/:id').put(async (req, res) => {
+    const { id } = req.params;
+    const { name, desc, image, length, rateCounter } = req.body;
+    if (!name || !desc || !image || !length || !rateCounter) {
+      res.status(401).json({ message: 'Wrong product data' });
+      return;
+    }
+
+    await Race.update(req.body, { where: { id } });
+    const updateRace = await Race.findOne({ where: { id } });
+    res.json(updateRace);
+  });
 });
 
 module.exports = router;

@@ -7,6 +7,8 @@ const upload = require('../middlewares/upload');
 
 const prodRouter = express.Router();
 
+// const {Product} = require('../../../client/public/')
+
 prodRouter.route('/').get(async (req, res) => {
   const products = await Product.findAll({
     order: [['id', 'DESC']],
@@ -27,11 +29,15 @@ prodRouter.route('/add').post(verifyAccessToken, upload.single('image'), async (
 
   try {
     // Имя файла для сохранения
-    const imageName = `${Date.now()}.webp`;
+    const imageName = `${Date.now()}.jpeg`;
+    // const imageName = `${Date.now()}.webp`;
 
     // Обработка и сохранение файла с новым именем
-    const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
+    // const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
+    const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+
     await fs.writeFile(`./public/img/${imageName}`, outputBuffer);
+    // await fs.writeFile(`../../../client/public/img/${imageName}`, outputBuffer);
 
     const newProd = await Product.create({
       name,
