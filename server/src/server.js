@@ -27,7 +27,7 @@ app.use(
 app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.json({ exrended: true }));
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(express.static(path.resolve('public')));
 
 app.use('/api/tokens', tokensRouter);
 app.use('/api/auth', authRouter);

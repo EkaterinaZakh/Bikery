@@ -6,6 +6,7 @@ import type { ProdStateType, ProdType } from '../../../types/prod';
 const initialState: ProdStateType = {
   prods: [],
   selectedProd: null,
+  modalType: null,
 };
 
 export const prodsSlice = createSlice({
@@ -14,11 +15,21 @@ export const prodsSlice = createSlice({
   reducers: {
     setSelectedProdById: (state, action: PayloadAction<ProdType['id']>) => {
       const selectedProd = state.prods.find((prod) => prod.id === action.payload);
-      if (selectedProd) state.selectedProd = selectedProd;
+      if (selectedProd) {
+        state.selectedProd = selectedProd;
+        state.modalType = 'info';
+      }
     },
-
+    openEditModal: (state, action: PayloadAction<ProdType['id']>) => {
+      const selectedProd = state.prods.find((prod) => prod.id === action.payload);
+      if (selectedProd) {
+        state.selectedProd = selectedProd;
+        state.modalType = 'edit';
+      } 
+    },
     clearSelectedProd: (state) => {
       state.selectedProd = null;
+      state.modalType = null
     },
   },
   extraReducers: (builder) => {
@@ -41,6 +52,6 @@ export const prodsSlice = createSlice({
   },
 });
 
-export const { setSelectedProdById, clearSelectedProd } = prodsSlice.actions;
+export const { setSelectedProdById, clearSelectedProd, openEditModal } = prodsSlice.actions;
 
 export default prodsSlice.reducer;

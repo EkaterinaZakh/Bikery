@@ -14,8 +14,12 @@ class FestService {
     return response.data;
   }
 
-  async createNewFest(formData: AddFestForm): Promise<FestType> {
-    const res = await this.client.post<FestType>('/fest', formData);
+  async createNewFest(formData: FormData): Promise<FestType> {
+    const res = await this.client.post<FestType>('/fest/add', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (res.status !== 201)
       return Promise.reject(new Error(`Wrong status code (expected 201, received: ${res.status}`));
     return res.data;
@@ -30,8 +34,8 @@ class FestService {
 
   async editFest(editedFest: FestType): Promise<FestType> {
     const res = await this.client.put<FestType>(`/fest/${editedFest.id}`, editedFest);
-    if (res.status !== 200) return res.data
-    return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`))
+    if (res.status !== 200) return res.data;
+    return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`));
   }
 }
 

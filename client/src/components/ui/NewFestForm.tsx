@@ -6,20 +6,22 @@ import { addFestThunk } from '../../redux/slices/fest/thunk';
 
 export default function NewFestForm(): JSX.Element {
   const dispatch = useAppDispatch();
+
   const user = useAppSelector((store) => store.auth.user);
+
   const [festData, setFestData] = useState<AddFestForm>({
     name: '',
     desc: '',
     image: '',
     place: '',
-    date: new Date().toISOString().slice(0, 10)
+    date: new Date().toISOString().slice(0, 10),
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFestData({ ...festData, [e.target.name]: e.target.value });
   };
 
-  const resetForm = ():void => {
+  const resetForm = (): void => {
     setFestData({
       name: '',
       desc: '',
@@ -31,25 +33,31 @@ export default function NewFestForm(): JSX.Element {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const formData = {
-      ...festData,
-      date: festData.date
-    };
-    void dispatch(addFestThunk(formData));
+    const formData = new FormData(event.currentTarget) 
+    // {
+    //   ...festData,
+    //   date: festData.date,
+    // };
+    // добавь в formData date
+    void dispatch(addFestThunk(formData)); // object application/json ---> multipart/form-data
     resetForm();
   };
 
   return (
-    <div style={{ margin: '10px', display: "flex", justifyContent: 'center', border: "1px solid red"}}>
+    <div
+      style={{ margin: '10px', display: 'flex', justifyContent: 'center', border: '1px solid red', margin: '5px'  }}
+    >
       {user.isAdmin === true && (
         <Box
           onSubmit={submitHandler}
           component="form"
-          sx={{display: "flex"}}
+          sx={{ display: 'flex' }}
           noValidate
           autoComplete="off"
         >
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '5px'  }}>
+          <h3>Добавить фестиваль:</h3>
             <TextField
               name="name"
               required
@@ -59,6 +67,7 @@ export default function NewFestForm(): JSX.Element {
               value={festData.name}
               onChange={handleChange}
               type="text"
+              sx={{ margin: '5px' }}
             />
             <TextField
               name="desc"
@@ -69,8 +78,10 @@ export default function NewFestForm(): JSX.Element {
               value={festData.desc}
               onChange={handleChange}
               type="text"
+              sx={{ margin: '5px' }}
             />
-            <TextField
+
+            {/* <TextField
               name="image"
               required
               id="outlined-required"
@@ -79,7 +90,20 @@ export default function NewFestForm(): JSX.Element {
               value={festData.image}
               onChange={handleChange}
               type="text"
+            /> */}
+
+            <TextField
+              name="image"
+              required
+              id="outlined-required"
+              // label="Добавьте картинку"
+              // placeholder="http://..."
+              // value={carData.image}
+              // onChange={hangleChange}
+              type="file"
+              sx={{ margin: '5px' }}
             />
+
             <TextField
               name="place"
               required
@@ -89,6 +113,7 @@ export default function NewFestForm(): JSX.Element {
               value={festData.place}
               onChange={handleChange}
               type="text"
+              sx={{ margin: '5px' }}
             />
             <TextField
               name="date"
@@ -99,13 +124,9 @@ export default function NewFestForm(): JSX.Element {
               value={festData.date}
               onChange={handleChange}
               type="date"
+              sx={{ margin: '5px' }}
             />
-            <Button
-              style={{ marginTop: '15px' }}
-              type="submit"
-              variant="contained"
-              color="success"
-            >
+            <Button style={{ marginTop: '15px' }} type="submit" variant="contained" color="success">
               Добавить
             </Button>
           </div>

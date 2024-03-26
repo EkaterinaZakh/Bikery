@@ -32,7 +32,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     void dispatch(deleteRaceThunk(race.id));
   };
 
-  console.log(race);
+  // console.log(race);
 
   return (
     <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>

@@ -6,6 +6,7 @@ export const getAllFestsThunk = createAsyncThunk<FestType[]>('fest/getAllFestsTh
   festService.getAllFests(),
 );
 
+// поменяй типы на FormData
 export const addFestThunk = createAsyncThunk<FestType, AddFestForm>('fest/addFestThunk', (fest) =>
   festService.createNewFest(fest),
 );
