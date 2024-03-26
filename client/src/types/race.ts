@@ -10,9 +10,9 @@ export type RaceType = {
   userId: number;
   date: Date;
   rateCounter: number;
+  RaceRatings: SetRating[];
   // дописать, что сюда придут комменты CommentRaces?: комменты[]
   CommentRaces?: CommitType[];
-  RacerRatings: SetRating[];
 };
 
 export type RaceStateType = {

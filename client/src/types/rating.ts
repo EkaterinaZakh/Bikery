@@ -1,5 +1,5 @@
 export type SetRating = {
-  id: number;
+  //   id: number;
   userId: number;
   raceId: number;
   starsCount: number;
