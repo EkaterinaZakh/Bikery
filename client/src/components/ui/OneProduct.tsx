@@ -36,10 +36,10 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           <Typography component="div" variant="h5">
             {prod.name}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
+          {/* <Typography variant="subtitle1" color="text.secondary" component="div">
             {prod.desc}
-          </Typography>
-          <Typography variant="h6" color="text.secondary" component="div">
+          </Typography> */}
+          <Typography variant="h6" color="text.secondary" component="div" sx={{margin: '10px'}}>
             {prod.price} руб.
           </Typography>
           <IconButton aria-label="add to favorites">

@@ -14,7 +14,6 @@ export default function ShopPage(): JSX.Element {
   const categories = useAppSelector((state) => state.categories.categories);
   const selectedProd = useAppSelector((state) => state.products.selectedProd);
   const allProds = useAppSelector((state) => state.products.prods);
-  const selectedCat = useAppSelector((state) => state.categories.selectedCategory);
   const prodsByCat = allProds.filter((prod) => prod.categoryId === selectedCat?.id);
   const user = useAppSelector((state) => state.auth.user);
   // if selectedFilterCategory не выбрана, то отобрази все, если выбрана, то только нужной категории
@@ -47,9 +46,9 @@ export default function ShopPage(): JSX.Element {
           ? prodsByCat.map((el) => <OneProduct prod={el} key={el.id} />)
           : allProds.map((el) => <OneProduct prod={el} key={el.id} />)}
         
-        {prodsByCat.map((el) => (
+        {/* {prodsByCat.map((el) => (
           <OneProduct prod={el} key={el.id} />
-        ))}
+        ))} */}
 
       </Box>
     </>
