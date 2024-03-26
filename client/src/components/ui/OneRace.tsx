@@ -22,8 +22,6 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     event.preventDefault();
     void dispatch(deleteRaceThunk(race.id));
   };
- 
-
 
   return (
     <Card className="card" sx={{ display: 'flex', marginBottom: 3 }}>

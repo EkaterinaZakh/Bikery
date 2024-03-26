@@ -35,7 +35,7 @@ router.route('/:id').delete(verifyAccessToken, async (req, res) => {
 router.route('/:id/rating').post(async (req, res) => {
   try {
     const newRate = await RaceRating.create(req.body);
-    const newRateWithUser = RaceRating.findOne({ where: { id: newRate.id }, include: User });
+    const newRateWithUser = await RaceRating.findOne({ where: { id: newRate.id }, include: User });
     res.status(201).json(newRateWithUser);
   } catch (error) {
     console.log(error);

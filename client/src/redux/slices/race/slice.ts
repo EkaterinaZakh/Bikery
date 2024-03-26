@@ -42,7 +42,8 @@ export const raceSlice = createSlice({
 
     builder.addCase(addRatingThunk.fulfilled, (state, action) => {
       const rate = action.payload;
-      state.races.map((el) => (el.id === rate.raceId ? el.RacerRatings.push(rate) : el));
+
+      state.races.map((el) => (el.id === rate.raceId ? el.RaceRatings.push(rate) : el));
     });
 
     builder.addCase(editRaceThunk.fulfilled, (state, action) => {

@@ -9,7 +9,7 @@ export type RaceType = {
   userId: number;
   date: Date;
   rateCounter: number;
-  RacerRatings: SetRating[];
+  RaceRatings: SetRating[];
 };
 
 export type RaceStateType = {
