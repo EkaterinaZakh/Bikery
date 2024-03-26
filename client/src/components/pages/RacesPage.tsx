@@ -18,7 +18,6 @@ export default function RacesPage(): JSX.Element {
 
   return (
     <div>
-
       <div>{user.status === 'logged' && <AddRaceForm />},</div>
       <div>
         {races.map((race) => (

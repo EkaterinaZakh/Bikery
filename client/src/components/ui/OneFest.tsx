@@ -15,12 +15,16 @@ import { deleteFestThunk } from '../../redux/slices/fest/thunk';
 import { setSelectedFestById } from '../../redux/slices/fest/slice';
 import type { FestType } from '../../types/fest';
 import AddRaceComment from './AddRaceComment';
+import AddFestComment from './AddFestComment';
+import OneFestComment from './OneFestComment';
 
 type OneFestProps = {
   fest: FestType;
 };
 
 export default function OneFest({ fest }: OneFestProps): JSX.Element {
+  const commentsForfest = fest.CommentFest || [];
+
   const [expanded, setExpanded] = React.useState(false);
   const user = useAppSelector((store) => store.auth.user);
   const formattedDate = new Date(fest.date).toLocaleDateString('en-US', {
@@ -76,7 +80,10 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
       {expanded && (
         <CardContent>
           <Typography paragraph>
-            <AddRaceComment />
+            {commentsForfest.map((comment) => (
+              <OneFestComment key={comment.id} comment={comment} />
+            ))}
+            <AddFestComment fest={fest} />
           </Typography>
         </CardContent>
       )}

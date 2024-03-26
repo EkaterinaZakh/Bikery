@@ -39,12 +39,12 @@ function App(): JSX.Element {
           <Root />
         </Loader>
       ),
-      errorElement: (
-        <>
-          <h1>Ошибка</h1>
-          <Link to="/">На главную</Link>
-        </>
-      ),
+      // errorElement: (
+      //   <>
+      //     <h1>Ошибка</h1>
+      //     <Link to="/">На главную</Link>
+      //   </>
+      // ),
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/fests', element: <FestPage /> },

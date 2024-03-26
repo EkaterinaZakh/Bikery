@@ -17,7 +17,10 @@ router
   .post(verifyAccessToken, async (req, res) => {
     try {
       const newRace = await Race.create({ ...req.body, userId: res.locals.user.id });
-      const newRaceWithUser = Race.findOne({ where: { id: newRace.id }, include: User });
+      const newRaceWithUser = await Race.findOne({
+        where: { id: newRace.id },
+        include: [User, RaceRating, CommentRace],
+      });
       res.status(201).json(newRaceWithUser);
     } catch (error) {
       console.log(error);

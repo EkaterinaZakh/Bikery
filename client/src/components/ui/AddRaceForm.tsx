@@ -12,7 +12,7 @@ export default function AddRaceForm(): JSX.Element {
     desc: '',
     length: 0,
     rateCounter: 0,
-    date: new Date(),
+    date: new Date().toISOString().slice(0, 10),
   });
 
   const hangleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -20,13 +20,13 @@ export default function AddRaceForm(): JSX.Element {
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    console.log(formData);
     void dispatch(addRaceThunk(formData));
   };
 
   return (
     <div style={{ margin: '10px' }}>
       <h3 style={{ textAlign: 'center' }}>Добавить мотопробег</h3>
-
       <Box
         onSubmit={submitHandler}
         component="form"
@@ -43,8 +43,8 @@ export default function AddRaceForm(): JSX.Element {
             id="outlined-required"
             label="Название"
             placeholder="Название"
-            value={formData.name}
             onChange={hangleChange}
+            value={formData.name}
           />
           <TextField
             name="image"
@@ -69,6 +69,7 @@ export default function AddRaceForm(): JSX.Element {
             required
             id="outlined-required"
             label="Дата"
+            type="date"
             placeholder="Дата проведения"
             onChange={hangleChange}
             value={formData.date}
