@@ -21,6 +21,8 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
     void dispatch(deleteProdThunk(prod.id));
   };
 
+  // console.log('---', prod.image);
+
   return (
     <Card
       sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px' }}
@@ -28,10 +30,12 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardMedia
           component="img"
-          sx={{ width: "280px" }}
-          image={prod.image}
-          alt=""
+          sx={{ width: '280px' }}
+          image={`${import.meta.env.VITE_APP_TITLE}/img/product/${prod.image}`}
+          // image={`${import.meta.env.VITE_APP_TITLE}/server/public/img/${imageName}`}
+          alt="фото продукта"
         />
+
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {prod.name}
@@ -39,7 +43,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           {/* <Typography variant="subtitle1" color="text.secondary" component="div">
             {prod.desc}
           </Typography> */}
-          <Typography variant="h6" color="text.secondary" component="div" sx={{margin: '10px'}}>
+          <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px' }}>
             {prod.price} руб.
           </Typography>
           <IconButton aria-label="add to favorites">
@@ -72,4 +76,3 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
     </Card>
   );
 }
-

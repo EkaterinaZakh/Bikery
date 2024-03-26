@@ -79,6 +79,7 @@ export default function NewProdForm(): JSX.Element {
               // onChange={hangleChange}
               type="file"
             />
+
             <Button
               style={{ marginTop: '15px', width: '15%', margin: '5px' }}
               type="submit"

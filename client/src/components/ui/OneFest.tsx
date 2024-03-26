@@ -46,7 +46,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader title={fest.name} />
-      <CardMedia component="img" height="194" image={fest.image} alt="" />
+      <CardMedia component="img" height="194" image={`${import.meta.env.VITE_APP_TITLE}/img/fest/${fest.image}`} alt="" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {fest.desc}

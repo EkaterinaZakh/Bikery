@@ -64,6 +64,9 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
         precision={0.5}
         getLabelText={getLabelText}
         onChange={(_e, rating) => rateHandler(rating)}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover);
+        }}
         // onChangeActive={(newHover) => {
         //   setHover(newHover);
         // }}
