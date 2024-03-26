@@ -15,7 +15,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   const [prodData, setProdData] = useState({
     name: '',
     desc: '',
-    price: '',
+    price: 0,
     image: '',
   });
 

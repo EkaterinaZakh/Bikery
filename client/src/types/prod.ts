@@ -10,6 +10,7 @@ export type ProdType = {
 export type ProdStateType = {
   prods: ProdType[];
   selectedProd: ProdType | null;
+  modalType: 'edit' | 'info' | null;
 };
 
 export type AddProdForm = {
