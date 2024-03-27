@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Fest.init({
     userId: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    desc: DataTypes.STRING,
+    desc: DataTypes.TEXT,
     image: DataTypes.STRING,
     date: DataTypes.DATE,
     place: DataTypes.STRING,

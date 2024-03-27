@@ -31,26 +31,24 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     });
   };
 
-  const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const formData = {
-      name: prodData.name,
-      desc: prodData.desc,
-      price: prodData.price,
-      image: prodData.image,
-    };
-    if (!selectedProd) return;
-    void dispatch(
-      editProdThunk({
-        ...selectedProd,
-        name: formData.name,
-        desc: formData.desc,
-        price: formData.price,
-        image: formData.image,
-      }),
-    );
-    onSubmit?.();
+const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+  e.preventDefault();
+  const formData = {
+    ...prodData,
+    image: prodData.image,
   };
+  if (!selectedProd) return;
+  void dispatch(
+    editProdThunk({
+      ...selectedProd,
+      name: formData.name,
+      desc: formData.desc,
+      price: formData.price,
+      image: formData.image,
+    }),
+  );
+  onSubmit?.();
+};
 
   const cancelHandler = (): void => {
     onCancel?.();
@@ -84,21 +82,11 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               type="text"
             />
 
-            {/* <TextField
-              name="image"
-              required
-              id="image-input"
-              // label="Добавить картинку"
-              placeholder="Загрузить изображение"
-              type="file"
-              onChange={handleChange}
-            /> */}
-
             <TextField
               name="image"
               // value={prodData.image}
               // onChange={handleChange}
-              required
+              // required
               id="outlined-required"
               type="file"
             />
@@ -136,3 +124,24 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     </div>
   );
 }
+
+// const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+//   e.preventDefault();
+//   const formData = {
+//     name: prodData.name,
+//     desc: prodData.desc,
+//     price: prodData.price,
+//     image: prodData.image,
+//   };
+//   if (!selectedProd) return;
+//   void dispatch(
+//     editProdThunk({
+//       ...selectedProd,
+//       name: formData.name,
+//       desc: formData.desc,
+//       price: formData.price,
+//       image: formData.image,
+//     }),
+//   );
+//   onSubmit?.();
+// };
