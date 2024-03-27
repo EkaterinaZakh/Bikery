@@ -41,8 +41,8 @@ router.route('/add').post(verifyAccessToken, upload.single('image'), async (req,
   try {
     const imageName1 = `${Date.now()}_fest.jpeg`;
     const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
-
     await fs.writeFile(`./public/img/fest/${imageName1}`, outputBuffer);
+
     const newFest = await Fest.create({
       name,
       desc,
@@ -52,6 +52,7 @@ router.route('/add').post(verifyAccessToken, upload.single('image'), async (req,
       userId: res.locals.user.id,
     });
     // const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
+
     const newFestWithUser = await Fest.findOne({ where: { id: newFest.id }, include: User });
     res.status(201).json(newFestWithUser);
   } catch (error) {
@@ -74,15 +75,20 @@ router
     }
   })
 
-  .put(verifyAccessToken, async (req, res) => {
+  .put(verifyAccessToken, upload.single('image'), async (req, res) => {
     const { id } = req.params;
     const { name, desc, image, place } = req.body;
-    console.log('---', req.body);
+    // console.log('---', req.body);
     if (!name || !desc || !image || !place) {
       res.status(401).json({ message: 'Wrong fest data' });
       return;
     }
-    await Fest.update(req.body, { where: { id } });
+
+    const imageNameFest = `${Date.now()}_prod_edited.jpeg`;
+    const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+    await fs.writeFile(`./public/img/product/${imageNameFest}`, outputBuffer);
+
+    await Fest.update({ ...req.body, image: imageNameFest }, { where: { id } });
     const updatedFest = await Fest.findOne({ where: { id } });
     res.json(updatedFest);
   })

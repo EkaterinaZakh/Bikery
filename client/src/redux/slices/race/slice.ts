@@ -1,4 +1,4 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction, Slice } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { RaceStateType, RaceType } from '../../../types/race';
 import getAllRaceThunk, {
@@ -14,7 +14,7 @@ const initialState: RaceStateType = {
   selectedRaces: null,
 };
 
-export const raceSlice = createSlice({
+export const raceSlice: Slice<RaceStateType> = createSlice({
   name: 'races',
   initialState,
   reducers: {
@@ -64,6 +64,17 @@ export const raceSlice = createSlice({
         ];
       }
     });
+    // builder.addCase(addCommitsThunk.fulfilled, (state, action) => {
+    //   const { raceId, text } = action.payload;
+    //   const raceToUpdate = state.races.find((race) => race.id === raceId);
+    //   if (raceToUpdate) {
+    //     const newComment: CommitType = {
+    //       raceId,
+    //       text,
+    //     };
+    //     raceToUpdate.CommentRaces = [...(raceToUpdate.CommentRaces || []), newComment];
+    //   }
+    // });
   },
 });
 

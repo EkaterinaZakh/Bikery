@@ -34,9 +34,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formData = {
-      name: prodData.name,
-      desc: prodData.desc,
-      price: prodData.price,
+      ...prodData,
       image: prodData.image,
     };
     if (!selectedProd) return;
@@ -46,7 +44,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
         name: formData.name,
         desc: formData.desc,
         price: formData.price,
-        image: formData.image,
+        image: e.currentTarget.image.files[0],
       }),
     );
     onSubmit?.();
@@ -84,23 +82,14 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               type="text"
             />
 
-            {/* <TextField
-              name="image"
-              required
-              id="image-input"
-              // label="Добавить картинку"
-              placeholder="Загрузить изображение"
-              type="file"
-              onChange={handleChange}
-            /> */}
-
             <TextField
               name="image"
               // value={prodData.image}
               // onChange={handleChange}
-              required
+              // required
               id="outlined-required"
               type="file"
+              // defaultValue={selectedProd?.image}
             />
 
             <TextField
@@ -136,3 +125,24 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     </div>
   );
 }
+
+// const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+//   e.preventDefault();
+//   const formData = {
+//     name: prodData.name,
+//     desc: prodData.desc,
+//     price: prodData.price,
+//     image: prodData.image,
+//   };
+//   if (!selectedProd) return;
+//   void dispatch(
+//     editProdThunk({
+//       ...selectedProd,
+//       name: formData.name,
+//       desc: formData.desc,
+//       price: formData.price,
+//       image: formData.image,
+//     }),
+//   );
+//   onSubmit?.();
+// };
