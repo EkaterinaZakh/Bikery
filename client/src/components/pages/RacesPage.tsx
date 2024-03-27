@@ -18,7 +18,7 @@ export default function RacesPage(): JSX.Element {
 
   return (
     <div>
-      <div>{user.status === 'logged' && <AddRaceForm />},</div>
+      <div>{user.status === 'logged' && <AddRaceForm />}</div>
       <div>
         {races.map((race) => (
           <OneRace race={race} key={race.id} />
@@ -34,7 +34,6 @@ export default function RacesPage(): JSX.Element {
       {/* {races.map((race) => (
         <OneRace race={race} key={race.id} />
       ))} */}
-
     </div>
   );
 }

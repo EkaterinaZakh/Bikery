@@ -5,6 +5,7 @@ import NewFestForm from '../ui/NewFestForm';
 import BaseModal from '../ui/BaseModal';
 import EditFestList from '../ui/EditFestList';
 import { clearSelectedFest } from '../../redux/slices/fest/slice';
+import { Box } from '@mui/material';
 
 export default function FestPage(): JSX.Element {
   const fests = useAppSelector((state) => state.festivals.fests);
@@ -19,11 +20,13 @@ export default function FestPage(): JSX.Element {
     <div>
       <NewFestForm />
       <BaseModal open={!!selectedFest} onClose={handleCloseModal}>
-        <EditFestList onSubmit={handleCloseModal}/>
+        <EditFestList onSubmit={handleCloseModal} />
       </BaseModal>
+      <Box >
       {fests.map((fest) => (
         <OneFest fest={fest} key={fest.id} />
-      ))}
+        ))}
+        </Box>
     </div>
   );
 }

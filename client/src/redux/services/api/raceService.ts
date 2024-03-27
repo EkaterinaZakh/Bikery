@@ -15,8 +15,12 @@ class RaceService {
     return response.data;
   }
 
-  async addNewRace(formData: AddRaceFormType): Promise<RaceType> {
-    const res = await this.client.post<RaceType>('/races', formData);
+  async addNewRace(formData: FormData): Promise<RaceType> {
+    const res = await this.client.post<RaceType>('/races/add', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (res.status !== 201)
       return Promise.reject(new Error(`Wrong status code (expected 201, received: ${res.status}`));
     return res.data;
