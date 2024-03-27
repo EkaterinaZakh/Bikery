@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
@@ -14,6 +14,7 @@ type OneProductProps = {
 
 export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
+  const [selectedProducts, setSelectedProducts] = useState<ProdType[]>([]);
   const dispatch = useAppDispatch();
 
   const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -21,7 +22,9 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
     void dispatch(deleteProdThunk(prod.id));
   };
 
-  // console.log('---', prod.image);
+  const addToCartHandler = (): void => {
+    setSelectedProducts([...selectedProducts, prod]);
+  };
 
   return (
     <Card
@@ -49,7 +52,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <Button href="#text-buttons">Купить</Button>
+          <Button onClick={addToCartHandler}>В корзину</Button>
         </CardContent>
       </Box>
       {user.isAdmin === true && (
