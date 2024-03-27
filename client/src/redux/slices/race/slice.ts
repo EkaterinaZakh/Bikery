@@ -55,10 +55,13 @@ export const raceSlice: Slice<RaceStateType> = createSlice({
     });
     // addCommitsThunk -> добавить action.payload в комменты к определенной race
     builder.addCase(addCommitsThunk.fulfilled, (state, action) => {
-      const { raceId, text } = action.payload;
+      const { raceId, userId, text, User } = action.payload;
       const raceToUpdate = state.races.find((race) => race.id === raceId);
       if (raceToUpdate) {
-        raceToUpdate.CommentRaces = [...(raceToUpdate.CommentRaces || []), { text }];
+        raceToUpdate.CommentRaces = [
+          ...(raceToUpdate.CommentRaces || []),
+          { text, userId, raceId, User },
+        ];
       }
     });
     // builder.addCase(addCommitsThunk.fulfilled, (state, action) => {

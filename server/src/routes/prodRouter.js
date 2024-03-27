@@ -7,13 +7,29 @@ const upload = require('../middlewares/upload');
 
 const prodRouter = express.Router();
 
-// const {Product} = require('../../../client/public/')
-
 prodRouter.route('/').get(async (req, res) => {
   const products = await Product.findAll({
     order: [['id', 'DESC']],
   });
   res.json(products);
+});
+
+prodRouter.route('/:id').put(async (req, res) => {
+  const { id } = req.params;
+  
+  // const { name, desc, price } = req.body;
+  // if (!name || !desc || !price || !req.file) {
+  //   res.status(401).json({ message: 'Wrong product data' });
+  //   return;
+  // }
+
+  const imageName = `${Date.now()}_prod_edited.jpeg`;
+  const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+  await fs.writeFile(`./public/img/product/${imageName}`, outputBuffer);
+
+  await Product.update(req.body, { where: { id } });
+  const updatedProduct = await Product.findOne({ where: { id } });
+  res.json(updatedProduct);
 });
 
 prodRouter.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
@@ -22,23 +38,18 @@ prodRouter.route('/add').post(verifyAccessToken, upload.single('image'), async (
   if (!name || !desc || !req.file || !price || !categoryId) {
     return res.status(400).json({ message: 'Заполните все поля' });
   }
-
   // if (!req.file) {
   //   return res.status(400).json({ message: 'Картинка не найдена' });
   // }
-
   try {
     // Имя файла для сохранения
-    const imageName = `${Date.now()}.jpeg`;
     // const imageName = `${Date.now()}.webp`;
-
+    const imageName = `${Date.now()}_prod.jpeg`;
     // Обработка и сохранение файла с новым именем
     // const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
     const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
-
-    await fs.writeFile(`./public/img/${imageName}`, outputBuffer);
-    // await fs.writeFile(`../../../client/public/img/${imageName}`, outputBuffer);
-
+    await fs.writeFile(`./public/img/product/${imageName}`, outputBuffer);
+    // await fs.writeFile(`./public/img/${imageName}`, outputBuffer);
     const newProd = await Product.create({
       name,
       desc,
@@ -50,7 +61,6 @@ prodRouter.route('/add').post(verifyAccessToken, upload.single('image'), async (
     res.status(201).json(newProd);
     // return res.sendStatus(200);
   } catch (error) {
-    // console.log(error);
     res.status(500).json({ meassage: 'Ошибка при создании нового товара' });
   }
 });
@@ -67,18 +77,6 @@ prodRouter.route('/:id').delete(async (req, res) => {
   } catch (err) {
     res.sendStatus(500);
   }
-});
-
-prodRouter.route('/:id').put(async (req, res) => {
-  const { id } = req.params;
-  const { name, desc, price } = req.body;
-  if (!name || !desc || !price || !req.file) {
-    res.status(401).json({ message: 'Wrong product data' });
-    return;
-  }
-  await Product.update(req.body, { where: { id } });
-  const updatedProduct = await Product.findOne({ where: { id } });
-  res.json(updatedProduct);
 });
 
 module.exports = prodRouter;

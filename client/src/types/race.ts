@@ -8,8 +8,7 @@ export type RaceType = {
   image: string;
   length: number;
   userId: number;
-  date: Date;
-  rateCounter: number;
+  date: string;
   RaceRatings: SetRating[];
   // дописать, что сюда придут комменты CommentRaces?: комменты[]
   CommentRaces?: CommitType[];
@@ -25,6 +24,5 @@ export type AddRaceFormType = {
   image: string;
   desc: string;
   length: number;
-  date: Date;
-  rateCounter: number;
+  date: string;
 };

@@ -15,7 +15,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   const [prodData, setProdData] = useState({
     name: '',
     desc: '',
-    price: '',
+    price: 0,
     image: '',
   });
 
@@ -31,24 +31,24 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     });
   };
 
-  const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const formData = {
-      name: prodData.name,
-      desc: prodData.desc,
-      price: prodData.price,
-      image: prodData.image,
-    };
-    if (!selectedProd) return;
-    void dispatch(editProdThunk({
+const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+  e.preventDefault();
+  const formData = {
+    ...prodData,
+    image: prodData.image,
+  };
+  if (!selectedProd) return;
+  void dispatch(
+    editProdThunk({
       ...selectedProd,
       name: formData.name,
       desc: formData.desc,
       price: formData.price,
       image: formData.image,
-    }));
-    onSubmit?.();
-  };
+    }),
+  );
+  onSubmit?.();
+};
 
   const cancelHandler = (): void => {
     onCancel?.();
@@ -56,7 +56,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
 
   return (
     <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '380px' }}>
-      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Добавить продукт:</h3>
+      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Редактировать продукт:</h3>
       <form onSubmit={editHandler}>
         <Box>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -70,6 +70,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Название"
               type="text"
             />
+
             <TextField
               name="desc"
               value={prodData.desc}
@@ -80,15 +81,16 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Описание"
               type="text"
             />
+
             <TextField
               name="image"
-              required
-              id="image-input"
-              label="Добавить картинку"
-              placeholder="Загрузить изображение"
+              // value={prodData.image}
+              // onChange={handleChange}
+              // required
+              id="outlined-required"
               type="file"
-              onChange={handleChange}
             />
+
             <TextField
               name="price"
               value={prodData.price}
@@ -99,6 +101,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               placeholder="Цена"
               type="text"
             />
+
             <Button
               style={{ marginTop: '15px', width: '100px' }}
               type="submit"
@@ -107,6 +110,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
             >
               Добавить
             </Button>
+
             <Button
               style={{ marginTop: '15px', width: '100px' }}
               variant="contained"
@@ -120,3 +124,24 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     </div>
   );
 }
+
+// const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+//   e.preventDefault();
+//   const formData = {
+//     name: prodData.name,
+//     desc: prodData.desc,
+//     price: prodData.price,
+//     image: prodData.image,
+//   };
+//   if (!selectedProd) return;
+//   void dispatch(
+//     editProdThunk({
+//       ...selectedProd,
+//       name: formData.name,
+//       desc: formData.desc,
+//       price: formData.price,
+//       image: formData.image,
+//     }),
+//   );
+//   onSubmit?.();
+// };

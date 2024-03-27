@@ -1,6 +1,10 @@
 const express = require('express');
-const { Fest, User } = require('../../db/models');
+// const { flushSync } = require('react-dom');
+const sharp = require('sharp');
+const fs = require('fs/promises');
+const { Fest, User, CommentFest } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
+const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
@@ -9,7 +13,7 @@ router
   .get(async (req, res) => {
     const fests = await Fest.findAll({
       order: [['id', 'DESC']],
-      include: User,
+      include: [User, { model: CommentFest, include: User }],
     });
     res.json(fests);
   })
@@ -24,6 +28,38 @@ router
       res.status(500).json({ message: 'Error while creating' });
     }
   });
+
+router.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
+  const { name, desc, date, place } = req.body;
+
+  console.log(req.body, req.file);
+
+  if (!name || !desc || !req.file || !place || !date) {
+    return res.status(400).json({ message: 'Заполните все поля' });
+  }
+
+  try {
+    const imageName1 = `${Date.now()}_fest.jpeg`;
+    const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+    await fs.writeFile(`./public/img/fest/${imageName1}`, outputBuffer);
+
+    const newFest = await Fest.create({
+      name,
+      desc,
+      image: imageName1,
+      date,
+      place,
+      userId: res.locals.user.id,
+    });
+    // const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
+
+    const newFestWithUser = await Fest.findOne({ where: { id: newFest.id }, include: User });
+    res.status(201).json(newFestWithUser);
+  } catch (error) {
+    // console.log(error);
+    res.status(500).json({ message: 'Ошибка при создании нового фестиваля' });
+  }
+});
 
 router
   .route('/:id')
@@ -83,3 +119,14 @@ module.exports = router;
 //     res.status(500).json({ message: 'ERROR UPDATING FEST' });
 //   }
 // })
+
+// .post(verifyAccessToken, async (req, res) => {
+//   try {
+//     const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
+//     const newFestWithUser = await Fest.findOne({ where: { id: newFest.id }, include: User });
+//     res.status(201).json(newFestWithUser);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: 'Error while creating' });
+//   }
+// });
