@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import type { AddFestForm, FestType } from '../../../types/fest';
+import type { FestType } from '../../../types/fest';
 import apiAxiosInstance from './apiAxiosInstance';
 
 class FestService {
@@ -33,8 +33,12 @@ class FestService {
   }
 
   async editFest(editedFest: FestType): Promise<FestType> {
-    const res = await this.client.put<FestType>(`/fest/${editedFest.id}`, editedFest);
-    if (res.status !== 200) return res.data;
+    const res = await this.client.put<FestType>(`/fest/${editedFest.id}`, editedFest, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    if (res.status === 200) return res.data;
     return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`));
   }
 }

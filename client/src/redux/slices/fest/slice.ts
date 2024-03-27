@@ -7,6 +7,7 @@ import { addFestCommentThunk } from '../comments/festthunk';
 const initialState: FestsStateType = {
   fests: [],
   selectedFest: null,
+  modalType: null,
 };
 
 export const festsSlice = createSlice({
@@ -15,10 +16,21 @@ export const festsSlice = createSlice({
   reducers: {
     setSelectedFestById: (state, action: PayloadAction<FestType['id']>) => {
       const selectedFest = state.fests.find((fest) => fest.id === action.payload);
-      if (selectedFest) state.selectedFest = selectedFest;
+      if (selectedFest) {
+        state.selectedFest = selectedFest;
+        state.modalType = 'info';
+      }
+    },
+    openEditModal: (state, action: PayloadAction<FestType['id']>) => {
+      const selectedFest = state.fests.find((fest) => fest.id === action.payload);
+      if (selectedFest) {
+        state.selectedFest = selectedFest;
+        state.modalType = 'edit';
+      }
     },
     clearSelectedFest: (state) => {
       state.selectedFest = null;
+      state.modalType = null;
     },
   },
   extraReducers: (builder) => {

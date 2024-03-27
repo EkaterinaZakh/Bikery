@@ -22,4 +22,5 @@ export type AddFestForm = {
 export type FestsStateType = {
   fests: FestType[];
   selectedFest: FestType | null;
+  modalType: 'edit' | 'info' | null;
 };
