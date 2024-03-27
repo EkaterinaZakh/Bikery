@@ -1,11 +1,13 @@
 import { Button } from '@mui/material';
 import React from 'react';
-import OneProduct from '../ui/OneProduct';
 import { useAppSelector } from '../../redux/hooks';
+import OneCartItem from '../ui/OneCartItem';
 
 export default function CartPage(): JSX.Element {
-  const prods = useAppSelector((state) => state.products.prods);
+  const cartItems = useAppSelector((state) => state.cartItems.cart);
 
+  console.log(cartItems);
+  
   return (
     <div className="cart_main">
       <h2 className="cart_h">Корзина</h2>
@@ -13,8 +15,8 @@ export default function CartPage(): JSX.Element {
       <div className="cart_content">
         <div className="cart_list">
           <h3>Выбранные товары </h3>
-          {prods.map((el) => (
-            <OneProduct prod={el} key={el.id} />
+          {cartItems.map((el) => (
+            <OneCartItem cartItem={el} key={el.productId} />
           ))}
         </div>
         <div className="cart_order">
