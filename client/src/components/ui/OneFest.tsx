@@ -45,7 +45,15 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Card sx={{ display: 'flex', margin: '10px', borderRadius: '15px' }}>
+      <Card
+        sx={{
+          display: 'flex',
+          margin: '10px',
+          borderRadius: '15px',
+          backgroundСolor: 'rgb(228, 219, 209)',
+          opacity: '0.9',
+        }}
+      >
         <Box>
           <CardMedia
             component="img"

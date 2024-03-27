@@ -2,12 +2,11 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 
 export default function MainPage(): JSX.Element {
-
-  
   return (
     <Box
       sx={{
         backgroundImage: `url('MainPagePicture.jpeg')`,
+        filter: 'brightness(85%)',
         backgroundSize: 'cover',
         height: '100vh',
         display: 'flex',
@@ -44,7 +43,7 @@ export default function MainPage(): JSX.Element {
           }}
         >
           <Typography className="text" variant="h5">
-              <strong>Знать дорогу и проехать по ней - не одно и то же!</strong>
+            <strong>Знать дорогу и проехать по ней - не одно и то же!</strong>
           </Typography>
         </Box>
       </Box>
