@@ -42,17 +42,15 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {race.name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
+            {race.desc}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary" component="div">
             {formattedDate}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {race.length}Км
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {race.desc}
-          </Typography>
-          {/* <Typography variant="subtitle1" color="text.secondary" component="div">
-            {race.rateCounter}
-          </Typography> */}
+         
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
@@ -86,7 +84,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
       <CardMedia
         component="img"
         sx={{ width: '30%', marginLeft: 'auto' }}
-        image={race.image}
+        image={`${import.meta.env.VITE_APP_TITLE}/img/race/${race.image}`}
         alt=""
       />
     </Card>

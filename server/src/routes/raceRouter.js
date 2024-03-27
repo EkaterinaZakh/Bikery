@@ -1,6 +1,9 @@
 const express = require('express');
+const sharp = require('sharp');
+const fs = require('fs/promises');
 const { Race, User, CommentRace, RaceRating } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
+const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
@@ -10,23 +13,41 @@ router
     const races = await Race.findAll({
       order: [['id', 'DESC']],
       include: [User, { model: CommentRace, include: User }, RaceRating],
+  res.json(races);
+});
+
+router.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
+  const { name, desc, date, length } = req.body;
+
+  if (!name || !req.file || !desc || !date || !length) {
+    return res.status(400).json({ message: 'Заполните все поля' });
+  }
+
+  try {
+    const imageName2 = `${Date.now()}_race.jpeg`;
+    const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+
+    await fs.writeFile(`./public/img/race/${imageName2}`, outputBuffer);
+
+    const newRace = await Race.create({
+      name,
+      image: imageName2,
+      desc,
+      date,
+      length,
+      userId: res.locals.user.id,
     });
 
-    res.json(races);
-  })
-  .post(verifyAccessToken, async (req, res) => {
-    try {
-      const newRace = await Race.create({ ...req.body, userId: res.locals.user.id });
-      const newRaceWithUser = await Race.findOne({
-        where: { id: newRace.id },
-        include: [User, RaceRating, CommentRace],
-      });
-      res.status(201).json(newRaceWithUser);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: 'Error while creating' });
-    }
-  });
+    const newRaceWithUser = await Race.findOne({
+      where: { id: newRace.id },
+      include: [User, RaceRating, CommentRace],
+    });
+    res.status(201).json(newRaceWithUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Ошибка при создании нового мотопробега' });
+  }
+});
 
 router.route('/:id').delete(verifyAccessToken, async (req, res) => {
   await Race.destroy({
