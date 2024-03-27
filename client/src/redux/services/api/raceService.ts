@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import apiAxiosInstance from './apiAxiosInstance';
-import type { AddRaceFormType, RaceType } from '../../../types/race';
+import type { RaceType } from '../../../types/race';
 import type { SetRating } from '../../../types/rating';
 
 class RaceService {

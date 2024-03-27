@@ -18,7 +18,7 @@ import WishListPage from './components/pages/WishListPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import { getAllCommitsThunk } from './redux/slices/comments/thunk';
 import { getAllFestsCommentsThunk } from './redux/slices/comments/festthunk';
-import getAllCartThunk from './redux/slices/cart/thunk';
+import { getAllCartThunk } from './redux/slices/cart/thunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

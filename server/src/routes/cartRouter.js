@@ -16,16 +16,33 @@ router.route('/')
       console.error(`Error fetching carts: ${error}`);
       res.status(500).json({ error: 'Error fetching carts' });
     }
+  });
+
+router
+  .route('/:id')
+  .delete(verifyAccessToken, async (req, res) => {
+    try {
+      await Cart.destroy({
+        where: { productId: req.params.id },
+      });
+      res.sendStatus(200);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'ERROR DELETING PRODUCT FROM CART' });
+    }
   })
   .post(verifyAccessToken, async (req, res) => {
+    const iddd = req.params.id;
     try {
-      const { productId, quantity } = req.body;
-      const newItemCart = await Cart.create({ productId, quantity, userId: res.locals.user.id });
-      const newFItemCartWithUser = await Cart.findOne({
+      const newItemCart = await Cart.create({ productId: +iddd, userId: res.locals.user.id }, {
+        returning: true,
+      });
+
+      const newItemCartWithUser = await Cart.findOne({
         where: { id: newItemCart.id },
         include: [User, Product],
       });
-      res.status(200).json(newFItemCartWithUser);
+      res.status(200).json(newItemCartWithUser);
     } catch (error) {
       console.error('Error while creating:', error);
       res.status(500).json({ message: 'Error while creating' });

@@ -6,6 +6,8 @@ import OneCartItem from '../ui/OneCartItem';
 export default function CartPage(): JSX.Element {
   const cartItems = useAppSelector((state) => state.cartItems.cart);
 
+  console.log(cartItems);
+  
   return (
     <div className="cart_main">
       <h2 className="cart_h">Корзина</h2>
@@ -14,11 +16,8 @@ export default function CartPage(): JSX.Element {
         <div className="cart_list">
           <h3>Выбранные товары </h3>
           {cartItems.map((el) => (
-            <OneCartItem cartItem={el} key={el.id} />
+            <OneCartItem cartItem={el} key={el.productId} />
           ))}
-          {/* {prods.map((el) => (
-            <OneProduct prod={el} key={el.id} />
-          ))} */}
         </div>
         <div className="cart_order">
           <h3>Детали доставки </h3>

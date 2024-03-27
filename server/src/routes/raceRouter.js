@@ -1,7 +1,9 @@
 const express = require('express');
 const sharp = require('sharp');
 const fs = require('fs/promises');
-const { Race, User, CommentRace, RaceRating } = require('../../db/models');
+const {
+  Race, User, CommentRace, RaceRating,
+} = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 const upload = require('../middlewares/upload');
 
@@ -13,11 +15,14 @@ router
     const races = await Race.findAll({
       order: [['id', 'DESC']],
       include: [User, { model: CommentRace, include: User }, RaceRating],
-  res.json(races);
-});
+    });
+    res.json(races);
+  });
 
 router.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
-  const { name, desc, date, length } = req.body;
+  const {
+    name, desc, date, length,
+  } = req.body;
 
   if (!name || !req.file || !desc || !date || !length) {
     return res.status(400).json({ message: 'Заполните все поля' });
@@ -68,7 +73,9 @@ router.route('/:id/rating').post(async (req, res) => {
 
   router.route('/:id').put(async (req, res) => {
     const { id } = req.params;
-    const { name, desc, image, length, rateCounter } = req.body;
+    const {
+      name, desc, image, length, rateCounter,
+    } = req.body;
     if (!name || !desc || !image || !length || !rateCounter) {
       res.status(401).json({ message: 'Wrong product data' });
       return;

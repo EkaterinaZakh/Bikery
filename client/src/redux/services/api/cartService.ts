@@ -13,6 +13,19 @@ class CartService {
       );
     return response.data;
   }
+
+  async addNewCartItem(prod: CartType['productId']): Promise<CartType> {
+    const response = await this.client.post<CartType>(`/cart/${prod}`, prod);
+    if (response.status !== 200)
+      return Promise.reject(new Error(`Wrong status code (expected 200, received: ${response.status}`));
+    return response.data
+  }
+
+  async deleteCartItem(id: CartType['id']): Promise<void> {
+    const response = await this.client.delete(`/cart/${id}`);
+    if (response.status !== 200)
+      return Promise.reject(new Error(`Wrong status code (expected 200, received: ${response.status}`));
+  }
 }
 
 const cartService = new CartService(apiAxiosInstance);
