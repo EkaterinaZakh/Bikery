@@ -33,7 +33,7 @@ class ProdService {
   }
 
   async editProd(editedProd: ProdType): Promise<ProdType> {
-    console.log('***', editedProd);
+    // console.log('***', editedProd);
     
     const res = await this.client.put<ProdType>(`/products/${editedProd.id}`, editedProd, {
       headers: {
