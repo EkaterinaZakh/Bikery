@@ -1,63 +1,75 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editFestThunk } from '../../redux/slices/fest/thunk';
 
 type EditListProps = {
-    onSubmit?: () => void;
+  onSubmit?: () => void;
 };
 
 const boxStyle = {
-    backgroundColor: '#fff',
-    border: '2px solid #000',
-    padding: '16px',
-    width: 300,
+  backgroundColor: '#fff',
+  border: '2px solid #000',
+  padding: '16px',
+  width: 300,
 };
 
 export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
-    const selectedFest = useAppSelector((state) => state.festivals.selectedFest);
-    const dispatch = useAppDispatch();
-    const [festData, setFestData] = useState({
-        name: '',
-        desc: '',
-        image: '',
-        place: '',
-        date: '',
-    });
+  const dispatch = useAppDispatch();
+  const selectedFest = useAppSelector((state) => state.festivals.selectedFest);
 
-    useEffect(() => {
-        if (selectedFest) setFestData(selectedFest); // скопируй и преобразуй дату к строке
-    }, [selectedFest]);
+  const [festData, setFestData] = useState({
+    name: '',
+    desc: '',
+    image: '',
+    place: '',
+    date: '',
+  });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = event.target;
-        setFestData((prevData) => ({ ...prevData, [name]: value }));
+  useEffect(() => {
+    if (selectedFest) setFestData(selectedFest); // скопируй и преобразуй дату к строке
+  }, [selectedFest]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = event.target;
+    setFestData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    const formData = {
+      ...festData,
+      image: festData.image,
     };
 
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        if (!selectedFest) return;
-        const formData = {
-            ...selectedFest,
-            ...festData,
-            date: festData.date || new Date().toISOString().slice(0, 10),
-        };
-        void dispatch(editFestThunk(formData)); 
-        onSubmit?.();
-    };
+    if (!selectedFest) return;
+    // const formData = {
+    //   ...selectedFest,
+    //   ...festData,
+    //   date: festData.date || new Date().toISOString().slice(0, 10),
+    // };
+    void dispatch(
+      editFestThunk({
+        ...selectedFest,
+        name: formData.name,
+        desc: formData.desc,
+        image: e.currentTarget.image.files[0],
+        place: formData.place,
+        date: formData.date,
+      }),
+    );
+    onSubmit?.();
+  };
 
-    const handleCancel = (): void => {
-        onSubmit?.();
-    };
+  const handleCancel = (): void => {
+    onSubmit?.();
+  };
 
-    return (
-        <form
-            style={boxStyle}
-            noValidate
-            autoComplete="off"
-            onSubmit={submitHandler}
-        >
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <form onSubmit={editHandler} style={boxStyle} noValidate autoComplete="off">
+            <div>
                 <TextField
                     name="name"
                     required
@@ -78,16 +90,17 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
                     onChange={handleChange}
                     type="text"
                 />
+
                 <TextField
                     name="image"
-                    required
+                    // value={prodData.image}
+                    // onChange={handleChange}
+                    // required
                     id="outlined-required"
-                    label="Добавьте картинку"
-                    placeholder="http://..."
-                    value={festData.image}
-                    onChange={handleChange}
-                    type="text"
+                    type="file"
+                    // defaultValue={selectedProd?.image}
                 />
+
                 <TextField
                     name="place"
                     required
@@ -126,5 +139,7 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
                 </Button>
             </div>
         </form>
-    );
+    </Box>
+);
+
 }

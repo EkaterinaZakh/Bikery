@@ -64,19 +64,23 @@ router.route('/:id/rating').post(async (req, res) => {
     console.log(error);
     res.status(500).json({ message: 'Error while creating' });
   }
+});
 
-  router.route('/:id').put(async (req, res) => {
-    const { id } = req.params;
-    const { name, desc, image, length, rateCounter } = req.body;
-    if (!name || !desc || !image || !length || !rateCounter) {
-      res.status(401).json({ message: 'Wrong product data' });
-      return;
-    }
+router.route('/:id').put(verifyAccessToken, upload.single('image'), async (req, res) => {
+  const { id } = req.params;
+  // const { name, desc, image, length} = req.body;
+  // if (!name || !desc || !image || !length) {
+  //   res.status(401).json({ message: 'Wrong product data' });
+  //   return;
+  // }
 
-    await Race.update(req.body, { where: { id } });
-    const updateRace = await Race.findOne({ where: { id } });
-    res.json(updateRace);
-  });
+  const imageNameRace = `${Date.now()}_race_edited.jpeg`;
+  const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+  await fs.writeFile(`./public/img/race/${imageNameRace}`, outputBuffer);
+
+  await Race.update({ ...req.body, image: imageNameRace }, { where: { id } });
+  const updatedRace = await Race.findOne({ where: { id } });
+  res.json(updatedRace);
 });
 
 module.exports = router;

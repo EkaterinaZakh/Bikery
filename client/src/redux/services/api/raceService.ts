@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import apiAxiosInstance from './apiAxiosInstance';
-import type { AddRaceFormType, RaceType } from '../../../types/race';
+import type { RaceType } from '../../../types/race';
 import type { SetRating } from '../../../types/rating';
 
 class RaceService {
@@ -42,9 +42,13 @@ class RaceService {
   }
 
   async editRace(editedRace: RaceType): Promise<RaceType> {
-    const res = await this.client.put<RaceType>(`/races/${editedRace.id}`, editedRace);
+    const res = await this.client.put<RaceType>(`/races/${editedRace.id}`, editedRace, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (res.status === 200) return res.data;
-    return Promise.reject(new Error('Failed editing races'));
+    return Promise.reject(new Error(`Wrong status code (expected 200, received: ${res.status}`));
   }
 }
 

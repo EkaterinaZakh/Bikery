@@ -12,6 +12,7 @@ import { addCommitsThunk } from '../comments/thunk';
 const initialState: RaceStateType = {
   races: [],
   selectedRaces: null,
+  modalType: null,
 };
 
 export const raceSlice: Slice<RaceStateType> = createSlice({
@@ -23,10 +24,21 @@ export const raceSlice: Slice<RaceStateType> = createSlice({
     },
     setSelectedRacesById: (state, action: PayloadAction<RaceType['id']>) => {
       const selectedRaces = state.races.find((race) => race.id === action.payload);
-      if (selectedRaces) state.selectedRaces = selectedRaces;
+      if (selectedRaces) {
+        state.selectedRaces = selectedRaces;
+        state.modalType = 'info';
+      }
+    },
+    openEditModal: (state, action: PayloadAction<RaceType['id']>) => {
+      const selectedRace = state.races.find((race) => race.id === action.payload);
+      if (selectedRace) {
+        state.selectedRaces = selectedRace;
+        state.modalType = 'edit';
+      }
     },
     clearSelectedRaces: (state) => {
       state.selectedRaces = null;
+      state.modalType = null;
     },
   },
   extraReducers: (builder) => {

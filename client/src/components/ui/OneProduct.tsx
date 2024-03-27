@@ -32,7 +32,6 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           component="img"
           sx={{ width: '280px' }}
           image={`${import.meta.env.VITE_APP_TITLE}/img/product/${prod.image}`}
-          // image={`${import.meta.env.VITE_APP_TITLE}/server/public/img/${imageName}`}
           alt="фото продукта"
         />
 
