@@ -19,6 +19,7 @@ import WishListPage from './components/pages/WishListPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import { getAllCommitsThunk } from './redux/slices/comments/thunk';
 import { getAllFestsCommentsThunk } from './redux/slices/comments/festthunk';
+import { getAllCartThunk } from './redux/slices/cart/thunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ function App(): JSX.Element {
     void dispatch(getAllFestsThunk());
     void dispatch(getAllCommitsThunk());
     void dispatch(getAllFestsCommentsThunk());
+    void dispatch(getAllCartThunk());
   }, []);
 
   const router = createBrowserRouter([
