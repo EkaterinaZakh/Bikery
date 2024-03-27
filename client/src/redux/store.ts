@@ -6,6 +6,7 @@ import catsReduser from './slices/cats/slice';
 import prodReducer from './slices/prod/slice';
 import commitsReducer from './slices/comments/slice';
 import festcommentsReducer from './slices/comments/festslice';
+import cartReduser from './slices/cart/slice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     products: prodReducer,
     comments: commitsReducer,
     festcomments: festcommentsReducer,
+    cartItems: cartReduser,
   },
 });
 

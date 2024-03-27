@@ -1,22 +1,29 @@
 const express = require('express');
 const sharp = require('sharp');
 const fs = require('fs/promises');
-const { Race, User, CommentRace, RaceRating } = require('../../db/models');
+const {
+  Race, User, CommentRace, RaceRating,
+} = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
-router.route('/').get(async (req, res) => {
-  const races = await Race.findAll({
-    order: [['id', 'DESC']],
-    include: [User, { model: CommentRace, include: User }, RaceRating],
+
+router
+  .route('/')
+  .get(async (req, res) => {
+    const races = await Race.findAll({
+      order: [['id', 'DESC']],
+      include: [User, { model: CommentRace, include: User }, RaceRating],
+    });
+    res.json(races);
   });
-  res.json(races);
-});
 
 router.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
-  const { name, desc, date, length } = req.body;
+  const {
+    name, desc, date, length,
+  } = req.body;
 
   if (!name || !req.file || !desc || !date || !length) {
     return res.status(400).json({ message: 'Заполните все поля' });

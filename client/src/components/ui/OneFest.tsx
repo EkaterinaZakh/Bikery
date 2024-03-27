@@ -44,9 +44,9 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
   };
 
   return (
-    <Box sx={{ display: 'flex', border: '1px solid black' }}>
-      <Card sx={{ display: 'flex', border: '1px solid red', margin: '10px' }}>
-        <Box sx={{ border: '3px solid blue' }}>
+    <Box sx={{ display: 'flex' }}>
+      <Card sx={{ display: 'flex', margin: '10px', borderRadius: '15px' }}>
+        <Box>
           <CardMedia
             component="img"
             height="194"
@@ -56,7 +56,75 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
           />
         </Box>
 
-        <Box sx={{ border: '3px solid green', marginLeft: '10px', width: '600px' }}>
+        {/* <Box sx={{ marginLeft: '10px', width: '600px' }}>
+          <CardHeader title={fest.name} />
+          <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              {fest.desc}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {formattedDate}
+            </Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            {user.isAdmin === true && (
+              <>
+                <Button onClick={deleteHandler} variant="outlined" color="error">
+                  Удалить
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => dispatch(setSelectedFestById(fest.id))}
+                >
+                  Изменить
+                </Button>
+              </>
+            )}
+            <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+              {expanded ? 'Скрыть' : 'Подробнее'}
+            </IconButton>
+          </CardActions>
+        </Box> */}
+        <Box
+          sx={{
+            width: '600px',
+            borderRadius: '0px 10px 10px 0px',
+            filter: 'drop-shadow(0 5px 10px 0 #ffffff)',
+            backgroundColor: '#ffffff',
+            padding: '20px',
+            position: 'relative',
+            zIndex: '0',
+            overflow: 'hidden',
+            transition: '0.6s ease-in',
+            '&:hover': {
+              color: '#ffffff',
+              backgroundColor: '#f66d52', // Изменение цвета при наведении
+            },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              zIndex: '-1',
+              top: '-15px',
+              right: '-15px',
+              background: 'transparent', // Прозрачный цвет, чтобы не было видно перед карточкой
+              height: '220px',
+              width: '25px',
+              borderRadius: '32px',
+              transform: 'scale(1)',
+              transformOrigin: '50% 50%',
+              transition: 'transform 0.25s ease-out',
+            },
+            '&:hover::before': {
+              transitionDelay: '0.2s',
+              transform: 'scale(40)',
+              background: '#f66d52', // Цвет, который будет заполнять всю карточку
+            },
+          }}
+        >
           <CardHeader title={fest.name} />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
@@ -89,6 +157,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             </IconButton>
           </CardActions>
         </Box>
+
         {expanded && (
           <CardContent>
             <Typography paragraph>
