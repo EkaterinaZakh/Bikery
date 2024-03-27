@@ -33,7 +33,7 @@ export default function NavBar(): JSX.Element {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={{ borderRadius: '10px', backgroundColor: '#15030366' }} position="static">
+      <AppBar sx={{ backgroundColor: 'rgba(33, 2, 2, 1)' }} position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
@@ -43,7 +43,20 @@ export default function NavBar(): JSX.Element {
           </Typography>
           {navs.map((nav) => (
             <Button key={nav.name} component={RouterLink} to={nav.link} color="inherit">
-              {nav.name}
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'rgba(255, 255, 255, 1)',
+                  padding: '10px',
+                  transition: '1s linear',
+                  '&:hover': {
+                    color: '#fff',
+                    background: '#f66d52',
+                  },
+                }}
+              >
+                {nav.name}
+              </Typography>
             </Button>
           ))}
           <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
@@ -53,7 +66,6 @@ export default function NavBar(): JSX.Element {
           <BaseModal open={openModal} onClose={handleCloseModal}>
             <AuthList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
           </BaseModal>
-          
         </Toolbar>
       </AppBar>
     </Box>

@@ -64,7 +64,7 @@ module.exports = {
         },
         {
           name: 'Байкфестиваль Майский погром',
-          desc: 'Погремим поршнями?! Традиционный ежегодный байк-рок фестиваль, проходящий на живописных берегах реки Волга. Участники феста смогут принять участие в мотоконкурсах и услышать одни из самхы заюлйных рок-групп: Эффект Фассбендера, Scirocco, Fressone, OutCry, Мамульки Бэнд, Монгол Шуудан.',
+          desc: 'Погремим поршнями?! Традиционный ежегодный байк-рок фестиваль, проходящий на живописных берегах реки Волга. Участники феста смогут принять участие в мотоконкурсах и услышать одни из самых забойных рок-групп: Эффект Фассбендера, Scirocco, Fressone, OutCry, Мамульки Бэнд, Монгол Шуудан.',
           image: 'maiskiy_pogrom_fest.jpeg',
           date: new Date('2023-05-01T19:00:00'),
           place: 'Тольятти, Самарская область',
@@ -283,31 +283,31 @@ module.exports = {
         },
       ],
       {},
+    );
 
-      await queryInterface.bulkInsert(
-        'Carts',
-        [
-          {
-           userId: 1,
-           productId: 1,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          },
-          {
-            userId: 1,
-            productId: 2,
-             createdAt: new Date(),
-             updatedAt: new Date(),
-           },
-           {
-            userId: 1,
-            productId: 3,
-             createdAt: new Date(),
-             updatedAt: new Date(),
-           },
-        ],
-        {},
-      );
+    await queryInterface.bulkInsert(
+      'Carts',
+      [
+        {
+          userId: 1,
+          productId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          productId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          productId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {},
     );
 
     await queryInterface.bulkInsert(

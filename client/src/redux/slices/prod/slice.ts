@@ -25,11 +25,11 @@ export const prodsSlice = createSlice({
       if (selectedProd) {
         state.selectedProd = selectedProd;
         state.modalType = 'edit';
-      } 
+      }
     },
     clearSelectedProd: (state) => {
       state.selectedProd = null;
-      state.modalType = null
+      state.modalType = null;
     },
   },
   extraReducers: (builder) => {

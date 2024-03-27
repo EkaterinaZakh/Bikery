@@ -37,7 +37,7 @@ class ProdService {
     
     const res = await this.client.put<ProdType>(`/products/${editedProd.id}`, editedProd, {
       headers: {
-        'Content-Type': 'multipart/form-data', // header multipart formdata
+        'Content-Type': 'multipart/form-data',
       },
     });
     if (res.status === 200) return res.data;
