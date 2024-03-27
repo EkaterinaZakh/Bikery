@@ -15,7 +15,7 @@ export default function RacesPage(): JSX.Element {
   const handleCloseModal = (): void => {
     void dispatch(clearSelectedRaces());
   };
-console.log('---', races);
+// console.log('---', races);
 
   return (
     <div>

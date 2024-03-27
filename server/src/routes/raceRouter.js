@@ -79,7 +79,10 @@ router.route('/:id').put(verifyAccessToken, upload.single('image'), async (req, 
   await fs.writeFile(`./public/img/race/${imageNameRace}`, outputBuffer);
 
   await Race.update({ ...req.body, image: imageNameRace }, { where: { id } });
-  const updatedRace = await Race.findOne({ where: { id } });
+  const updatedRace = await Race.findOne({
+    where: { id },
+    include: [User, CommentRace, RaceRating],
+  });
   res.json(updatedRace);
 });
 
