@@ -111,10 +111,16 @@ export default function AddRaceForm(): JSX.Element {
           />
 
           <Button
-            className="more_button"
-            style={{ margin: '10px', width: '40%' }}
+            className="btn-new"
+            style={{
+              margin: '10px',
+              width: '40%',
+              backgroundColor: '#f66d52',
+              color: 'black',
+              marginTop: '10px',
+            }}
             type="submit"
-            color="success"
+            variant="outlined"
           >
             Добавить
           </Button>

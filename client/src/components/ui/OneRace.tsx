@@ -101,7 +101,43 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     //   />
     // </Card>
 
-    <Card className="one_race_card">
+    <Card
+      className="one_race_card"
+      sx={{
+        // width: 'auto',
+        // borderRadius: '0px 10px 10px 0px',
+        // filter: 'drop-shadow(0 5px 10px 0 #ffffff)',
+        // backgroundColor: '#ffffff',
+        // padding: '20px',
+        position: 'relative',
+        // zIndex: '0',
+        // overflow: 'hidden',
+        // transition: '0.6s ease-in',
+        '&:hover': {
+          // color: '#ffffff',
+          // backgroundColor: '#f66d52', // Изменение цвета при наведении
+        },
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          zIndex: '-1',
+          top: '-15px',
+          // right: '-15px',
+          background: 'transparent', // Прозрачный цвет, чтобы не было видно перед карточкой
+          height: '220px',
+          width: '25px',
+          // borderRadius: '32px',a
+          transform: 'scale(1)',
+          transformOrigin: '50% 50%',
+          transition: 'transform 0.15s ease-out',
+        },
+        '&:hover::before': {
+          transitionDelay: '0.2s',
+          transform: 'scale(40)',
+          background: '#f66d52', // Цвет, который будет заполнять всю карточку
+        },
+      }}
+    >
       <CardHeader title={race.name} />
       <CardMedia
         className="race_img"
