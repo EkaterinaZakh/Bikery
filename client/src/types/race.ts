@@ -14,15 +14,16 @@ export type RaceType = {
   CommentRaces?: CommitType[];
 };
 
-export type RaceStateType = {
-  races: RaceType[];
-  selectedRaces: RaceType | null;
-};
-
 export type AddRaceFormType = {
   name: string;
   image: string;
   desc: string;
   length: number;
   date: string;
+};
+
+export type RaceStateType = {
+  races: RaceType[];
+  selectedRaces: RaceType | null;
+  modalType: 'edit' | 'info' | null;
 };

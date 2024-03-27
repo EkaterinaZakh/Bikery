@@ -16,67 +16,73 @@ const boxStyle = {
   width: 300,
 };
 
-export default function EditRacesList({ onSubmit,onCancel }: EditRacesProps): JSX.Element {
-  const selectedRaces = useAppSelector((state) => state.motoRaces.selectedRaces);
+export default function EditRacesList({ onSubmit, onCancel }: EditRacesProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const selectedRace = useAppSelector((state) => state.motoRaces.selectedRaces);
+  console.log('***', selectedRace);
+  
+
   const [raceData, setRaceData] = useState({
     name: '',
     desc: '',
     image: '',
     length: 0,
-    rateCounter: 0,
-    //  date: '',
+    date: '',
   });
 
   useEffect(() => {
-    if (selectedRaces) setRaceData(selectedRaces);
-  }, [selectedRaces]);
+    if (selectedRace) setRaceData(selectedRace);
+  }, [selectedRace]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setRaceData({
-      ...raceData,
-      [event.target.name]: event.target.value,
-      [event.target.desc]: event.target.value,
-      [event.target.image]: event.target.value,
-      [event.target.length]: event.target.value,
-      [event.target.rateCounter]: event.target.value,
-      // [event.target.date]: event.target.value,
-    });
+    const { name, value } = event.target;
+    setRaceData((prevData) => ({ ...prevData, [name]: value }));
+    // setRaceData({
+    //   ...raceData,
+    //   [event.target.name]: event.target.value,
+    //   [event.target.desc]: event.target.value,
+    //   [event.target.image]: event.target.value,
+    //   [event.target.length]: event.target.value,
+    //   [event.target.date]: event.target.value,
+    // });
   };
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+  const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const desc = formData.get('desc') as string;
-    const image = formData.get('image') as string;
-    const length = parseInt(formData.get('length') as string, 10);
-    const rateCounter = parseInt(formData.get('rateCounter') as string, 10);
+    const formData = {
+      ...raceData,
+      image: raceData.image,
+    };
 
-    if (!selectedRaces) return;
+    // const formData = new FormData(e.currentTarget);
+    // const name = formData.get('name') as string;
+    // const desc = formData.get('desc') as string;
+    // const image = formData.get('image') as string;
+    // const length = parseInt(formData.get('length') as string, 10);
+    // const rateCounter = parseInt(formData.get('rateCounter') as string, 10);
+
+    if (!selectedRace) return;
 
     void dispatch(
       editRaceThunk({
-        ...selectedRaces,
-        name,
-        desc,
-        image,
-        length,
-        rateCounter,
-        // date: formData.date,
+        ...selectedRace,
+        name: formData.name,
+        desc: formData.desc,
+        image: e.currentTarget.image.files[0],
+        length: formData.length,
+        date: formData.date,
       }),
     );
-
     onSubmit?.();
   };
 
   const handleCancel = (): void => {
-   onCancel?.();
+    onCancel?.();
   };
 
   return (
-    <Box component="form" sx={boxStyle} noValidate autoComplete="off" onSubmit={submitHandler}>
+    <Box component="form" sx={boxStyle} noValidate autoComplete="off" onSubmit={editHandler}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <TextField
           name="name"
@@ -88,6 +94,7 @@ export default function EditRacesList({ onSubmit,onCancel }: EditRacesProps): JS
           onChange={handleChange}
           type="text"
         />
+
         <TextField
           name="desc"
           required
@@ -98,16 +105,17 @@ export default function EditRacesList({ onSubmit,onCancel }: EditRacesProps): JS
           onChange={handleChange}
           type="text"
         />
+
         <TextField
           name="image"
-          required
+          // value={prodData.image}
+          // onChange={handleChange}
+          // required
           id="outlined-required"
-          label="Добавьте картинку"
-          placeholder="http://..."
-          value={raceData.image}
-          onChange={handleChange}
-          type="text"
+          type="file"
+          // defaultValue={selectedProd?.image}
         />
+
         <TextField
           name="length"
           required
@@ -120,15 +128,16 @@ export default function EditRacesList({ onSubmit,onCancel }: EditRacesProps): JS
         />
 
         <TextField
-          name="rateCounter"
+          name="date"
           required
           id="outlined-required"
-          label="Счетчик"
-          placeholder="Счетчик"
-          value={raceData.rateCounter}
+          label="Дата"
+          placeholder="yyyy-mm-dd"
+          value={raceData.date}
           onChange={handleChange}
-          type="text"
+          type="date"
         />
+
         <Button
           style={{ marginTop: '15px', width: '55%' }}
           type="submit"
