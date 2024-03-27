@@ -28,10 +28,13 @@ export default function AddRaceForm(): JSX.Element {
     <div style={{ margin: '10px' }}>
       <h3 style={{ textAlign: 'center' }}>Добавить мотопробег</h3>
       <Box
+        className="form_Race"
         onSubmit={submitHandler}
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiInputBase-input': { color: 'white' },
+          '& .MuiFormLabel-root': { color: 'white' },
         }}
         noValidate
         autoComplete="off"
@@ -85,9 +88,9 @@ export default function AddRaceForm(): JSX.Element {
           />
 
           <Button
-            style={{ marginTop: '15px', width: '15%' }}
+            className="more_button"
+            style={{ margin: '10px', width: '40%' }}
             type="submit"
-            variant="contained"
             color="success"
           >
             Добавить

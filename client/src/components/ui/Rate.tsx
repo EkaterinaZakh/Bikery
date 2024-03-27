@@ -56,6 +56,7 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
         width: 200,
         display: 'flex',
         alignItems: 'center',
+        marginLeft: '12px',
       }}
     >
       <Rating
@@ -67,11 +68,8 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
-        // onChangeActive={(newHover) => {
-        //   setHover(newHover);
-        // }}
         readOnly={hasVoted}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        emptyIcon={<StarIcon style={{ opacity: 0.6 }} fontSize="inherit" />}
       />
       {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
     </Box>
