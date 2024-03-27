@@ -36,14 +36,7 @@ export default function AddRaceForm(): JSX.Element {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        border: '1px solid red',
-        margin: '5px',
-      }}
-    >
+    <div>
       <Box
         className="form_Race"
         onSubmit={submitHandler}
