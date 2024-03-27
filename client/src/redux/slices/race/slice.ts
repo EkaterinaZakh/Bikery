@@ -1,4 +1,4 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction, Slice } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { RaceStateType, RaceType } from '../../../types/race';
 import getAllRaceThunk, {
@@ -12,9 +12,10 @@ import { addCommitsThunk } from '../comments/thunk';
 const initialState: RaceStateType = {
   races: [],
   selectedRaces: null,
+  modalType: null,
 };
 
-export const raceSlice = createSlice({
+export const raceSlice: Slice<RaceStateType> = createSlice({
   name: 'races',
   initialState,
   reducers: {
@@ -23,10 +24,21 @@ export const raceSlice = createSlice({
     },
     setSelectedRacesById: (state, action: PayloadAction<RaceType['id']>) => {
       const selectedRaces = state.races.find((race) => race.id === action.payload);
-      if (selectedRaces) state.selectedRaces = selectedRaces;
+      if (selectedRaces) {
+        state.selectedRaces = selectedRaces;
+        state.modalType = 'info';
+      }
+    },
+    openEditModal: (state, action: PayloadAction<RaceType['id']>) => {
+      const selectedRace = state.races.find((race) => race.id === action.payload);
+      if (selectedRace) {
+        state.selectedRaces = selectedRace;
+        state.modalType = 'edit';
+      }
     },
     clearSelectedRaces: (state) => {
       state.selectedRaces = null;
+      state.modalType = null;
     },
   },
   extraReducers: (builder) => {
@@ -64,6 +76,17 @@ export const raceSlice = createSlice({
         ];
       }
     });
+    // builder.addCase(addCommitsThunk.fulfilled, (state, action) => {
+    //   const { raceId, text } = action.payload;
+    //   const raceToUpdate = state.races.find((race) => race.id === raceId);
+    //   if (raceToUpdate) {
+    //     const newComment: CommitType = {
+    //       raceId,
+    //       text,
+    //     };
+    //     raceToUpdate.CommentRaces = [...(raceToUpdate.CommentRaces || []), newComment];
+    //   }
+    // });
   },
 });
 

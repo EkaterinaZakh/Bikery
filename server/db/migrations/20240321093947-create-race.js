@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       desc: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       image: {
         type: Sequelize.STRING,

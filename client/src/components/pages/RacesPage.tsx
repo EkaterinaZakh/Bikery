@@ -16,6 +16,7 @@ export default function RacesPage(): JSX.Element {
   const handleCloseModal = (): void => {
     void dispatch(clearSelectedRaces());
   };
+console.log('---', races);
 
   return (
     <Box className="race_main">

@@ -6,27 +6,44 @@ import { addRaceThunk } from '../../redux/slices/race/thunk';
 
 export default function AddRaceForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const [formData, newFormData] = useState<AddRaceFormType>({
+  const [raceData, setRaceData] = useState<AddRaceFormType>({
     name: '',
     image: '',
     desc: '',
     length: 0,
-    rateCounter: 0,
     date: new Date().toISOString().slice(0, 10),
   });
 
   const hangleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    newFormData({ ...formData, [e.target.name]: e.target.value });
+    setRaceData({ ...raceData, [e.target.name]: e.target.value });
   };
+
+  const resetForm = (): void => {
+    setRaceData({
+      name: '',
+      image: '',
+      desc: '',
+      length: 0,
+      date: new Date().toISOString().slice(0, 10),
+    });
+  };
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(formData);
+    const formData = new FormData(e.currentTarget);
     void dispatch(addRaceThunk(formData));
+    resetForm();
   };
 
   return (
-    <div style={{ margin: '10px' }}>
-      <h3 style={{ textAlign: 'center' }}>Добавить мотопробег</h3>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        border: '1px solid red',
+        margin: '5px',
+      }}
+    >
       <Box
         className="form_Race"
         onSubmit={submitHandler}
@@ -39,7 +56,10 @@ export default function AddRaceForm(): JSX.Element {
         noValidate
         autoComplete="off"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '5px' }}
+        >
+          <h3>Добавить мотопробег</h3>
           <TextField
             name="name"
             required
@@ -47,16 +67,9 @@ export default function AddRaceForm(): JSX.Element {
             label="Название"
             placeholder="Название"
             onChange={hangleChange}
-            value={formData.name}
-          />
-          <TextField
-            name="image"
-            required
-            id="outlined-required"
-            label="Фото"
-            placeholder="http://..."
-            onChange={hangleChange}
-            value={formData.image}
+            value={raceData.name}
+            type="text"
+            sx={{ margin: '5px' }}
           />
           <TextField
             name="desc"
@@ -65,17 +78,9 @@ export default function AddRaceForm(): JSX.Element {
             label="Описание"
             placeholder="Описание"
             onChange={hangleChange}
-            value={formData.desc}
-          />
-          <TextField
-            name="date"
-            required
-            id="outlined-required"
-            label="Дата"
-            type="date"
-            placeholder="Дата проведения"
-            onChange={hangleChange}
-            value={formData.date}
+            value={raceData.desc}
+            type="text"
+            sx={{ margin: '5px' }}
           />
           <TextField
             name="length"
@@ -84,7 +89,32 @@ export default function AddRaceForm(): JSX.Element {
             label="Длина"
             placeholder="Длина маршрута"
             onChange={hangleChange}
-            value={formData.length}
+            value={raceData.length}
+            type="number"
+            sx={{ margin: '5px' }}
+          />
+          <TextField
+            name="image"
+            required
+            id="outlined-required"
+            // label="Добавьте картинку"
+            // placeholder="http://..."
+            // value={carData.image}
+            // onChange={hangleChange}
+            type="file"
+            sx={{ margin: '5px' }}
+          />
+
+          <TextField
+            name="date"
+            required
+            id="outlined-required"
+            label="Дата"
+            type="date"
+            placeholder="Дата проведения"
+            onChange={hangleChange}
+            value={raceData.date}
+            sx={{ margin: '5px' }}
           />
 
           <Button

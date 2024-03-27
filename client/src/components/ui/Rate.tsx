@@ -21,7 +21,7 @@ type RatePropsType = {
   rates: SetRating[];
 };
 
-function getLabelText(value: number): string {
+ function getLabelText(value: number): string {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
@@ -75,3 +75,6 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
     </Box>
   );
 }
+
+// const MemoizedRate = React.memo(Rate);
+// export default MemoizedRate;

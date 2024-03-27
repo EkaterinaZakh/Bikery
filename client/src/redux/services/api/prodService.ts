@@ -33,7 +33,13 @@ class ProdService {
   }
 
   async editProd(editedProd: ProdType): Promise<ProdType> {
-    const res = await this.client.put<ProdType>(`/products/${editedProd.id}`, editedProd);
+    // console.log('***', editedProd);
+    
+    const res = await this.client.put<ProdType>(`/products/${editedProd.id}`, editedProd, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (res.status === 200) return res.data;
     return Promise.reject(new Error('Failed editing product'));
   }
@@ -42,6 +48,12 @@ class ProdService {
 const prodService = new ProdService(apiAxiosInstance);
 
 export default prodService;
+
+// async editProd(editedProd: ProdType): Promise<ProdType> {
+//   const res = await this.client.put<ProdType>(`/products/${editedProd.id}`, editedProd);
+//   if (res.status === 200) return res.data;
+//   return Promise.reject(new Error('Failed editing product'));
+// }
 
 //   async getAllChars(): Promise<CharacterType[]> {
 //     const response = await this.client<CharacterType[]>('/characters');

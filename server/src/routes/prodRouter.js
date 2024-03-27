@@ -14,19 +14,20 @@ prodRouter.route('/').get(async (req, res) => {
   res.json(products);
 });
 
-prodRouter.route('/:id').put(async (req, res) => {
+prodRouter.route('/:id').put(verifyAccessToken, upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  const { name, desc, price } = req.body;
-  if (!name || !desc || !price || !req.file) {
-    res.status(401).json({ message: 'Wrong product data' });
-    return;
-  }
 
-  // const imageName = `${Date.now()}.jpeg`;
-  // const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
-  // await fs.writeFile(`./public/img/${imageName}`, outputBuffer);
+  // const { name, desc, price } = req.body;
+  // if (!name || !desc || !price || !req.file) {
+  //   res.status(401).json({ message: 'Wrong product data' });
+  //   return;
+  // }
 
-  await Product.update(req.body, { where: { id } });
+  const imageName = `${Date.now()}_prod_edited.jpeg`;
+  const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
+  await fs.writeFile(`./public/img/product/${imageName}`, outputBuffer);
+
+  await Product.update({ ...req.body, image: imageName }, { where: { id } });
   const updatedProduct = await Product.findOne({ where: { id } });
   res.json(updatedProduct);
 });
