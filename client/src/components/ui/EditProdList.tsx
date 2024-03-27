@@ -31,24 +31,24 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     });
   };
 
-const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-  e.preventDefault();
-  const formData = {
-    ...prodData,
-    image: prodData.image,
+  const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const formData = {
+      ...prodData,
+      image: prodData.image,
+    };
+    if (!selectedProd) return;
+    void dispatch(
+      editProdThunk({
+        ...selectedProd,
+        name: formData.name,
+        desc: formData.desc,
+        price: formData.price,
+        image: e.currentTarget.image.files[0],
+      }),
+    );
+    onSubmit?.();
   };
-  if (!selectedProd) return;
-  void dispatch(
-    editProdThunk({
-      ...selectedProd,
-      name: formData.name,
-      desc: formData.desc,
-      price: formData.price,
-      image: formData.image,
-    }),
-  );
-  onSubmit?.();
-};
 
   const cancelHandler = (): void => {
     onCancel?.();
@@ -89,6 +89,7 @@ const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
               // required
               id="outlined-required"
               type="file"
+              // defaultValue={selectedProd?.image}
             />
 
             <TextField
