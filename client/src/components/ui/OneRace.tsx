@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+
 import type { RaceType } from '../../types/race';
 import { deleteRaceThunk } from '../../redux/slices/race/thunk';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -15,9 +16,6 @@ type OneRaceProps = {
 
 export default function OneRace({ race }: OneRaceProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
-  // список комментов получить из race.CommentRaces <--- комменты конкректно к данной гонке
-  // const allComments = useAppSelector((state) => state.comments.commits);
-  // const comments = allComments; // .filter() // raceId
   const commentsForRace = race.CommentRaces || [];
 
   const formattedDate = new Date(race.date).toLocaleDateString('en-US', {
