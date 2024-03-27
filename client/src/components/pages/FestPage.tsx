@@ -17,16 +17,18 @@ export default function FestPage(): JSX.Element {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundImage: `url('festPage.jpeg')`, backgroundSize: 'cover'}}
+    >
       <NewFestForm />
       <BaseModal open={!!selectedFest} onClose={handleCloseModal}>
         <EditFestList onSubmit={handleCloseModal} />
       </BaseModal>
-      <Box >
-      {fests.map((fest) => (
-        <OneFest fest={fest} key={fest.id} />
+      <Box>
+        {fests.map((fest) => (
+          <OneFest fest={fest} key={fest.id} />
         ))}
-        </Box>
+      </Box>
     </div>
   );
 }

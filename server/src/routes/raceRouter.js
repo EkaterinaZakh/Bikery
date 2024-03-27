@@ -7,12 +7,11 @@ const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(async (req, res) => {
-    const races = await Race.findAll({
-      order: [['id', 'DESC']],
-      include: [User, { model: CommentRace, include: User }, RaceRating],
+router.route('/').get(async (req, res) => {
+  const races = await Race.findAll({
+    order: [['id', 'DESC']],
+    include: [User, { model: CommentRace, include: User }, RaceRating],
+  });
   res.json(races);
 });
 
