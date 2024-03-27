@@ -8,10 +8,14 @@ type OneComentProps = {
 
 export default function OneRaceComment({ comment }: OneComentProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
+  console.log(comment);
+
+
   return (
     <div>
-      {user.status === 'logged' ? `${user.name} : ${comment.text}` : null}
-      {/* {comment.text} */}
+      <p>
+        {/* <strong>{comment.user.name}:</strong> {comment.text} */}
+      </p>
     </div>
   );
 }
