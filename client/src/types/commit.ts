@@ -1,8 +1,11 @@
+import type { BackendUser } from './auth';
+
 export type CommitType = {
   id: number;
   userId: number;
   raceId: number;
   text: string;
+  User?: BackendUser;
 };
 
 export type FestCommitType = {
@@ -10,6 +13,7 @@ export type FestCommitType = {
   userId: number;
   festId: number;
   text: string;
+  User?: BackendUser;
 };
 
 export type FestCommitStateType = {

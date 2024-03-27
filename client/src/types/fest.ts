@@ -1,4 +1,4 @@
-import type { CommitType } from './commit';
+import type { FestCommitType } from './commit';
 
 export type FestType = {
   id: number;
@@ -8,7 +8,7 @@ export type FestType = {
   place: string;
   userId: number;
   date: string;
-  CommentFest?: CommitType[];
+  CommentFests?: FestCommitType[];
 };
 
 export type AddFestForm = {

@@ -15,7 +15,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteFestThunk } from '../../redux/slices/fest/thunk';
 import { setSelectedFestById } from '../../redux/slices/fest/slice';
 import type { FestType } from '../../types/fest';
-import AddRaceComment from './AddRaceComment';
 import AddFestComment from './AddFestComment';
 import OneFestComment from './OneFestComment';
 
@@ -24,7 +23,7 @@ type OneFestProps = {
 };
 
 export default function OneFest({ fest }: OneFestProps): JSX.Element {
-  const commentsForfest = fest.CommentFest || [];
+  const commentsForfest = fest.CommentFests || [];
 
   const [expanded, setExpanded] = React.useState(false);
   const user = useAppSelector((store) => store.auth.user);
