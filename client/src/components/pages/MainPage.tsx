@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function MainPage(): JSX.Element {
-  return <div>НЕ ЗАБЫВАЕМ ДОБАВИТЬ МЕМЫ И ПАСХАЛКИ</div>;
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  );
 }
