@@ -8,5 +8,10 @@ type OneComentProps = {
 
 export default function OneFestComment({ comment }: OneComentProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
-  return <div>{user.status === 'logged' ? `${comment.User?.name} : ${comment.text}` : null}</div>;
+  return (
+    <>
+      <div></div>
+      <div>{comment.User?.name}: {comment.text}</div>
+    </>
+  )
 }

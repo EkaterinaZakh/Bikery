@@ -18,23 +18,27 @@ type NavItem = {
 export default function NavBar(): JSX.Element {
   const user = useAppSelector((store) => store.auth.user);
   const [openModal, setOpenModal] = useState(false);
-  const navs: NavItem[] = [
+  const navs: NavItem[] = user.status === 'guest' ? ([
+    { name: 'Главная', link: '/' },
+    { name: 'Фестивали', link: '/fests' },
+    { name: 'Мотопробеги', link: 'races' },
+    { name: 'Магазин', link: '/shop' }])
+    : 
+    ([
     { name: 'Главная', link: '/' },
     { name: 'Фестивали', link: '/fests' },
     { name: 'Мотопробеги', link: 'races' },
     { name: 'Магазин', link: '/shop' },
-    { name: 'Корзина', link: '/cart' },
-    // { name: 'Избранное', link: '/wish' },
-  ];
+    { name: 'Корзина', link: '/cart' }])
 
   const handleCloseModal = (): void => {
     setOpenModal(false);
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,  fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>
       <AppBar
-        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto' }}
+        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}
         position="fixed"
       >
         <Toolbar>
@@ -65,7 +69,6 @@ export default function NavBar(): JSX.Element {
           <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
             {user.status !== 'logged' ? 'Присоединиться?' : 'Выйти?'}
           </Button>
-
           <BaseModal open={openModal} onClose={handleCloseModal}>
             <AuthList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
           </BaseModal>

@@ -13,10 +13,10 @@ import type { SetRating } from '../../types/rating';
 
 const labels: { [index: string]: string } = {
   1: 'Фу',
-  2: 'C пивом потянет',
+  2: 'Потянет',
   3: 'Нормально',
   4: 'Хорошечно',
-  5: 'Огонь!',
+  5: 'Чьйотенько!',
 };
 
 type RatePropsType = {
