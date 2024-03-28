@@ -60,9 +60,21 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
       {user.isAdmin === true && (
         <div className="btn_box">
           {user.status === 'logged' && (
-            <Button onClick={(e) => addToCartHandler(e, prod.id)}>Добавить в корзину</Button>
+            <Button
+              style={{
+                backgroundColor: '#f66d52',
+                color: 'black',
+                marginBottom: '10px',
+                borderRadius: '15px',
+              }}
+              className="btn-new"
+              onClick={(e) => addToCartHandler(e, prod.id)}
+            >
+              Добавить в корзину
+            </Button>
           )}
           <Button
+            className="btn-new"
             onClick={deleteHandler}
             variant="outlined"
             startIcon={<DeleteIcon />}
@@ -72,6 +84,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           </Button>
 
           <Button
+            className="btn-new"
             variant="outlined"
             startIcon={<BorderColorRoundedIcon />}
             onClick={() => dispatch(openEditModal(prod.id))}
@@ -81,12 +94,20 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
         </div>
       )}
       <Button
-            className="btn_product"
-            variant="outlined"
-            onClick={() => dispatch(setSelectedProdById(prod.id))}
-          >
-            Подробное описание
-          </Button>
+        className="btn_product btn-new"
+        sx={{
+          backgroundColor: '#814b0f',
+          color: 'black',
+          marginBottom: '10px',
+          borderRadius: '15px',
+          width: '200px',
+          margin: '10px auto',
+        }}
+        variant="outlined"
+        onClick={() => dispatch(setSelectedProdById(prod.id))}
+      >
+        Подробнее
+      </Button>
     </Card>
   );
 }
