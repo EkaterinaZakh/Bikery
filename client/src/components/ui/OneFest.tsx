@@ -143,9 +143,6 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
             {user.isAdmin === true && (
               <>
                 <Button onClick={deleteHandler} variant="outlined" color="error">
