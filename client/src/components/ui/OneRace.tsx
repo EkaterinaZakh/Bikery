@@ -111,8 +111,8 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
         // padding: '20px',
         position: 'relative',
         // zIndex: '0',
-        // overflow: 'hidden',
-        // transition: '0.6s ease-in',
+        overflow: 'hidden',
+        transition: '0.6s ease-in',
         '&:hover': {
           // color: '#ffffff',
           // backgroundColor: '#f66d52', // Изменение цвета при наведении
@@ -174,7 +174,15 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
       </CardActions>
       {expanded && (
         <CardContent>
-          <Typography paragraph>
+          <Typography
+            paragraph
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '5px',
+              wordWrap: 'break-word',
+            }}
+          >
             {commentsForRace.map((comment) => (
               <OneRaceComment key={comment.id} comment={comment} />
             ))}

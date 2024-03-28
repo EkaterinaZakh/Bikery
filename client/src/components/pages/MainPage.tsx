@@ -5,9 +5,10 @@ export default function MainPage(): JSX.Element {
   return (
     <Box
       sx={{
-        backgroundImage: `url('MainPagePicture.jpeg')`,
+        backgroundImage: `url('../src/img/main_page.jpeg')`,
         filter: 'brightness(85%)',
         backgroundSize: 'cover',
+        backgroundPosition: 'center',
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -15,6 +16,7 @@ export default function MainPage(): JSX.Element {
         alignItems: 'center', // Центрирует содержимое по горизонтали
         textAlign: 'center', // Выравнивает текст по центру
         color: 'rgba(13, 13, 12, 1)',
+        paddingBottom: '100px',
       }}
     >
       <Box

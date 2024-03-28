@@ -118,6 +118,7 @@ export default function AddRaceForm(): JSX.Element {
               backgroundColor: '#f66d52',
               color: 'black',
               marginTop: '10px',
+              borderRadius: '15px',
             }}
             type="submit"
             variant="outlined"
