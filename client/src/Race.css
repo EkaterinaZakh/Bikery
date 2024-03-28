@@ -13,6 +13,9 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   align-items: center;
+  /* height: 100vh; */
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .all_content_race {

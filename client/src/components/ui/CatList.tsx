@@ -15,8 +15,20 @@ export default function CatList({ category }: OneCategoryProps): JSX.Element {
   };
 
   return (
-    <Box sx={{ marginLeft: '20px', border: '1px solid black' }}>
-      <Button onClick={setCategoryhandler}>{category.name}</Button>
+    <Box sx={{ marginLeft: '20px' }}>
+      <Button
+        className="btn-new"
+        style={{
+          margin: '10px',
+          backgroundColor: '#f66d52',
+          color: 'black',
+          borderRadius: '15px',
+        }}
+        onClick={setCategoryhandler}
+        variant="outlined"
+      >
+        {category.name}
+      </Button>
     </Box>
   );
 }

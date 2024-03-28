@@ -23,8 +23,11 @@ export default function FestPage(): JSX.Element {
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed',
         filter: 'brightness(80%)',
+        paddingTop: '80px',
+        paddingBottom: '80px',
       }}
     >
+      <h1>Фестивали</h1>
       <NewFestForm />
       <BaseModal open={!!selectedFest} onClose={handleCloseModal}>
         <EditFestList onSubmit={handleCloseModal} />

@@ -57,10 +57,10 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
         <Box>
           <CardMedia
             component="img"
-            height="194"
+            // height="194"
             image={`${import.meta.env.VITE_APP_TITLE}/img/fest/${fest.image}`}
             alt=""
-            sx={{ width: '400px', height: 'auto' }}
+            sx={{ width: '400px', height: '400px', backgroundSize: 'cover' }}
           />
         </Box>
 

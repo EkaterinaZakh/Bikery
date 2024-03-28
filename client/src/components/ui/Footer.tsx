@@ -9,9 +9,10 @@ export default function Footer(): JSX.Element {
         color: 'white',
         margin: '0px',
         padding: '1% 0',
-        position: 'relative',
+        position: 'fixed',
         bottom: 0,
         width: '100%',
+        zIndex: 1000,
       }}
       component="footer"
     >
