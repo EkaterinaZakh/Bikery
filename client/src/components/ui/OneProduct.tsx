@@ -26,31 +26,42 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   };
 
   return (
-    <Card
-      sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px' }}
-    >
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Card className="card_shop">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '80%',
+        }}
+      >
         <CardMedia
+          className="shop_img"
           component="img"
-          sx={{ width: '280px' }}
+          sx={{
+            width: '250px',
+            height: '250px',
+            margin: '10px auto',
+            backgroundPosition: 'center',
+          }}
           image={`${import.meta.env.VITE_APP_TITLE}/img/product/${prod.image}`}
           alt="фото продукта"
         />
 
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
+          <Typography component="div" variant="h6">
             {prod.name}
           </Typography>
           <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px' }}>
             {prod.price} руб.
           </Typography>
-          {user.status === 'logged' && (
-            <Button onClick={(e) => addToCartHandler(e, prod.id)}>Добавить в корзину</Button>
-          )}
         </CardContent>
       </Box>
       {user.isAdmin === true && (
-        <div>
+        <div className="btn_box">
+          {user.status === 'logged' && (
+            <Button onClick={(e) => addToCartHandler(e, prod.id)}>Добавить в корзину</Button>
+          )}
           <Button
             onClick={deleteHandler}
             variant="outlined"
@@ -67,11 +78,15 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           >
             Изменить
           </Button>
+          <Button
+            className="btn_product"
+            variant="outlined"
+            onClick={() => dispatch(setSelectedProdById(prod.id))}
+          >
+            Подробное описание
+          </Button>
         </div>
       )}
-      <Button variant="outlined" onClick={() => dispatch(setSelectedProdById(prod.id))}>
-        Подробное описание
-      </Button>
     </Card>
   );
 }

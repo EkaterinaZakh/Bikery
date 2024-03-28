@@ -15,10 +15,13 @@ import { useAppDispatch } from '../../redux/hooks';
 // import Box from '@mui/material/Box';
 
 const boxStyle = {
-  backgroundColor: '#fff',
-  // border: '2px solid #000',
+  backgroundColor: 'rgb(240, 235, 229)',
   padding: '16px',
   width: '500px',
+  borderRadius: '10px',
+  boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.1)',
+  opacity: '0.8',
+  marginTop: '20px',
 };
 
 export default function NewProdForm(): JSX.Element {
@@ -43,11 +46,17 @@ export default function NewProdForm(): JSX.Element {
   });
 
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center'}}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <form onSubmit={submitHandler}>
         <Box sx={boxStyle}>
           <h3 style={{ textAlign: 'center' }}>Добавить товар:</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
             <TextField
               name="name"
               required
@@ -146,10 +155,10 @@ export default function NewProdForm(): JSX.Element {
             </Button>
 
             <Button
-               style={{ margin: '15px', width: '100px' }}
+              style={{ margin: '15px', width: '150px' }}
               type="submit"
               variant="contained"
-              // color="success"
+              className="btn-new"
             >
               Добавить
             </Button>
