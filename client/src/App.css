@@ -1,5 +1,12 @@
 /* стили корзины*/
 
+@font-face {
+  font-family: 'DischargePro';
+  src:
+    local('DischargePro'),
+    url(../src/fonts/DischargePro.ttf) format('ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,9 +21,10 @@
   filter: brightness(70%);
   border-radius: 7px;
   position: relative;
-  font-family: "Pangolin", cursive;
+  font-family: 'Pangolin', cursive;
   font-weight: 400;
   font-style: normal;
+  font-family: 'DischargePro'
 }
 
 .cart_h,
