@@ -16,7 +16,7 @@ export const categoriesSlice = createSlice({
     });
     builder.addCase(deleteCartItemThunk.fulfilled, (state, action) => {
         if (!state.cart) return;
-        state.cart.filter((item) => item.productId !== action.payload);
+        state.cart = state.cart.filter((item) => item.productId !== action.payload);
     });
     builder.addCase(addCartItemThunk.fulfilled, (state, action) => {
         state.cart.push(action.payload)
