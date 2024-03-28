@@ -58,6 +58,9 @@ export default function NewFestForm(): JSX.Element {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        fontFamily: "Pangolin", 
+        fontWeight: 400, 
+        fontStyle: "normal",
       }}
     >
       {user.isAdmin === true && (
@@ -78,7 +81,7 @@ export default function NewFestForm(): JSX.Element {
           noValidate
           autoComplete="off"
         >
-          <h3 style={{ marginBottom: '20px' }}>Добавить фестиваль:</h3>
+          <h3 style={{ marginBottom: '20px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>Добавить фестиваль:</h3>
           <TextField
             name="name"
             required

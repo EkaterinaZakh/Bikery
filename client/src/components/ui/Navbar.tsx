@@ -36,9 +36,9 @@ export default function NavBar(): JSX.Element {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,  fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>
       <AppBar
-        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto' }}
+        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}
         position="fixed"
       >
         <Toolbar>
