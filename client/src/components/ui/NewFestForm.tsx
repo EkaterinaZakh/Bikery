@@ -55,8 +55,11 @@ export default function NewFestForm(): JSX.Element {
   };
 
   return (
-    <Box
-      style={boxStyle}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
     >
       {user.isAdmin === true && (
         <Box
@@ -67,9 +70,11 @@ export default function NewFestForm(): JSX.Element {
             flexDirection: 'column',
             alignItems: 'center',
             padding: '15px',
-            backgroundColor: '#f9f9f9',
+            backgroundColor: 'rgb(240, 235, 229)',
             borderRadius: '10px',
             boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.1)',
+            opacity: '0.9',
+            marginTop: '15px',
           }}
           
           noValidate
@@ -148,6 +153,6 @@ export default function NewFestForm(): JSX.Element {
           </Button>
         </Box>
       )}
-    </Box>
+    </div>
   );
 }

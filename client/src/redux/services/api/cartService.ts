@@ -21,7 +21,7 @@ class CartService {
     return response.data
   }
 
-  async deleteCartItem(id: CartType['id']): Promise<void> {
+  async deleteCartItem(id: CartType['productId']): Promise<void> {
     const response = await this.client.delete(`/cart/${id}`);
     if (response.status !== 200)
       return Promise.reject(new Error(`Wrong status code (expected 200, received: ${response.status}`));

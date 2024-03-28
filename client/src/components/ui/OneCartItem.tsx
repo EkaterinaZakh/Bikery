@@ -11,8 +11,7 @@ type CartItemProps = {
 export default function OneCartItem({cartItem}: CartItemProps): JSX.Element {
     const dispatch = useAppDispatch();
 
-    const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
-        e.preventDefault();
+    const deleteHandler = (): void => {
         void dispatch(deleteCartItemThunk(cartItem.productId))
     }
 

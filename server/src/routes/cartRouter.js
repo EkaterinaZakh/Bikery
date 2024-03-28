@@ -8,7 +8,7 @@ router.route('/')
   .get(async (req, res) => {
     try {
       const carts = await Cart.findAll({
-        order: [['id', 'DESC']],
+        order: [['id', 'ASC']],
         include: [User, Product],
       });
       res.json(carts);

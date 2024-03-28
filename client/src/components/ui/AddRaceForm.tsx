@@ -40,21 +40,16 @@ export default function AddRaceForm(): JSX.Element {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        border: '1px solid red',
-        margin: '5px',
-      }}
-    >
+    <div>
       <Box
+        className="form_Race"
         onSubmit={submitHandler}
         component="form"
-        // sx={{
-        //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-        // }}
-        sx={{ display: 'flex' }}
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiInputBase-input': { color: 'white' },
+          '& .MuiFormLabel-root': { color: 'white' },
+        }}
         noValidate
         autoComplete="off"
       >
@@ -130,10 +125,17 @@ export default function AddRaceForm(): JSX.Element {
           />
 
           <Button
-            style={{ marginTop: '15px', width: '15%' }}
+            className="btn-new"
+            style={{
+              margin: '10px',
+              width: '40%',
+              backgroundColor: '#f66d52',
+              color: 'black',
+              marginTop: '10px',
+              borderRadius: '15px',
+            }}
             type="submit"
-            variant="contained"
-            color="success"
+            variant="outlined"
           >
             Добавить
           </Button>

@@ -100,6 +100,7 @@ h3 {
   animation: text ease-in 1; /* добавляем анимацию fadeIn */
   animation-fill-mode: forwards; /* будет видимым после завершения анимации */
   animation-duration: 3s;
+  text-align: center;
 }
 
 @keyframes text {
@@ -153,4 +154,3 @@ h3 {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
-

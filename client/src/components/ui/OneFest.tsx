@@ -45,14 +45,22 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Card sx={{ display: 'flex', margin: '10px', borderRadius: '15px' }}>
+      <Card
+        sx={{
+          display: 'flex',
+          margin: '10px',
+          borderRadius: '15px',
+          backgroundСolor: 'rgb(228, 219, 209)',
+          opacity: '0.9',
+        }}
+      >
         <Box>
           <CardMedia
             component="img"
-            height="194"
+            // height="194"
             image={`${import.meta.env.VITE_APP_TITLE}/img/fest/${fest.image}`}
             alt=""
-            sx={{ width: '400px', height: 'auto' }}
+            sx={{ width: '400px', height: '400px', backgroundSize: 'cover' }}
           />
         </Box>
 
@@ -135,9 +143,6 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
             {user.isAdmin === true && (
               <>
                 <Button onClick={deleteHandler} variant="outlined" color="error">
@@ -164,7 +169,9 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
               {commentsForfest.map((comment) => (
                 <OneFestComment key={comment.id} comment={comment} />
               ))}
-              <AddFestComment fest={fest} />
+              {user.status === 'logged' && (
+                <AddFestComment fest={fest} />
+              )}
             </Typography>
           </CardContent>
         )}

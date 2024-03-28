@@ -3,17 +3,20 @@ import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
+import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports';
+import TwoWheelerTwoToneIcon from '@mui/icons-material/TwoWheelerTwoTone';
+
 import type { RaceType } from '../../types/race';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addRatingThunk } from '../../redux/slices/race/thunk';
 import type { SetRating } from '../../types/rating';
 
 const labels: { [index: string]: string } = {
-  1: 'Useless',
-  2: 'Poor',
-  3: 'Ok',
-  4: 'Good',
-  5: 'Excellent',
+  1: 'Фу',
+  2: 'C пивом потянет',
+  3: 'Нормально',
+  4: 'Хорошечно',
+  5: 'Огонь!',
 };
 
 type RatePropsType = {
@@ -21,8 +24,8 @@ type RatePropsType = {
   rates: SetRating[];
 };
 
- function getLabelText(value: number): string {
-  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+function getLabelText(value: number): string {
+  return `${value} Motorcycle${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
 export default function Rate({ race, rates }: RatePropsType): JSX.Element {
@@ -56,22 +59,21 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
         width: 200,
         display: 'flex',
         alignItems: 'center',
+        marginLeft: '12px',
       }}
     >
       <Rating
         name="hover-feedback"
         value={value}
-        precision={0.5}
+        precision={1}
         getLabelText={getLabelText}
         onChange={(_e, rating) => rateHandler(rating)}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
-        // onChangeActive={(newHover) => {
-        //   setHover(newHover);
-        // }}
         readOnly={hasVoted}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        emptyIcon={<SportsMotorsportsIcon style={{ opacity: 0.6 }} fontSize="inherit" />}
+        icon={<SportsMotorsportsIcon fontSize="inherit" />}
       />
       {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
     </Box>

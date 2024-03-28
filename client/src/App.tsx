@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import './Race.css';
+import './Shop.css';
 import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
 import Root from './components/Root';
@@ -55,7 +57,7 @@ function App(): JSX.Element {
         { path: '/races', element: <RacesPage /> },
         { path: '/shop', element: <ShopPage /> },
         { path: '/cart', element: <CartPage /> },
-        { path: '/wish', element: <WishListPage /> },
+        // { path: '/wish', element: <WishListPage /> },
         { path: '*', element: <NotFoundPage /> },
       ],
     },

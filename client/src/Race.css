@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.race_main {
+  background-image: url('../src/img/пробеги.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(85%);
+  border-radius: 7px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  align-items: center;
+  /* height: 100vh; */
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.all_content_race {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.races_cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -40px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.raceForm {
+  width: 30%;
+  position: fixed;
+  right: 0;
+  /* margin-right: 4%; */
+}
+
+.one_race_card {
+  width: 37%;
+  color: rgb(5, 5, 5) !important;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  background-color: rgb(240, 235, 229) !important;
+  opacity: 0.9;
+  margin-right: 2%;
+  border-radius: 15px !important;
+}
+
+.race_img {
+  background-size: cover;
+  background-position: center;
+  margin: 15px;
+  width: auto !important;
+}
+.more_button {
+  color: rgb(8, 7, 6) !important;
+  font-size: 18px !important;
+  text-transform: uppercase;
+}
+
+.comments_form {
+  background-color: rgb(211, 205, 199) !important;
+}
+.send_btn {
+  color: rgb(16, 16, 16) !important;
+}
+
+.delete_btn {
+  color: rgb(240, 48, 48) !important;
+}
+
+.edit_btn {
+  color: rgb(194, 208, 109) !important;
+}
+.comments_form {
+  color: rgb(228, 224, 217) !important;
+}
+
+.form_Race {
+  padding-top: 20px;
+  color: rgb(243, 242, 239) !important;
+  background-color: rgb(97, 84, 72) !important;
+  width: 70%;
+  margin-left: 60px;
+  border-radius: 20px;
+  opacity: 0.8;
+}
