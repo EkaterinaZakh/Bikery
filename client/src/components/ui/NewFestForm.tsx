@@ -9,7 +9,6 @@ import type { AddFestForm } from '../../types/fest';
 import { addFestThunk } from '../../redux/slices/fest/thunk';
 
 const boxStyle = {
-
   backgroundColor: '#fff',
   padding: '16px',
   width: '500px',
@@ -79,7 +78,6 @@ export default function NewFestForm(): JSX.Element {
             opacity: '0.9',
             marginTop: '15px',
           }}
-          
           noValidate
           autoComplete="off"
         >

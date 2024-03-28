@@ -26,25 +26,40 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
-/* .all_content_race {
-  margin-top: 30px;
+
+.card_shop {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  width: 320px;
+  margin-bottom: 30px;
+  border-radius: 30px;
+  background-color: rgb(248, 238, 228) !important;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
 }
 
-.races_cards {
+.shop_img {
+  padding: 3px !important;
+  background-size: cover;
+  background-position: center;
+}
+
+/* .btn_product {
+  bottom: 0;
+  width: 250px;
+  bottom: 0;
+  margin: 5px auto;
+  transform: 'translateX(-50%)';
+  margin-bottom: 10px;
+} */
+
+.btn_box {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  margin-left: -40px;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  /* position: relative; */
+  bottom: 0;
+  /* margin-bottom: 10px; */
 }
 
-h1 {
-  text-align: center;
-}
-
-.raceForm {
-  width: 30%;
-  position: fixed;
-  right: 0;
-  /* margin-right: 4%; */

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import './Race.css';
 import './Shop.css';
-import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Link, RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
 import Root from './components/Root';
 import FestPage from './components/pages/FestPage';
@@ -21,6 +21,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import { getAllCommitsThunk } from './redux/slices/comments/thunk';
 import { getAllFestsCommentsThunk } from './redux/slices/comments/festthunk';
 import { getAllCartThunk } from './redux/slices/cart/thunk';
+import PrivateRoute from './components/HOC/PrivateRoute';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -56,9 +57,14 @@ function App(): JSX.Element {
         { path: '/fests', element: <FestPage /> },
         { path: '/races', element: <RacesPage /> },
         { path: '/shop', element: <ShopPage /> },
-        { path: '/cart', element: <CartPage /> },
-        // { path: '/wish', element: <WishListPage /> },
         { path: '*', element: <NotFoundPage /> },
+        { 
+          element: 
+          <PrivateRoute isAllowed={status !== 'guest'} redirect='/'/>,
+            children: [
+              { path: '/cart', element: <CartPage /> }
+            ],
+          },
       ],
     },
   ]);
