@@ -19,7 +19,8 @@ export default function OneProdDesc({ onCancel }: OneProdDescProps): JSX.Element
   };
 
   const addToCartHandler = (e:React.MouseEvent<HTMLButtonElement>, productId: number): void => {
-    void dispatch(addCartItemThunk(productId)) 
+    void dispatch(addCartItemThunk(productId))
+    onCancel();
   };
 
   return (
