@@ -19,7 +19,7 @@ export const authSlice = createSlice({
   extraReducers: (builder) => { 
     builder.addCase(loginThunk.fulfilled, (state, action) => action.payload);
     builder.addCase(logoutThunk.fulfilled, (state, action) => {
-      state.user.status = 'guest';
+      state.user = {status: 'guest'};
       state.accessToken = '';
     });                            
     builder.addCase(signupThunk.fulfilled, (state, action) => action.payload);
