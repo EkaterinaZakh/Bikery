@@ -1,7 +1,25 @@
 import React from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
 import { addProdThunk } from '../../redux/slices/prod/thunk';
 import { useAppDispatch } from '../../redux/hooks';
+// import Box from '@mui/material/Box';
+
+const boxStyle = {
+  backgroundColor: '#fff',
+  // border: '2px solid #000',
+  padding: '16px',
+  width: '500px',
+};
 
 export default function NewProdForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -12,11 +30,23 @@ export default function NewProdForm(): JSX.Element {
     void dispatch(addProdThunk(formData));
   };
 
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
+
   return (
-    <div style={{ margin: '10px' }}>
-      <h3 style={{ textAlign: 'center' }}>Добавить продукт:</h3>
+    <Box sx={{display: 'flex', justifyContent: 'center'}}>
       <form onSubmit={submitHandler}>
-        <Box>
+        <Box sx={boxStyle}>
+          <h3 style={{ textAlign: 'center' }}>Добавить товар:</h3>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <TextField
               name="name"
@@ -25,21 +55,46 @@ export default function NewProdForm(): JSX.Element {
               label="Название"
               placeholder="Название"
               type="text"
-              sx={{ margin: '5px' }}
+              sx={{ marginBottom: '10px', width: '450px' }}
             />
 
             <TextField
               name="desc"
               required
-              id="outlined-required"
+              id="outlined-multiline-static"
+              // label="Multiline"
               label="Описание"
               placeholder="Описание"
-              type="text"
-              sx={{ margin: '5px' }}
+              multiline
+              rows={6}
+              sx={{ marginBottom: '10px', width: '450px' }}
+              // value={festData.desc}
+              // onChange={handleChange}
+              // defaultValue="Default Value"
             />
 
+            <TextField
+              name="price"
+              required
+              id="outlined-required"
+              label="Цена"
+              placeholder="Цена"
+              type="text"
+              sx={{ marginBottom: '10px', width: '450px' }}
+            />
+
+            {/* <TextField
+              name="categoryId"
+              required
+              id="outlined-required"
+              label="Категория"
+              placeholder="Категория"
+              type="text"
+              sx={{ margin: '5px' }}
+            /> */}
+
             {/* <TextField name='categodyId'>
-              <Box sx={{ margin: '5px' }}>
+              <Box sx={{ margin: '15px' }}>
                 <label htmlFor="language">Категория продукта:</label>
                 <select name="categoryId" id="language">
                   <option value="1">Куртки</option>
@@ -49,27 +104,26 @@ export default function NewProdForm(): JSX.Element {
               </Box>
             </TextField> */}
 
-            <TextField
-              name="price"
-              required
-              id="outlined-required"
-              label="Цена"
-              placeholder="Цена"
-              type="text"
-              sx={{ margin: '5px' }}
-            />
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Категории</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="categoryId"
+                  // value={categoryId}
+                  label="Категория"
+                  // onChange={handleChange}
+                  sx={{ marginBottom: '10px', width: '450px' }}
+                >
+                  <MenuItem value={1}>Куртки</MenuItem>
+                  <MenuItem value={2}>Шлемы</MenuItem>
+                  <MenuItem value={3}>Обувь</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
 
-            <TextField
-              name="categoryId"
-              required
-              id="outlined-required"
-              label="Категория"
-              placeholder="Категория"
-              type="text"
-              sx={{ margin: '5px' }}
-            />
-
-            <TextField
+            {/* <TextField
               name="image"
               required
               id="outlined-required"
@@ -78,22 +132,99 @@ export default function NewProdForm(): JSX.Element {
               // value={carData.image}
               // onChange={hangleChange}
               type="file"
-            />
+              sx={{marginBottom: "5px"}}
+            /> */}
 
             <Button
-              style={{ marginTop: '15px', width: '15%', margin: '5px' }}
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              sx={{ marginBottom: '10px', width: '450px' }}
+            >
+              Добавить фото
+              <Input type="file" name="image" sx={{ display: 'none' }} />
+            </Button>
+
+            <Button
+               style={{ margin: '15px', width: '100px' }}
               type="submit"
               variant="contained"
-              color="success"
+              // color="success"
             >
               Добавить
             </Button>
           </div>
         </Box>
       </form>
-    </div>
+    </Box>
   );
 }
+
+// import * as React from 'react';
+// import { styled } from '@mui/material/styles';
+// import Button from '@mui/material/Button';
+// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+// const VisuallyHiddenInput = styled('input')({
+//   clip: 'rect(0 0 0 0)',
+//   clipPath: 'inset(50%)',
+//   height: 1,
+//   overflow: 'hidden',
+//   position: 'absolute',
+//   bottom: 0,
+//   left: 0,
+//   whiteSpace: 'nowrap',
+//   width: 1,
+// });
+
+// export default function InputFileUpload() {
+//   return (
+//     <Button
+//       component="label"
+//       role={undefined}
+//       variant="contained"
+//       tabIndex={-1}
+//       startIcon={<CloudUploadIcon />}
+//     >
+//       Upload file
+//       <VisuallyHiddenInput type="file" />
+//     </Button>
+//   );
+// }
+
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+// export default function BasicSelect() {
+//   const [age, setAge] = React.useState('');
+
+//   const handleChange = (event: SelectChangeEvent) => {
+//     setAge(event.target.value as string);
+//   };
+
+//   return (
+//     <Box sx={{ minWidth: 120 }}>
+//       <FormControl fullWidth>
+//         <InputLabel id="demo-simple-select-label">Age</InputLabel>
+//         <Select
+//           labelId="demo-simple-select-label"
+//           id="demo-simple-select"
+//           value={age}
+//           label="Age"
+//           onChange={handleChange}
+//         >
+//           <MenuItem value={10}>Ten</MenuItem>
+//           <MenuItem value={20}>Twenty</MenuItem>
+//           <MenuItem value={30}>Thirty</MenuItem>
+//         </Select>
+//       </FormControl>
+//     </Box>
+//   );
+// }
 
 // import { Dropdown } from '@mui/base/Dropdown';
 // import { MenuButton } from '@mui/base/MenuButton';

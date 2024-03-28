@@ -19,7 +19,7 @@ function ProdModal(): JSX.Element {
             case 'info':
                 return <OneProdDesc onCancel={handleClose} />;
             case 'edit':
-                return <EditProdList onCancel={handleClose} />;
+                return <EditProdList onSubmit={handleClose} onCancel={handleClose} />;
             default:
                 return <>Error</>;
         }

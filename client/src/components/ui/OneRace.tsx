@@ -43,10 +43,10 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {race.desc}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {formattedDate}
+            Дата старта мотопробега: {formattedDate}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {race.length}Км
+            Длина маршрута: {race.length} км
           </Typography>
          
           <IconButton aria-label="add to favorites">

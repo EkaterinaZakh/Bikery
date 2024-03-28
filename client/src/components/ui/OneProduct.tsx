@@ -18,16 +18,13 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
-
   const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     void dispatch(deleteProdThunk(prod.id));
   };
 
-  const addToCartHandler = (e:React.MouseEvent<HTMLButtonElement>, productId: number): void => {
-    void dispatch(addCartItemThunk(productId))
-
-    
+  const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>, productId: number): void => {
+    void dispatch(addCartItemThunk(productId));
   };
 
   return (
@@ -55,27 +52,29 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <Button onClick={(e) => addToCartHandler(e, prod.id )}>В корзину</Button>
+          <Button onClick={(e) => addToCartHandler(e, prod.id)}>В корзину</Button>
         </CardContent>
       </Box>
       {user.isAdmin === true && (
         <div>
-          <Button onClick={deleteHandler} variant="outlined" startIcon={<DeleteIcon />}>
+          <Button
+            onClick={deleteHandler}
+            variant="outlined"
+            startIcon={<DeleteIcon />}
+            color="error"
+          >
             Удалить
           </Button>
+
           <Button
             variant="outlined"
             startIcon={<BorderColorRoundedIcon />}
             onClick={() => dispatch(openEditModal(prod.id))}
           >
-            Правки
+            Изменить
           </Button>
-          <Button
-            variant='outlined'
-            startIcon={<BorderColorRoundedIcon />}
-            onClick={() => dispatch(setSelectedProdById(prod.id))}
-          >
-            Подробное описание
+          <Button variant="outlined" onClick={() => dispatch(setSelectedProdById(prod.id))}>
+            Подробнее
           </Button>
         </div>
       )}
