@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
+
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import type { ProdType } from '../../types/prod';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -23,7 +25,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
 
   const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>, productId: number): void => {
     void dispatch(addCartItemThunk(productId));
-  };
+  }; 
 
   return (
     <Card
