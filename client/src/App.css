@@ -29,22 +29,24 @@ h3 {
 .cart_content {
   display: flex;
   background-color: rgb(13, 13, 13);
-  width: 65%;
-  height: 82%;
+  padding: 80px;
+  width: 55%;
+  height: 100%;
   margin-left: 35px;
   border-radius: 30px;
   opacity: 0.6;
+  overflow: auto;
   /* z-index: -1; */
 }
 
-.cart_list,
-.cart_order {
+.cart_list
+ {
   align-items: center;
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
-  width: 45%;
+
+  width: 85%;
   height: 90%;
   margin: 25px 35px;
   border-radius: 30px;
@@ -55,6 +57,7 @@ h3 {
   width: 70%;
   border-bottom: 2px black solid;
 }
+
 
 /* стили избранного */
 
