@@ -41,7 +41,7 @@ export default function NavBar(): JSX.Element {
         sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}
         position="fixed"
       >
-        <Toolbar>
+        <Toolbar sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
           </IconButton>

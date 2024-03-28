@@ -25,16 +25,24 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
 
   const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>, productId: number): void => {
     void dispatch(addCartItemThunk(productId));
-  }; 
+  };
+
+  // sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}
 
   return (
-    <Card className="card_shop">
+    <Card
+      className="card_shop"
+      sx={{ fontFamily: 'Pangolin', fontWeight: 400, fontStyle: 'normal' }}
+    >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           height: '80%',
+          fontFamily: 'Pangolin',
+          fontWeight: 400,
+          fontStyle: 'normal',
         }}
       >
         <CardMedia
@@ -51,10 +59,10 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
         />
 
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h6">
+          <Typography component="div" variant="h6"  sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>
             {prod.name}
           </Typography>
-          <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px' }}>
+          <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>
             {prod.price} руб.
           </Typography>
         </CardContent>
