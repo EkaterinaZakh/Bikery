@@ -24,11 +24,12 @@ export default function NavBar(): JSX.Element {
     { name: 'Мотопробеги', link: 'races' },
     { name: 'Магазин', link: '/shop' }])
     : 
-    ([{ name: 'Корзина', link: '/cart' },
+    ([
     { name: 'Главная', link: '/' },
     { name: 'Фестивали', link: '/fests' },
     { name: 'Мотопробеги', link: 'races' },
-    { name: 'Магазин', link: '/shop' }])
+    { name: 'Магазин', link: '/shop' },
+    { name: 'Корзина', link: '/cart' }])
 
   const handleCloseModal = (): void => {
     setOpenModal(false);
