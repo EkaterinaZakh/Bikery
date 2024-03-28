@@ -16,16 +16,16 @@ export default function OneCartItem({cartItem}: CartItemProps): JSX.Element {
     }
 
   return (
-    <>
-    <div>{cartItem.Product?.name}</div>
+    <div style ={{backgroundColor: 'white', padding:'20px', borderRadius:'10px', marginBottom:'10px'}}>
+    <div style={{marginBottom:'20px'}}><strong>{cartItem.Product?.name}</strong></div>
     <CardMedia
           component="img"
-          sx={{ width: '280px' }}
+          sx={{ width: '100px',marginBottom:'20px' }}
           image={`${import.meta.env.VITE_APP_TITLE}/img/product/${cartItem.Product?.image}`}
           alt="фото продукта"
         />
-    <div>{cartItem.Product?.price}</div>
-    <Button onClick={deleteHandler}>Убрать из корзины</Button>
-    </>
+    <div style={{marginBottom:'10px'}}><strong>Цена {cartItem.Product?.price}</strong> </div>
+    <Button color='error' onClick={deleteHandler}>Убрать из корзины</Button>
+    </div>
   )
 }
