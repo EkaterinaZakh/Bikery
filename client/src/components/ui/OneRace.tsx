@@ -130,7 +130,9 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {commentsForRace.map((comment) => (
               <OneRaceComment key={comment.id} comment={comment} />
             ))}
-            <AddRaceComment race={race} />
+            {user.status === 'logged' && (
+              <AddRaceComment race={race} />
+            )}
           </Typography>
         </CardContent>
       )}
