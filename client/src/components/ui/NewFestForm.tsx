@@ -9,7 +9,6 @@ import type { AddFestForm } from '../../types/fest';
 import { addFestThunk } from '../../redux/slices/fest/thunk';
 
 const boxStyle = {
-
   backgroundColor: '#fff',
   padding: '16px',
   width: '500px',
@@ -59,6 +58,9 @@ export default function NewFestForm(): JSX.Element {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        fontFamily: "Pangolin", 
+        fontWeight: 400, 
+        fontStyle: "normal",
       }}
     >
       {user.isAdmin === true && (
@@ -76,11 +78,10 @@ export default function NewFestForm(): JSX.Element {
             opacity: '0.9',
             marginTop: '15px',
           }}
-          
           noValidate
           autoComplete="off"
         >
-          <h3 style={{ marginBottom: '20px' }}>Добавить фестиваль:</h3>
+          <h3 style={{ marginBottom: '20px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>Добавить фестиваль:</h3>
           <TextField
             name="name"
             required

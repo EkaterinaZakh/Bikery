@@ -11,6 +11,8 @@ import {
   Box,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteFestThunk } from '../../redux/slices/fest/thunk';
 import { setSelectedFestById } from '../../redux/slices/fest/slice';
@@ -27,7 +29,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
 
   const [expanded, setExpanded] = React.useState(false);
   const user = useAppSelector((store) => store.auth.user);
-  const formattedDate = new Date(fest.date).toLocaleDateString('en-US', {
+  const formattedDate = new Date(fest.date).toLocaleDateString('ru-RU', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -44,7 +46,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <Card
         sx={{
           display: 'flex',
@@ -60,43 +62,9 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             // height="194"
             image={`${import.meta.env.VITE_APP_TITLE}/img/fest/${fest.image}`}
             alt=""
-            sx={{ width: '400px', height: '400px', backgroundSize: 'cover' }}
+            sx={{ width: '400px', height: '400px', backgroundSize: 'cover',  }}
           />
         </Box>
-
-        {/* <Box sx={{ marginLeft: '10px', width: '600px' }}>
-          <CardHeader title={fest.name} />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {fest.desc}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {formattedDate}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            {user.isAdmin === true && (
-              <>
-                <Button onClick={deleteHandler} variant="outlined" color="error">
-                  Удалить
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => dispatch(setSelectedFestById(fest.id))}
-                >
-                  Изменить
-                </Button>
-              </>
-            )}
-            <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-              {expanded ? 'Скрыть' : 'Подробнее'}
-            </IconButton>
-          </CardActions>
-        </Box> */}
         <Box
           sx={{
             width: '600px',
@@ -133,24 +101,25 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             },
           }}
         >
-          <CardHeader title={fest.name} />
+          <CardHeader title={fest.name} sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}} />
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal", fontSize: '20px'}}>
               {fest.desc}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal", fontSize: '20px'}}>
               {formattedDate}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
             {user.isAdmin === true && (
               <>
-                <Button onClick={deleteHandler} variant="outlined" color="error">
+                <Button onClick={deleteHandler} variant="outlined" color="error" startIcon={<DeleteIcon />}>
                   Удалить
                 </Button>
                 <Button
                   variant="outlined"
                   color="primary"
+                  startIcon={<BorderColorRoundedIcon />}
                   onClick={() => dispatch(setSelectedFestById(fest.id))}
                 >
                   Изменить
@@ -158,7 +127,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
               </>
             )}
             <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-              {expanded ? 'Скрыть' : 'Подробнее'}
+              {expanded ? 'Скрыть' : 'Комментарии'}
             </IconButton>
           </CardActions>
         </Box>
@@ -169,9 +138,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
               {commentsForfest.map((comment) => (
                 <OneFestComment key={comment.id} comment={comment} />
               ))}
-              {user.status === 'logged' && (
-                <AddFestComment fest={fest} />
-              )}
+              {user.status === 'logged' && <AddFestComment fest={fest} />}
             </Typography>
           </CardContent>
         )}

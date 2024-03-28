@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
+
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import type { ProdType } from '../../types/prod';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -23,35 +25,58 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
 
   const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>, productId: number): void => {
     void dispatch(addCartItemThunk(productId));
-  };
+  }; 
 
   return (
-    <Card
-      sx={{ display: 'flex', flexDirection: 'column', border: '1px solid gray', width: '400px' }}
-    >
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Card className="card_shop">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '80%',
+        }}
+      >
         <CardMedia
+          className="shop_img"
           component="img"
-          sx={{ width: '280px' }}
+          sx={{
+            width: '250px',
+            height: '250px',
+            margin: '10px auto',
+            backgroundPosition: 'center',
+          }}
           image={`${import.meta.env.VITE_APP_TITLE}/img/product/${prod.image}`}
           alt="фото продукта"
         />
 
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
+          <Typography component="div" variant="h6">
             {prod.name}
           </Typography>
           <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px' }}>
             {prod.price} руб.
           </Typography>
-          {user.status === 'logged' && (
-            <Button onClick={(e) => addToCartHandler(e, prod.id)}>Добавить в корзину</Button>
-          )}
         </CardContent>
       </Box>
       {user.isAdmin === true && (
-        <div>
+        <div className="btn_box">
+          {user.status === 'logged' && (
+            <Button
+              style={{
+                backgroundColor: '#f66d52',
+                color: 'black',
+                marginBottom: '10px',
+                borderRadius: '15px',
+              }}
+              className="btn-new"
+              onClick={(e) => addToCartHandler(e, prod.id)}
+            >
+              Добавить в корзину
+            </Button>
+          )}
           <Button
+            className="btn-new"
             onClick={deleteHandler}
             variant="outlined"
             startIcon={<DeleteIcon />}
@@ -61,6 +86,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           </Button>
 
           <Button
+            className="btn-new"
             variant="outlined"
             startIcon={<BorderColorRoundedIcon />}
             onClick={() => dispatch(openEditModal(prod.id))}
@@ -69,8 +95,20 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           </Button>
         </div>
       )}
-      <Button variant="outlined" onClick={() => dispatch(setSelectedProdById(prod.id))}>
-        Подробное описание
+      <Button
+        className="btn_product btn-new"
+        sx={{
+          backgroundColor: '#814b0f',
+          color: 'black',
+          marginBottom: '10px',
+          borderRadius: '15px',
+          width: '200px',
+          margin: '10px auto',
+        }}
+        variant="outlined"
+        onClick={() => dispatch(setSelectedProdById(prod.id))}
+      >
+        Подробнее
       </Button>
     </Card>
   );

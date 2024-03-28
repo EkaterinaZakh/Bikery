@@ -10,7 +10,9 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 import type { RaceType } from '../../types/race';
 import { deleteRaceThunk } from '../../redux/slices/race/thunk';
@@ -32,7 +34,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     setExpanded(!expanded);
   };
 
-  const formattedDate = new Date(race.date).toLocaleDateString('en-US', {
+  const formattedDate = new Date(race.date).toLocaleDateString('ru-RU', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -82,7 +84,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
         },
       }}
     >
-      <CardHeader title={race.name} />
+      <CardHeader sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}} title={race.name} />
       <CardMedia
         className="race_img"
         component="img"
@@ -90,19 +92,34 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
         image={`${import.meta.env.VITE_APP_TITLE}/img/race/${race.image}`}
         alt=""
       />
+
+{/* sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}} */}
+
       <Rate rates={race.RaceRatings} race={race} />
       <CardContent>
-        <Typography variant="subtitle2">{race.length} Км</Typography>
-        <Typography variant="subtitle2">{race.desc}</Typography>
-        <Typography variant="subtitle1">{formattedDate}</Typography>
+        <Typography variant="subtitle1" sx={{marginBottom:'10px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>Дата старта: {formattedDate}</Typography>
+        <Typography variant="subtitle2" sx={{marginBottom:'10px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>Длина маршрута: {race.length} км</Typography>
+        <Typography variant="subtitle2" sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>{race.desc}</Typography>
       </CardContent>
       <CardActions disableSpacing>
         {user.isAdmin === true && (
           <>
-            <Button className="delete_btn" onClick={deleteHandler}>
+            <Button
+              className="delete_btn"
+              variant="outlined"
+              color="error"
+              startIcon={<DeleteIcon />}
+              onClick={deleteHandler}
+            >
               Удалить
             </Button>
-            <Button className="edit_btn" onClick={() => dispatch(setSelectedRacesById(race.id))}>
+            <Button
+              // className="edit_btn"
+              variant="outlined"
+              color="primary"
+              startIcon={<BorderColorRoundedIcon />}
+              onClick={() => dispatch(setSelectedRacesById(race.id))}
+            >
               Изменить
             </Button>
           </>
@@ -112,8 +129,9 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}
         >
-          {expanded ? 'Скрыть' : 'Подробнее'}
+          {expanded ? 'Скрыть' : 'Комментарии'}
         </IconButton>
       </CardActions>
       {expanded && (
