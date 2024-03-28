@@ -59,9 +59,11 @@ export default function NewFestForm(): JSX.Element {
             flexDirection: 'column',
             alignItems: 'center',
             padding: '15px',
-            backgroundColor: '#f9f9f9',
+            backgroundColor: 'rgb(240, 235, 229)',
             borderRadius: '10px',
             boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.1)',
+            opacity: '0.9',
+            marginTop: '15px',
           }}
           noValidate
           autoComplete="off"
@@ -122,7 +124,7 @@ export default function NewFestForm(): JSX.Element {
             type="submit"
             variant="outlined"
             className="btn-new"
-            sx={{ backgroundColor: '#f66d52', color: 'black', marginTop:'10px' }}
+            sx={{ backgroundColor: '#f66d52', color: 'black', marginTop: '10px' }}
           >
             Добавить
           </Button>

@@ -1,11 +1,11 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import OneFest from '../ui/OneFest';
 import NewFestForm from '../ui/NewFestForm';
 import BaseModal from '../ui/BaseModal';
 import EditFestList from '../ui/EditFestList';
 import { clearSelectedFest } from '../../redux/slices/fest/slice';
-import { Box } from '@mui/material';
 
 export default function FestPage(): JSX.Element {
   const fests = useAppSelector((state) => state.festivals.fests);
@@ -18,13 +18,18 @@ export default function FestPage(): JSX.Element {
 
   return (
     <div
-      style={{ backgroundImage: `url('festPage.jpeg')`, backgroundSize: 'cover'}}
+      style={{
+        backgroundImage: `url('festPage.jpeg')`,
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        filter: 'brightness(80%)',
+      }}
     >
       <NewFestForm />
       <BaseModal open={!!selectedFest} onClose={handleCloseModal}>
         <EditFestList onSubmit={handleCloseModal} />
       </BaseModal>
-      <Box>
+      <Box style={{ marginLeft: '50px' }}>
         {fests.map((fest) => (
           <OneFest fest={fest} key={fest.id} />
         ))}

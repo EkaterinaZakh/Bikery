@@ -10,7 +10,6 @@ type OneRaceProps = {
 };
 
 export default function AddRaceComment({ race }: OneRaceProps): JSX.Element {
-
   const dispatch = useAppDispatch();
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -33,9 +32,8 @@ export default function AddRaceComment({ race }: OneRaceProps): JSX.Element {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, marginTop: '20px' }}>
+    <Card className="comments_form" sx={{ marginTop: '10px' }}>
       <CardContent>
-        {/* Инпут для комментария */}
         <form onSubmit={handleCommentSubmit}>
           <TextField
             name="text"
@@ -44,11 +42,8 @@ export default function AddRaceComment({ race }: OneRaceProps): JSX.Element {
             label="Добавить комментарий"
             variant="outlined"
             margin="normal"
-            // Дополнительные свойства, если нужно
           />
-          <Button type="submit" variant="contained" color="primary">
-            Отправить
-          </Button>
+          <Button className='send_btn' type="submit">Отправить</Button>
         </form>
       </CardContent>
     </Card>

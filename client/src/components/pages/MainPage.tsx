@@ -6,6 +6,7 @@ export default function MainPage(): JSX.Element {
     <Box
       sx={{
         backgroundImage: `url('MainPagePicture.jpeg')`,
+        filter: 'brightness(85%)',
         backgroundSize: 'cover',
         height: '100vh',
         display: 'flex',
