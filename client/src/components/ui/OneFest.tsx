@@ -172,7 +172,9 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
               {commentsForfest.map((comment) => (
                 <OneFestComment key={comment.id} comment={comment} />
               ))}
-              <AddFestComment fest={fest} />
+              {user.status === 'logged' && (
+                <AddFestComment fest={fest} />
+              )}
             </Typography>
           </CardContent>
         )}

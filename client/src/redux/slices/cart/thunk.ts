@@ -7,7 +7,7 @@ export const getAllCartThunk = createAsyncThunk<CartType[]>(
     () => cartService.getAllCartItem()
 )
 
-export const deleteCartItemThunk = createAsyncThunk<CartType['id'], CartType['id']>(
+export const deleteCartItemThunk = createAsyncThunk<CartType['productId'], CartType['productId']>(
     'cart/deleteCartItemThunk',
     (id) => cartService.deleteCartItem(id).then(() => id)
 )
