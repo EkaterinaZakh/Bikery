@@ -135,6 +135,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
         {expanded && (
           <CardContent>
             <Typography paragraph>
+              <div>Комментарии:</div>
               {commentsForfest.map((comment) => (
                 <OneFestComment key={comment.id} comment={comment} />
               ))}
