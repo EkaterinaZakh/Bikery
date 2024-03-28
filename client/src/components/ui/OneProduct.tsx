@@ -78,15 +78,15 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           >
             Изменить
           </Button>
-          <Button
+        </div>
+      )}
+      <Button
             className="btn_product"
             variant="outlined"
             onClick={() => dispatch(setSelectedProdById(prod.id))}
           >
             Подробное описание
           </Button>
-        </div>
-      )}
     </Card>
   );
 }
