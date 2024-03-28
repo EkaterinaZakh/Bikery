@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import React from 'react';
+import { Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useParams } from 'react-router-dom';
 import type { ProdType } from '../../types/prod';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteProdThunk } from '../../redux/slices/prod/thunk';
@@ -25,9 +23,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
   };
 
   const addToCartHandler = (e:React.MouseEvent<HTMLButtonElement>, productId: number): void => {
-    void dispatch(addCartItemThunk(productId))
-
-    
+    void dispatch(addCartItemThunk(productId)) 
   };
 
   return (
@@ -46,17 +42,13 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           <Typography component="div" variant="h5">
             {prod.name}
           </Typography>
-          {/* <Typography variant="subtitle1" color="text.secondary" component="div">
-            {prod.desc}
-          </Typography> */}
           <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px' }}>
             {prod.price} руб.
           </Typography>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <Button onClick={(e) => addToCartHandler(e, prod.id )}>В корзину</Button>
-        </CardContent>
+          {user.status === 'logged' && (
+            <Button onClick={(e) => addToCartHandler(e, prod.id )}>Добавить в корзину</Button>
+            )}
+            </CardContent>
       </Box>
       {user.isAdmin === true && (
         <div>
@@ -70,15 +62,14 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           >
             Правки
           </Button>
+          </div>
+        )}
           <Button
             variant='outlined'
-            startIcon={<BorderColorRoundedIcon />}
             onClick={() => dispatch(setSelectedProdById(prod.id))}
           >
             Подробное описание
           </Button>
-        </div>
-      )}
     </Card>
   );
 }
