@@ -45,62 +45,6 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
   };
 
   return (
-    // <Card className="one_race_card" sx={{ backgroundColor: 'black' }}>
-    //   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-    //     <CardContent sx={{ paddingLeft: 3 }}>
-    //       <Typography component="div" variant="h6">
-    //         {race.name}
-    //       </Typography>
-    //       <Typography variant="subtitle2" component="div">
-    //         {formattedDate}
-    //       </Typography>
-    //       <Typography variant="subtitle2" component="div">
-    //         {race.length} Км
-    //       </Typography>
-    //       <Typography variant="subtitle1" component="div">
-    //         {race.desc}
-    //       </Typography>
-    //       {/* <IconButton aria-label="add to favorites">
-    //         <FavoriteIcon />
-    //       </IconButton> */}
-    //       {user.isAdmin === true && (
-    //         <>
-    //           <Button
-    //             sx={{ marginRight: '10px' }}
-    //             onClick={(e) => deleteHandler(e)}
-    //             variant="outlined"
-    //             color="error"
-    //           >
-    //             Удалить
-    //           </Button>
-    //           <Button
-    //             variant="outlined"
-    //             color="primary"
-    //             onClick={() => dispatch(setSelectedRacesById(race.id))}
-    //           >
-    //             Изменить
-    //           </Button>
-    //         </>
-    //       )}
-    //       <Rate rates={race.RaceRatings} race={race} />
-    //       <Card className="comments">
-    //         <AddRaceComment race={race} />
-    //         {commentsForRace.map((comment) => (
-    //           <OneRaceComment key={comment.id} comment={comment} />
-    //         ))}
-    //       </Card>
-    //     </CardContent>
-    //   </Box>
-
-    //   <CardMedia
-    //     component="img"
-    //     className="race_img"
-    //     sx={{ width: '70%', padding: '10px' }}
-    //     image={race.image}
-    //     alt=""
-    //   />
-    // </Card>
-
     <Card
       className="one_race_card"
       sx={{

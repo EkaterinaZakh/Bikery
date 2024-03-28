@@ -1,4 +1,8 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
+// import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks';
 import type { AddRaceFormType } from '../../types/race';
@@ -86,7 +90,7 @@ export default function AddRaceForm(): JSX.Element {
             type="number"
             sx={{ margin: '5px' }}
           />
-          <TextField
+          {/* <TextField
             name="image"
             required
             id="outlined-required"
@@ -96,7 +100,17 @@ export default function AddRaceForm(): JSX.Element {
             // onChange={hangleChange}
             type="file"
             sx={{ margin: '5px' }}
-          />
+          /> */}
+
+          <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+            sx={{ marginBottom: '5px' }}
+          >
+            Добавить фото
+            <Input type="file" name="image" sx={{ display: 'none' }} />
+          </Button>
 
           <TextField
             name="date"

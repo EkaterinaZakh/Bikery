@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { AddFestForm } from '../../types/fest';
 import { addFestThunk } from '../../redux/slices/fest/thunk';
+
+const boxStyle = {
+
+  backgroundColor: '#fff',
+  padding: '16px',
+  width: '500px',
+};
 
 export default function NewFestForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -65,6 +76,7 @@ export default function NewFestForm(): JSX.Element {
             opacity: '0.9',
             marginTop: '15px',
           }}
+          
           noValidate
           autoComplete="off"
         >
@@ -78,7 +90,7 @@ export default function NewFestForm(): JSX.Element {
             value={festData.name}
             onChange={handleChange}
             type="text"
-            sx={{ marginBottom: '10px' }}
+            sx={{ marginBottom: '10px', width: '450px' }}
           />
           <TextField
             name="desc"
@@ -89,7 +101,7 @@ export default function NewFestForm(): JSX.Element {
             value={festData.desc}
             onChange={handleChange}
             type="text"
-            sx={{ marginBottom: '10px' }}
+            sx={{ marginBottom: '10px', width: '450px' }}
           />
           <TextField
             name="place"
@@ -100,7 +112,7 @@ export default function NewFestForm(): JSX.Element {
             value={festData.place}
             onChange={handleChange}
             type="text"
-            sx={{ marginBottom: '10px' }}
+            sx={{ marginBottom: '10px', width: '450px' }}
           />
           <TextField
             name="date"
@@ -111,15 +123,26 @@ export default function NewFestForm(): JSX.Element {
             value={festData.date}
             onChange={handleChange}
             type="date"
-            sx={{ marginBottom: '20px' }}
+            sx={{ marginBottom: '10px', width: '450px' }}
           />
-          <TextField
+          {/* <TextField
             name="image"
             required
             id="outlined-required"
             type="file"
             sx={{ marginBottom: '10px', width: '44%', margin: '5px' }}
-          />
+          /> */}
+
+          <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+            sx={{ marginBottom: '10px', width: '450px' }}
+          >
+            Добавить фото
+            <Input type="file" name="image" sx={{ display: 'none' }} />
+          </Button>
+
           <Button
             type="submit"
             variant="outlined"

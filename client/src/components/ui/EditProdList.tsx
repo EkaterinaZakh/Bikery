@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
+// import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editProdThunk } from '../../redux/slices/prod/thunk';
 
 type EditProdListProps = {
   onSubmit?: () => void;
   onCancel?: () => void;
+};
+
+const boxStyle = {
+  backgroundColor: '#fff',
+  border: '2px solid #000',
+  padding: '16px',
+  width: '500px',
 };
 
 export default function EditProdList({ onSubmit, onCancel }: EditProdListProps): JSX.Element {
@@ -25,10 +36,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
-    setProdData({
-      ...prodData,
-      [name]: value,
-    });
+    setProdData((prevData) => ({...prevData, [name]: value }));
   };
 
   const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -37,6 +45,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
       ...prodData,
       image: prodData.image,
     };
+
     if (!selectedProd) return;
     void dispatch(
       editProdThunk({
@@ -55,8 +64,8 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
   };
 
   return (
-    <div style={{ margin: '10px', backgroundColor: 'white', width: '300px', height: '380px' }}>
-      <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Редактировать продукт:</h3>
+    <Box sx={boxStyle}>
+      <h3 style={{ textAlign: 'center', marginBottom: '25px' }}>Редактировать продукт:</h3>
       <form onSubmit={editHandler}>
         <Box>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -69,20 +78,25 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               label="Название"
               placeholder="Название"
               type="text"
+              sx={{ marginBottom: '10px', width: '450px' }}
             />
 
             <TextField
               name="desc"
-              value={prodData.desc}
-              onChange={handleChange}
               required
-              id="desc-input"
+              id="outlined-multiline-static"
+              // label="Multiline"
               label="Описание"
               placeholder="Описание"
-              type="text"
+              multiline
+              rows={6}
+              sx={{ marginBottom: '10px', width: '450px' }}
+              value={prodData.desc}
+              onChange={handleChange}
+              // defaultValue="Default Value"
             />
 
-            <TextField
+            {/* <TextField
               name="image"
               // value={prodData.image}
               // onChange={handleChange}
@@ -90,7 +104,17 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               id="outlined-required"
               type="file"
               // defaultValue={selectedProd?.image}
-            />
+            /> */}
+
+            <Button
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              sx={{ marginBottom: '10px', width: '450px' }}
+            >
+              Добавить фото
+              <Input type="file" name="image" sx={{ display: 'none' }} />
+            </Button>
 
             <TextField
               name="price"
@@ -101,28 +125,32 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               label="Цена"
               placeholder="Цена"
               type="text"
+              sx={{ marginBottom: '10px', width: '450px' }}
             />
 
-            <Button
-              style={{ marginTop: '15px', width: '100px' }}
-              type="submit"
-              variant="contained"
-              color="success"
-            >
-              Добавить
-            </Button>
+            <Box>
+              <Button
+                style={{ margin: '15px', width: '100px' }}
+                type="submit"
+                variant="contained"
+                // color="success"
+              >
+                Добавить
+              </Button>
 
-            <Button
-              style={{ marginTop: '15px', width: '100px' }}
-              variant="contained"
-              onClick={cancelHandler}
-            >
-              Отменить
-            </Button>
+              <Button
+                style={{ margin: '15px', width: '100px' }}
+                variant="contained"
+                onClick={cancelHandler}
+                color="error"
+              >
+                Отменить
+              </Button>
+            </Box>
           </div>
         </Box>
       </form>
-    </div>
+    </Box>
   );
 }
 

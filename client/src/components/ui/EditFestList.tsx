@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField, Box } from '@mui/material';
+import { TextField, Box } from '@mui/material';
+// import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editFestThunk } from '../../redux/slices/fest/thunk';
 
@@ -11,7 +15,7 @@ const boxStyle = {
   backgroundColor: '#fff',
   border: '2px solid #000',
   padding: '16px',
-  width: 300,
+  width: '500px',
 };
 
 export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
@@ -67,79 +71,152 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <form onSubmit={editHandler} style={boxStyle} noValidate autoComplete="off">
-            <div>
-                <TextField
-                    name="name"
-                    required
-                    id="outlined-required"
-                    label="Название"
-                    placeholder="Название"
-                    value={festData.name}
-                    onChange={handleChange}
-                    type="text"
-                />
-                <TextField
-                    name="desc"
-                    required
-                    id="outlined-required"
-                    label="Описание"
-                    placeholder="Описание"
-                    value={festData.desc}
-                    onChange={handleChange}
-                    type="text"
-                />
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '400px',
+        // backgroundColor: 'green',
+      }}
+    >
+      <form onSubmit={editHandler} style={boxStyle} noValidate autoComplete="off">
+        <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+        <h3 style={{ textAlign: 'center', marginBottom: '25px' }}>Редактировать фестиваль:</h3>
+          <TextField
+            name="name"
+            required
+            id="outlined-required"
+            label="Название"
+            placeholder="Название"
+            value={festData.name}
+            onChange={handleChange}
+            type="text"
+            sx={{ marginBottom: '10px' }}
+          />
+          {/* <TextField
+            name="desc"
+            required
+            id="outlined-required"
+            label="Описание"
+            placeholder="Описание"
+            value={festData.desc}
+            onChange={handleChange}
+            type="text"
+            sx={{ marginBottom: '10px' }}
+          /> */}
 
-                <TextField
-                    name="image"
-                    // value={prodData.image}
-                    // onChange={handleChange}
-                    // required
-                    id="outlined-required"
-                    type="file"
-                    // defaultValue={selectedProd?.image}
-                />
+          <TextField
+            name="desc"
+            required
+            id="outlined-multiline-static"
+            // label="Multiline"
+            label="Описание"
+            placeholder="Описание"
+            multiline
+            rows={6}
+            sx={{ marginBottom: '10px' }}
+            value={festData.desc}
+            onChange={handleChange}
+            // defaultValue="Default Value"
+          />
 
-                <TextField
-                    name="place"
-                    required
-                    id="outlined-required"
-                    label="Место"
-                    placeholder="Место"
-                    value={festData.place}
-                    onChange={handleChange}
-                    type="text"
-                />
-                <TextField
-                    name="date"
-                    required
-                    id="outlined-required"
-                    label="Дата"
-                    placeholder="yyyy-mm-dd"
-                    value={festData.date}
-                    onChange={handleChange}
-                    type="date"
-                />
-                <Button
-                    style={{ marginTop: '15px', width: '15%' }}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                >
-                    Изменить
-                </Button>
-                <Button
-                    style={{ marginTop: '15px', width: '15%' }}
-                    onClick={handleCancel}
-                    variant="contained"
-                    color="error"
-                >
-                    Отменить
-                </Button>
-            </div>
-        </form>
+          <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+            sx={{ marginBottom: '10px' }}
+          >
+            Добавить Фото
+            <Input type="file" name="image" sx={{ display: 'none' }} />
+          </Button>
+
+          <TextField
+            name="place"
+            required
+            id="outlined-required"
+            label="Место"
+            placeholder="Место"
+            value={festData.place}
+            onChange={handleChange}
+            type="text"
+            sx={{ marginBottom: '10px' }}
+          />
+
+          <TextField
+            name="date"
+            required
+            id="outlined-required"
+            label="Дата"
+            placeholder="yyyy-mm-dd"
+            value={festData.date}
+            onChange={handleChange}
+            type="date"
+            sx={{ marginBottom: '10px' }}
+          />
+        </Box>
+
+        <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+
+          <Button style={{ marginTop: '15px' }} type="submit" variant="contained" color="primary">
+            Изменить
+          </Button>
+        
+
+        
+          <Button
+            style={{ marginTop: '15px' }}
+            onClick={handleCancel}
+            variant="contained"
+            color="error"
+            >
+            Отменить
+          </Button>
+            </Box>
+        
+
+      </form>
     </Box>
-);
-
+  );
 }
+
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
+
+// export default function MultilineTextFields() {
+//   return (
+//     <Box
+//       component="form"
+//       sx={{
+//         '& .MuiTextField-root': { m: 1, width: '25ch' },
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
+//       <div>
+//         <TextField
+//           id="outlined-multiline-flexible"
+//           label="Multiline"
+//           multiline
+//           maxRows={4}
+//         />
+//         <TextField
+//           id="outlined-textarea"
+//           label="Multiline Placeholder"
+//           placeholder="Placeholder"
+//           multiline
+//         />
+//         <TextField
+//           id="outlined-multiline-static"
+//           label="Multiline"
+//           multiline
+//           rows={4}
+//           defaultValue="Default Value"
+//         />
+//       </div>
+
+//     </Box>
+//   );
+// }
