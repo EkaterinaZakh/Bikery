@@ -18,14 +18,17 @@ type NavItem = {
 export default function NavBar(): JSX.Element {
   const user = useAppSelector((store) => store.auth.user);
   const [openModal, setOpenModal] = useState(false);
-  const navs: NavItem[] = [
+  const navs: NavItem[] = user.status === 'guest' ? ([
     { name: 'Главная', link: '/' },
     { name: 'Фестивали', link: '/fests' },
     { name: 'Мотопробеги', link: 'races' },
-    { name: 'Магазин', link: '/shop' },
-    { name: 'Корзина', link: '/cart' },
-    // { name: 'Избранное', link: '/wish' },
-  ];
+    { name: 'Магазин', link: '/shop' }])
+    : 
+    ([{ name: 'Корзина', link: '/cart' },
+    { name: 'Главная', link: '/' },
+    { name: 'Фестивали', link: '/fests' },
+    { name: 'Мотопробеги', link: 'races' },
+    { name: 'Магазин', link: '/shop' }])
 
   const handleCloseModal = (): void => {
     setOpenModal(false);
@@ -65,7 +68,6 @@ export default function NavBar(): JSX.Element {
           <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
             {user.status !== 'logged' ? 'Присоединиться?' : 'Выйти?'}
           </Button>
-
           <BaseModal open={openModal} onClose={handleCloseModal}>
             <AuthList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
           </BaseModal>
