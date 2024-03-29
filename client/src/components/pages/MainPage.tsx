@@ -17,6 +17,7 @@ export default function MainPage(): JSX.Element {
         textAlign: 'center', // Выравнивает текст по центру
         color: 'rgba(13, 13, 12, 1)',
         paddingBottom: '100px',
+        fontFamily: 'Discharge Pro',
       }}
     >
       <Box
@@ -36,6 +37,7 @@ export default function MainPage(): JSX.Element {
             backgroundColor: 'rgba(255, 255, 255, 0.7)',
             borderRadius: '10px', // Округление углов
             padding: '10px', // Поля внутри прямоугольника
+            fontFamily: 'DischargePro',
           }}
         >
           <strong>
