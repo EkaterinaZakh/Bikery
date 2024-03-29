@@ -16,7 +16,7 @@ const labels: { [index: string]: string } = {
   2: 'Потянет',
   3: 'Нормально',
   4: 'Хорошечно',
-  5: 'Чьйотенько!',
+  5: 'Чьотенько!',
 };
 
 type RatePropsType = {
