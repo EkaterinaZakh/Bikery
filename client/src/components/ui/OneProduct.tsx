@@ -39,9 +39,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           flexDirection: 'column',
           justifyContent: 'space-between',
           height: '80%',
-          // fontFamily: 'Pangolin',
-          // fontWeight: 400,
-          // fontStyle: 'normal',
+  
         }}
       >
         <CardMedia
