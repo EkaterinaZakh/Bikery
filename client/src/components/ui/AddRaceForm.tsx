@@ -106,7 +106,7 @@ export default function AddRaceForm(): JSX.Element {
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
-            sx={{ marginBottom: '5px' }}
+            sx={{ marginBottom: '5px', backgroundColor: '#be8952'}}
           >
             Добавить фото
             <Input type="file" name="image" sx={{ display: 'none' }} />

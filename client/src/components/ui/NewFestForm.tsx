@@ -78,7 +78,7 @@ export default function NewFestForm(): JSX.Element {
           noValidate
           autoComplete="off"
         >
-          <h3 style={{ marginBottom: '20px'}}>Добавить фестиваль:</h3>
+          <h3 style={{ marginBottom: '20px' }}>Добавить фестиваль:</h3>
           <TextField
             name="name"
             required
@@ -135,7 +135,7 @@ export default function NewFestForm(): JSX.Element {
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
-            sx={{ marginBottom: '10px', width: '450px' }}
+            sx={{ marginBottom: '10px', width: '250px', backgroundColor: '#be8952' }}
           >
             Добавить фото
             <Input type="file" name="image" sx={{ display: 'none' }} />

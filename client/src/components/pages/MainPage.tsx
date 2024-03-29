@@ -47,7 +47,7 @@ export default function MainPage(): JSX.Element {
           variant="body2"
           sx={{
             width: '50%',
-            fontSize: '25px',
+            fontSize: '22px',
             marginRight: '50px',
             backgroundColor: 'rgba(255, 255, 255, 0.7)',
             borderRadius: '10px', // Округление углов

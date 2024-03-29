@@ -27,12 +27,8 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
     void dispatch(addCartItemThunk(productId));
   };
 
-
   return (
-    <Card
-      className="card_shop"
-      sx={{ fontFamily: '', fontWeight: 400, fontStyle: 'normal' }}
-    >
+    <Card className="card_shop" sx={{ fontFamily: '', fontWeight: 400, fontStyle: 'normal' }}>
       <Box
         sx={{
           display: 'flex',
@@ -103,7 +99,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
       <Button
         className="btn_product btn-new"
         sx={{
-          backgroundColor: '#814b0f',
+          backgroundColor: '#be8952',
           color: 'black',
           marginBottom: '10px',
           borderRadius: '15px',
