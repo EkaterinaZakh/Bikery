@@ -45,7 +45,7 @@ export default function OneProdDesc({ onCancel }: OneProdDescProps): JSX.Element
           sx={{ width: '300px', height: '300px'}}
         />   
         <Box sx={{ marginLeft: '15px' }}>
-          <Box sx={{ fontFamily: 'Discharge Pro', fontSize: '35px', fontWeight: 'bold' }}>{prod?.name}</Box>
+          <Box sx={{ fontSize: '35px', fontWeight: 'bold' }}>{prod?.name}</Box>
           <Box sx={{fontSize: '25px', marginTop: '15px'}}>{prod?.price} ₽</Box>
           <Box sx={{ marginTop: '15px', fontSize:'20px' }}>{prod?.desc}</Box>
           {user.status === 'logged' && (

@@ -9,6 +9,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import BaseModal from './BaseModal';
 import AuthList from './AuthList';
+// import '../../fonts/DischargePro.ttf'
 
 type NavItem = {
   name: string;
@@ -36,16 +37,16 @@ export default function NavBar(): JSX.Element {
   };
 
   return (
-    <Box sx={{ flexGrow: 1,  fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>
+    <Box sx={{ flexGrow: 1}}>
       <AppBar
-        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}
+        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto'}}
         position="fixed"
       >
-        <Toolbar sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>
+        <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
             {user.status === 'logged' ? user.name : 'Гость'}
           </Typography>
           {navs.map((nav) => (
@@ -59,6 +60,7 @@ export default function NavBar(): JSX.Element {
                   '&:hover': {
                     color: '#fff',
                     background: '#f66d52',
+                    // fontFamily: 'Discharge Pro',
                   },
                 }}
               >

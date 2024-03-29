@@ -128,6 +128,7 @@ export default function NewProdForm(): JSX.Element {
                   <MenuItem value={1}>Куртки</MenuItem>
                   <MenuItem value={2}>Шлемы</MenuItem>
                   <MenuItem value={3}>Обувь</MenuItem>
+                  <MenuItem value={4}>Прочее</MenuItem>
                 </Select>
               </FormControl>
             </Box>

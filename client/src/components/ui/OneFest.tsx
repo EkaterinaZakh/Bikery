@@ -101,33 +101,12 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             },
           }}
         >
-          <CardHeader
-            title={fest.name}
-            sx={{ fontFamily: 'Pangolin', fontWeight: 400, fontStyle: 'normal' }}
-          />
+          <CardHeader title={fest.name} />
           <CardContent>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{
-                fontFamily: 'Pangolin',
-                fontWeight: 400,
-                fontStyle: 'normal',
-                fontSize: '20px',
-              }}
-            >
+            <Typography variant="body2" color="text.secondary">
               {fest.desc}
             </Typography>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{
-                fontFamily: 'Pangolin',
-                fontWeight: 400,
-                fontStyle: 'normal',
-                fontSize: '20px',
-              }}
-            >
+            <Typography variant="body2" color="text.secondary">
               {formattedDate}
             </Typography>
           </CardContent>

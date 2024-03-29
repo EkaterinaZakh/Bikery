@@ -27,12 +27,11 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
     void dispatch(addCartItemThunk(productId));
   };
 
-  // sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}
 
   return (
     <Card
       className="card_shop"
-      sx={{ fontFamily: 'Pangolin', fontWeight: 400, fontStyle: 'normal' }}
+      sx={{ fontFamily: '', fontWeight: 400, fontStyle: 'normal' }}
     >
       <Box
         sx={{
@@ -40,9 +39,9 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           flexDirection: 'column',
           justifyContent: 'space-between',
           height: '80%',
-          fontFamily: 'Pangolin',
-          fontWeight: 400,
-          fontStyle: 'normal',
+          // fontFamily: 'Pangolin',
+          // fontWeight: 400,
+          // fontStyle: 'normal',
         }}
       >
         <CardMedia
@@ -59,10 +58,10 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
         />
 
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h6"  sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>
+          <Typography component="div" variant="h6">
             {prod.name}
           </Typography>
-          <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal" }}>
+          <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '10px' }}>
             {prod.price} руб.
           </Typography>
         </CardContent>

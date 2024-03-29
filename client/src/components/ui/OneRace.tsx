@@ -84,7 +84,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
         },
       }}
     >
-      <CardHeader sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}} title={race.name} />
+      <CardHeader title={race.name} />
       <CardMedia
         className="race_img"
         component="img"
@@ -93,13 +93,11 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
         alt=""
       />
 
-{/* sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}} */}
-
       <Rate rates={race.RaceRatings} race={race} />
       <CardContent>
-        <Typography variant="subtitle1" sx={{marginBottom:'10px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>Дата старта: {formattedDate}</Typography>
-        <Typography variant="subtitle2" sx={{marginBottom:'10px', fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>Длина маршрута: {race.length} км</Typography>
-        <Typography variant="subtitle2" sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}>{race.desc}</Typography>
+        <Typography variant="subtitle1" sx={{marginBottom:'10px'}}>Дата старта: {formattedDate}</Typography>
+        <Typography variant="subtitle2" sx={{marginBottom:'10px'}}>Длина маршрута: {race.length} км</Typography>
+        <Typography variant="subtitle2">{race.desc}</Typography>
       </CardContent>
       <CardActions disableSpacing>
         {user.isAdmin === true && (
@@ -129,7 +127,6 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-          sx={{fontFamily: "Pangolin", fontWeight: 400, fontStyle: "normal"}}
         >
           {expanded ? 'Скрыть' : 'Комментарии'}
         </IconButton>
