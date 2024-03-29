@@ -18,6 +18,14 @@
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
+
+  border-radius: 7px;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  align-items: center;
+  /* height: 100vh; */
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .cart_h,
@@ -48,12 +56,13 @@ h3 {
   display: flex;
   flex-direction: column;
   padding: 10px;
-
+  /* flex-wrap: wrap; */
   width: 85%;
-  height: 90%;
-  margin: 25px 35px;
+  /* height: 90%; */
   border-radius: 30px;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  margin-top: -30px;
+  /* mar */
 }
 
 .line {

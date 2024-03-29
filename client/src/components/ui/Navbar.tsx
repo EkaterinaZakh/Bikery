@@ -19,34 +19,42 @@ type NavItem = {
 export default function NavBar(): JSX.Element {
   const user = useAppSelector((store) => store.auth.user);
   const [openModal, setOpenModal] = useState(false);
-  const navs: NavItem[] = user.status === 'guest' ? ([
-    { name: 'Главная', link: '/' },
-    { name: 'Фестивали', link: '/fests' },
-    { name: 'Мотопробеги', link: 'races' },
-    { name: 'Магазин', link: '/shop' }])
-    : 
-    ([
-    { name: 'Главная', link: '/' },
-    { name: 'Фестивали', link: '/fests' },
-    { name: 'Мотопробеги', link: 'races' },
-    { name: 'Магазин', link: '/shop' },
-    { name: 'Корзина', link: '/cart' }])
+  const navs: NavItem[] =
+    user.status === 'guest'
+      ? [
+          { name: 'Главная', link: '/' },
+          { name: 'Фестивали', link: '/fests' },
+          { name: 'Мотопробеги', link: 'races' },
+          { name: 'Магазин', link: '/shop' },
+        ]
+      : [
+          { name: 'Главная', link: '/' },
+          { name: 'Фестивали', link: '/fests' },
+          { name: 'Мотопробеги', link: 'races' },
+          { name: 'Магазин', link: '/shop' },
+          { name: 'Корзина', link: '/cart' },
+        ];
 
   const handleCloseModal = (): void => {
     setOpenModal(false);
   };
 
   return (
-    <Box sx={{ flexGrow: 1}}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        sx={{ backgroundColor: 'rgba(33, 2, 2, 1)', zIndex: 1000, margin: '0 auto'}}
+        sx={{
+          backgroundColor: 'rgba(33, 2, 2, 1)',
+          zIndex: 1000,
+          margin: '0 auto',
+          borderRadius: '20px',
+        }}
         position="fixed"
       >
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {user.status === 'logged' ? user.name : 'Гость'}
           </Typography>
           {navs.map((nav) => (
@@ -56,10 +64,11 @@ export default function NavBar(): JSX.Element {
                 sx={{
                   color: 'rgba(255, 255, 255, 1)',
                   padding: '10px',
-                  transition: '1s linear',
+                  transition: '0.3s linear',
                   '&:hover': {
                     color: '#fff',
                     background: '#f66d52',
+                    borderRadius: '20px',
                     // fontFamily: 'Discharge Pro',
                   },
                 }}
@@ -68,7 +77,13 @@ export default function NavBar(): JSX.Element {
               </Typography>
             </Button>
           ))}
-          <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
+          <Button
+            className="btn-new"
+            sx={{ backgroundColor: '#f66d52' }}
+            variant="contained"
+            color="primary"
+            onClick={() => setOpenModal(true)}
+          >
             {user.status !== 'logged' ? 'Присоединиться?' : 'Выйти?'}
           </Button>
           <BaseModal open={openModal} onClose={handleCloseModal}>

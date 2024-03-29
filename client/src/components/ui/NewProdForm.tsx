@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, TextField } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,6 +12,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { addProdThunk } from '../../redux/slices/prod/thunk';
 import { useAppDispatch } from '../../redux/hooks';
+import type { AddProdForm } from '../../types/prod';
 // import Box from '@mui/material/Box';
 
 const boxStyle = {
@@ -26,11 +27,35 @@ const boxStyle = {
 
 export default function NewProdForm(): JSX.Element {
   const dispatch = useAppDispatch();
+  // const [prodData, setProdData] = useState<AddProdForm>({
+  //   name: '',
+  //   desc: '',
+  //   price: 1,
+  // });
+
+  // const hangleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  //   setProdData({ ...prodData, [e.target.name]: e.target.value });
+  // };
+
+  // const resetForm = (): void => {
+  //   setProdData({
+  //     name: '',
+  //     desc: '',
+  //     price: 1,
+  //   });
+  // };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget); // as AddProdForm;
+
+    const formData = new FormData();
+    formData.append('name', e.currentTarget.name.value);
+    formData.append('desc', e.currentTarget.desc.value);
+    formData.append('price', e.currentTarget.price.value);
+    formData.append('categoryId', e.currentTarget.categoryId.value);
+    formData.append('image', e.currentTarget.image.files[0]);
     void dispatch(addProdThunk(formData));
+    e.currentTarget.reset();
   };
 
   const VisuallyHiddenInput = styled('input')({
@@ -149,14 +174,14 @@ export default function NewProdForm(): JSX.Element {
               component="label"
               variant="contained"
               startIcon={<CloudUploadIcon />}
-              sx={{ marginBottom: '10px', width: '450px' }}
+              sx={{ marginBottom: '10px', width: '250px', backgroundColor: '#be8952' }}
             >
               Добавить фото
               <Input type="file" name="image" sx={{ display: 'none' }} />
             </Button>
 
             <Button
-              style={{ margin: '15px', width: '150px' }}
+              style={{ margin: '15px', width: '150px', backgroundColor: '#be8952' }}
               type="submit"
               variant="contained"
               className="btn-new"

@@ -48,7 +48,7 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
       void dispatch(addRatingThunk({ userId: user.id, raceId: race.id, starsCount: rating ?? 0 }));
       setValue(averageRating);
     } else {
-      alert('Вы уже проголосовали за эту гонку. Голосование доступно только один раз');
+      alert('Голосование недоступно');
     }
   };
 
