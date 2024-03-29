@@ -1,12 +1,5 @@
 /* стили корзины*/
 
-@font-face {
-  font-family: 'DischargePro';
-  src:
-    local('DischargePro'),
-    url(../src/fonts/DischargePro.ttf) format('ttf');
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -21,10 +14,10 @@
   filter: brightness(70%);
   border-radius: 7px;
   position: relative;
-  font-family: 'Pangolin', cursive;
-  font-weight: 400;
+  font-family: 'Oswald', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
   font-style: normal;
-  font-family: 'DischargePro'
 }
 
 .cart_h,
@@ -50,8 +43,7 @@ h3 {
   /* z-index: -1; */
 }
 
-.cart_list
- {
+.cart_list {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -68,7 +60,6 @@ h3 {
   width: 70%;
   border-bottom: 2px black solid;
 }
-
 
 /* стили избранного */
 
