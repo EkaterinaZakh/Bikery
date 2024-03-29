@@ -46,7 +46,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
   };
 
   return (
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex' }}>
       <Card
         sx={{
           display: 'flex',
@@ -62,7 +62,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             // height="194"
             image={`${import.meta.env.VITE_APP_TITLE}/img/fest/${fest.image}`}
             alt=""
-            sx={{ width: '400px', height: '400px', backgroundSize: 'cover',  }}
+            sx={{ width: '400px', height: '400px', backgroundSize: 'cover' }}
           />
         </Box>
         <Box
@@ -101,7 +101,7 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
             },
           }}
         >
-          <CardHeader title={fest.name}/>
+          <CardHeader title={fest.name} />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               {fest.desc}
@@ -113,7 +113,12 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
           <CardActions disableSpacing>
             {user.isAdmin === true && (
               <>
-                <Button onClick={deleteHandler} variant="outlined" color="error" startIcon={<DeleteIcon />}>
+                <Button
+                  onClick={deleteHandler}
+                  variant="outlined"
+                  color="error"
+                  startIcon={<DeleteIcon />}
+                >
                   Удалить
                 </Button>
                 <Button
@@ -136,9 +141,11 @@ export default function OneFest({ fest }: OneFestProps): JSX.Element {
           <CardContent>
             <Typography paragraph>
               <div>Комментарии:</div>
-              {commentsForfest.map((comment) => (
-                <OneFestComment key={comment.id} comment={comment} />
-              ))}
+              <div style={{ overflow: 'auto', maxHeight: '200px' }}>
+                {commentsForfest.map((comment) => (
+                  <OneFestComment key={comment.id} comment={comment} />
+                ))}
+              </div>
               {user.status === 'logged' && <AddFestComment fest={fest} />}
             </Typography>
           </CardContent>
