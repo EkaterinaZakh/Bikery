@@ -5,4 +5,4 @@ This is a website where freedom is not just a word, but a way of life. Bikery is
 
 ## 📝 License
 
-This project is licensed under the Copyright © 2024 Alexander Grimalyak, Ekaterina Zakharova, Roman Dakaev and Ivanov Ivan.
+This project is licensed under the Copyright © 2024 Alexander Grimalyak, Ekaterina Zakharova, Roman Dakaev and Ivan Ivanov.
