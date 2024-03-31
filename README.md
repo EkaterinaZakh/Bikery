@@ -5,4 +5,4 @@ This is a web portal where freedom is not just a word, but a way of life. This i
 
 ## 📝 License
 
-This project is licensed under the Copyright © 2024 Ivanov Ivan, Alexander Grimalyak, Ekaterina Zakharova and Roman Dakaev.
+This project is licensed under the Copyright © 2024 Alexander Grimalyak, Ekaterina Zakharova, Roman Dakaev and Ivanov Ivan.
