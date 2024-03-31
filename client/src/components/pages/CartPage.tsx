@@ -11,8 +11,8 @@ export default function CartPage(): JSX.Element {
   return (
     <div className="cart_main">
       <div className="cart_content">
-        <h3 style={{ color: 'white' }}>Выбранные товары </h3>
         <div className="cart_list">
+          <h3 style={{ color: 'white', fontSize: '30px' }}>Выбранные товары </h3>
           {cartItems.map((el) => (
             <OneCartItem cartItem={el} key={el.productId} />
           ))}
@@ -21,4 +21,3 @@ export default function CartPage(): JSX.Element {
     </div>
   );
 }
-l

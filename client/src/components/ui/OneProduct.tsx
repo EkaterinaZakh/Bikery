@@ -35,7 +35,6 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
           flexDirection: 'column',
           justifyContent: 'space-between',
           height: '80%',
-  
         }}
       >
         <CardMedia
@@ -69,6 +68,7 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
                 color: 'black',
                 marginBottom: '10px',
                 borderRadius: '15px',
+                width: '200px'
               }}
               className="btn-new"
               onClick={(e) => addToCartHandler(e, prod.id)}
@@ -76,24 +76,27 @@ export default function OneProduct({ prod }: OneProductProps): JSX.Element {
               Добавить в корзину
             </Button>
           )}
-          <Button
-            className="btn-new"
-            onClick={deleteHandler}
-            variant="outlined"
-            startIcon={<DeleteIcon />}
-            color="error"
-          >
-            Удалить
-          </Button>
+          <Box>
+            <Button
+              className="btn-new"
+              onClick={deleteHandler}
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              color="error"
+            >
+              Удалить
+            </Button>
 
-          <Button
-            className="btn-new"
-            variant="outlined"
-            startIcon={<BorderColorRoundedIcon />}
-            onClick={() => dispatch(openEditModal(prod.id))}
-          >
-            Изменить
-          </Button>
+            <Button
+              className="btn-new"
+              variant="outlined"
+              startIcon={<BorderColorRoundedIcon />}
+              onClick={() => dispatch(openEditModal(prod.id))}
+              sx={{ marginLeft: '10px' }}
+            >
+              Изменить
+            </Button>
+          </Box>
         </div>
       )}
       <Button

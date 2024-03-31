@@ -67,11 +67,6 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        {
-          name: 'Прочее',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
       ],
       {},
     );
