@@ -40,6 +40,9 @@ h3 {
 }
 .cart_content {
   display: flex;
+  flex-direction: column;
+  justify-content: 'center';
+  align-items: 'center';
   background-color: rgb(13, 13, 13);
   padding: 80px;
   width: 55%;
@@ -48,6 +51,7 @@ h3 {
   border-radius: 30px;
   opacity: 0.6;
   overflow: auto;
+  /* border: 3px solid red; */
   /* z-index: -1; */
 }
 
