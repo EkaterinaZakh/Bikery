@@ -1,5 +1,7 @@
 ## 🚀 Bikery 
-Bikery is a website for true bikers, who love riding their steel horses on dusty roads.
+This is a web portal where freedom is not just a word, but a way of life. This is a website for everyone who likes to feel the real speed and the spirit of the movement on their steel horses and become part of strong biker community. We encourage rebellion against the mundane and together we create epic stories on the dusty roads. Join us!
+
+![Screenshot](./screenshot.png)
 
 ## 📝 License
 
