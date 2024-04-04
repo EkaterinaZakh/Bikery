@@ -9,7 +9,7 @@ There is a Shop for true bikers where they can order leather moto jackets, helme
 
 You can open a modal window with description of exact product:
 
-![screen_shop](./screen_modal.png)
+![screen_shop](./screen_modal_window.png)
 
 Visitors of Bikery website can also checkout info about future bike festivals:
 
