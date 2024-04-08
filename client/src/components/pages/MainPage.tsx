@@ -29,7 +29,6 @@ export default function MainPage(): JSX.Element {
           width: '80%',
           height: '70%',
           color: 'rgba(33, 2, 2, 1)',
-          // border: '2px solid green',
         }}
       >
         <Box
@@ -43,22 +42,6 @@ export default function MainPage(): JSX.Element {
             marginTop: '20px',
           }}
         />
-        {/* <Typography
-          variant="body2"
-          sx={{
-            width: '50%',
-            fontSize: '22px',
-            marginRight: '50px',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
-            borderRadius: '10px', // Округление углов
-            padding: '10px', // Поля внутри прямоугольника
-            border: '2px solid red',
-          }}
-        >
-            Bikery - портал, где свобода не просто слово, <br/>а образ жизни. Здесь каждый может
-            почувствовать настоящую скорость, ощутить дух движения и стать частью сильного
-            сообщества байкеров.
-        </Typography> */}
         <Box
           sx={{
             display: 'flex',
@@ -69,9 +52,6 @@ export default function MainPage(): JSX.Element {
             backgroundColor: 'rgba(255, 255, 255, 0.7)',
             borderRadius: '10px', // Округление углов
             padding: '10px', // Поля внутри прямоугольника
-            // marginTop: '-75px', // Смещение вверх
-            // animation: 'fadeInUp 3s ease'
-            // border: '2px solid blue',
             marginLeft: '-15px',
             marginTop: '20px',
           }}

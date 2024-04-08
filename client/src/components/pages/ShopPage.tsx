@@ -40,18 +40,11 @@ export default function ShopPage(): JSX.Element {
           display: 'flex',
         }}
       >
-        {/** <ProdModal /> */}
-        {/** Если модальное окно 1, а открываться должно по-разному -- нужен стейт */}
-        {/* <BaseModal open={!!selectedProd && modalType === '???'} onClose={handleCloseModal}>
-          <EditProdList onSubmit={handleCloseModal} onCancel={handleCloseModal} />
-        </BaseModal> */}
+  
         <ProdModal />
         {selectedCat
           ? prodsByCat.map((el) => <OneProduct prod={el} key={el.id} />)
           : allProds.map((el) => <OneProduct prod={el} key={el.id} />)}
-        {/* <BaseModal open={!!selectedProd} onClose={handleCloseModal}>
-            <OneProdDesc onCancel={handleCloseModal} />
-        </BaseModal> */}
       </Container>
     </Box>
   );

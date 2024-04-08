@@ -44,12 +44,7 @@ export default function NewFestForm(): JSX.Element {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    // {
-    //   ...festData,
-    //   date: festData.date,
-    // };
-    // добавь в formData date
-    void dispatch(addFestThunk(formData)); // object application/json ---> multipart/form-data
+    void dispatch(addFestThunk(formData));
     resetForm();
   };
 
@@ -123,13 +118,6 @@ export default function NewFestForm(): JSX.Element {
             type="date"
             sx={{ marginBottom: '10px', width: '450px' }}
           />
-          {/* <TextField
-            name="image"
-            required
-            id="outlined-required"
-            type="file"
-            sx={{ marginBottom: '10px', width: '44%', margin: '5px' }}
-          /> */}
 
           <Button
             component="label"

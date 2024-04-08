@@ -75,11 +75,6 @@ router.route('/:id/rating').post(async (req, res) => {
 
 router.route('/:id').put(verifyAccessToken, upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  // const { name, desc, image, length} = req.body;
-  // if (!name || !desc || !image || !length) {
-  //   res.status(401).json({ message: 'Wrong product data' });
-  //   return;
-  // }
 
   const imageNameRace = `${Date.now()}_race_edited.jpeg`;
   const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();

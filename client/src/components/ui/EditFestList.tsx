@@ -48,11 +48,6 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
     };
 
     if (!selectedFest) return;
-    // const formData = {
-    //   ...selectedFest,
-    //   ...festData,
-    //   date: festData.date || new Date().toISOString().slice(0, 10),
-    // };
     void dispatch(
       editFestThunk({
         ...selectedFest,
@@ -78,7 +73,6 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
         alignItems: 'center',
         justifyContent: 'center',
         width: '400px',
-        // backgroundColor: 'green',
       }}
     >
       <form onSubmit={editHandler} style={boxStyle} noValidate autoComplete="off">
@@ -95,23 +89,11 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
             type="text"
             sx={{ marginBottom: '10px' }}
           />
-          {/* <TextField
-            name="desc"
-            required
-            id="outlined-required"
-            label="Описание"
-            placeholder="Описание"
-            value={festData.desc}
-            onChange={handleChange}
-            type="text"
-            sx={{ marginBottom: '10px' }}
-          /> */}
 
           <TextField
             name="desc"
             required
             id="outlined-multiline-static"
-            // label="Multiline"
             label="Описание"
             placeholder="Описание"
             multiline
@@ -119,7 +101,6 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
             sx={{ marginBottom: '10px' }}
             value={festData.desc}
             onChange={handleChange}
-            // defaultValue="Default Value"
           />
 
           <Button
@@ -180,43 +161,3 @@ export default function EditFestList({ onSubmit }: EditListProps): JSX.Element {
     </Box>
   );
 }
-
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-
-// export default function MultilineTextFields() {
-//   return (
-//     <Box
-//       component="form"
-//       sx={{
-//         '& .MuiTextField-root': { m: 1, width: '25ch' },
-//       }}
-//       noValidate
-//       autoComplete="off"
-//     >
-//       <div>
-//         <TextField
-//           id="outlined-multiline-flexible"
-//           label="Multiline"
-//           multiline
-//           maxRows={4}
-//         />
-//         <TextField
-//           id="outlined-textarea"
-//           label="Multiline Placeholder"
-//           placeholder="Placeholder"
-//           multiline
-//         />
-//         <TextField
-//           id="outlined-multiline-static"
-//           label="Multiline"
-//           multiline
-//           rows={4}
-//           defaultValue="Default Value"
-//         />
-//       </div>
-
-//     </Box>
-//   );
-// }

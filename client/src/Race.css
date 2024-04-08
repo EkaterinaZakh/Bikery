@@ -13,12 +13,8 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   align-items: center;
-  /* height: 100vh; */
   padding-top: 80px;
   padding-bottom: 80px;
-  /* font-family: "Pangolin", cursive;
-  font-weight: 400;
-  font-style: normal; */
 }
 
 .all_content_race {
@@ -42,7 +38,6 @@ h1 {
   width: 30%;
   position: fixed;
   right: 0;
-  /* margin-right: 4%; */
 }
 
 .one_race_card {

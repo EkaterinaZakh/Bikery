@@ -76,17 +76,6 @@ export const raceSlice: Slice<RaceStateType> = createSlice({
         ];
       }
     });
-    // builder.addCase(addCommitsThunk.fulfilled, (state, action) => {
-    //   const { raceId, text } = action.payload;
-    //   const raceToUpdate = state.races.find((race) => race.id === raceId);
-    //   if (raceToUpdate) {
-    //     const newComment: CommitType = {
-    //       raceId,
-    //       text,
-    //     };
-    //     raceToUpdate.CommentRaces = [...(raceToUpdate.CommentRaces || []), newComment];
-    //   }
-    // });
   },
 });
 

@@ -16,17 +16,6 @@ router.route('/').get(async (req, res) => {
   res.json(fests);
 });
 
-// router.post(verifyAccessToken, async (req, res) => {
-//   try {
-//     const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
-//     const newFestWithUser = await Fest.findOne({ where: { id: newFest.id }, include: User });
-//     res.status(201).json(newFestWithUser);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: 'Error while creating' });
-//   }
-// });
-
 router.route('/add').post(verifyAccessToken, upload.single('image'), async (req, res) => {
   const { name, desc, date, place } = req.body;
 
@@ -49,12 +38,10 @@ router.route('/add').post(verifyAccessToken, upload.single('image'), async (req,
       place,
       userId: res.locals.user.id,
     });
-    // const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
 
     const newFestWithUser = await Fest.findOne({ where: { id: newFest.id }, include: User });
     res.status(201).json(newFestWithUser);
   } catch (error) {
-    // console.log(error);
     res.status(500).json({ message: 'Ошибка при создании нового фестиваля' });
   }
 });
@@ -75,13 +62,6 @@ router
 
   .put(verifyAccessToken, upload.single('image'), async (req, res) => {
     const { id } = req.params;
-
-    // const { name, desc, image, place } = req.body;
-    // // console.log('---', req.body);
-    // if (!name || !desc || !image || !place) {
-    //   res.status(401).json({ message: 'Wrong fest data' });
-    //   return;
-    // }
 
     const imageNameFest = `${Date.now()}_fest_edited.jpeg`;
     const outputBuffer = await sharp(req.file.buffer).jpeg().toBuffer();
@@ -106,31 +86,3 @@ router
   });
 
 module.exports = router;
-
-// .put(async (req, res) => {
-//   try {
-//     const targetFest = await Fest.findOne({ where: { id: req.params.id }, include: User });
-//     if (!targetFest) {
-//       res.status(404).json({ message: 'Fest not found' });
-//     }
-//     Object.keys(req.body).forEach((key) => {
-//       targetFest[key] = req.body[key];
-//     });
-//     await targetFest.save();
-//     res.status(200).json(targetFest);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: 'ERROR UPDATING FEST' });
-//   }
-// })
-
-// .post(verifyAccessToken, async (req, res) => {
-//   try {
-//     const newFest = await Fest.create({ ...req.body, userId: res.locals.user.id });
-//     const newFestWithUser = await Fest.findOne({ where: { id: newFest.id }, include: User });
-//     res.status(201).json(newFestWithUser);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: 'Error while creating' });
-//   }
-// });

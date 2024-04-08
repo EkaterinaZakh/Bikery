@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, TextField } from '@mui/material';
-// import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -85,7 +84,6 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               name="desc"
               required
               id="outlined-multiline-static"
-              // label="Multiline"
               label="Описание"
               placeholder="Описание"
               multiline
@@ -93,18 +91,7 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
               sx={{ marginBottom: '10px', width: '450px' }}
               value={prodData.desc}
               onChange={handleChange}
-              // defaultValue="Default Value"
             />
-
-            {/* <TextField
-              name="image"
-              // value={prodData.image}
-              // onChange={handleChange}
-              // required
-              id="outlined-required"
-              type="file"
-              // defaultValue={selectedProd?.image}
-            /> */}
 
             <Button
               component="label"
@@ -133,7 +120,6 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
                 style={{ margin: '15px', width: '100px' }}
                 type="submit"
                 variant="contained"
-                // color="success"
               >
                 Добавить
               </Button>
@@ -153,24 +139,3 @@ export default function EditProdList({ onSubmit, onCancel }: EditProdListProps):
     </Box>
   );
 }
-
-// const editHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-//   e.preventDefault();
-//   const formData = {
-//     name: prodData.name,
-//     desc: prodData.desc,
-//     price: prodData.price,
-//     image: prodData.image,
-//   };
-//   if (!selectedProd) return;
-//   void dispatch(
-//     editProdThunk({
-//       ...selectedProd,
-//       name: formData.name,
-//       desc: formData.desc,
-//       price: formData.price,
-//       image: formData.image,
-//     }),
-//   );
-//   onSubmit?.();
-// };

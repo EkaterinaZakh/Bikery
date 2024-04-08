@@ -22,16 +22,6 @@ class CommentService {
     return res.data;
   }
 
-  // async getAllFestsComments(): Promise<CommitType[]> {
-  //   const response = await this.client<CommitType[]>('/festcomments');
-  //   if (response.status !== 200) {
-  //     return Promise.reject(
-  //       new Error(`Wrong status code (expected 200, received: ${response.status})`),
-  //     );
-  //   }
-  //   return response.data;
-  // }
-
   async createNewFestCommit(festId: number, formData: { text: string }): Promise<CommitType> {
     const res = await this.client.post<CommitType>(`/festcomments/fests/${festId}`, formData);
     if (res.status !== 200)
