@@ -10,7 +10,6 @@ import {
   Button,
   Box,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';

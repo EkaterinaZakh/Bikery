@@ -2,9 +2,7 @@
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
-import StarIcon from '@mui/icons-material/Star';
 import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports';
-import TwoWheelerTwoToneIcon from '@mui/icons-material/TwoWheelerTwoTone';
 
 import type { RaceType } from '../../types/race';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -79,6 +77,3 @@ export default function Rate({ race, rates }: RatePropsType): JSX.Element {
     </Box>
   );
 }
-
-// const MemoizedRate = React.memo(Rate);
-// export default MemoizedRate;

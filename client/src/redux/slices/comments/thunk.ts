@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { AddCommitForm, CommitType } from '../../../types/commit';
+import type { CommitType } from '../../../types/commit';
 import commentService from '../../services/api/commentService';
 
 export const getAllCommitsThunk = createAsyncThunk<CommitType[]>('fest/getAllCommitsThunk', () =>

@@ -1,4 +1,3 @@
-// const { Router } = require('express');
 const express = require('express');
 const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
 const generateTokens = require('../utils/generateTokens');

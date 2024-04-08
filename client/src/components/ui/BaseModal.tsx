@@ -13,7 +13,6 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  // background: 'rgba(255, 255, 255, 0.9)'
 };
 
 export default function BaseModal({ children, onClose, open }: BaseModalType): JSX.Element {

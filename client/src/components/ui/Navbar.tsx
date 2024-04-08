@@ -9,7 +9,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import BaseModal from './BaseModal';
 import AuthList from './AuthList';
-// import '../../fonts/DischargePro.ttf'
 
 type NavItem = {
   name: string;
@@ -51,9 +50,7 @@ export default function NavBar(): JSX.Element {
         position="fixed"
       >
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            {/* <MenuIcon /> */}
-          </IconButton>
+          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {user.status === 'logged' ? user.name : 'Гость'}
           </Typography>
@@ -69,7 +66,6 @@ export default function NavBar(): JSX.Element {
                     color: '#fff',
                     background: '#f66d52',
                     borderRadius: '20px',
-                    // fontFamily: 'Discharge Pro',
                   },
                 }}
               >

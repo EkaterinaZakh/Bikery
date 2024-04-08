@@ -50,29 +50,18 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
     <Card
       className="one_race_card"
       sx={{
-        // width: 'auto',
-        // borderRadius: '0px 10px 10px 0px',
-        // filter: 'drop-shadow(0 5px 10px 0 #ffffff)',
-        // backgroundColor: '#ffffff',
-        // padding: '20px',
         position: 'relative',
-        // zIndex: '0',
         overflow: 'hidden',
         transition: '0.6s ease-in',
-        '&:hover': {
-          // color: '#ffffff',
-          // backgroundColor: '#f66d52', // Изменение цвета при наведении
-        },
+        '&:hover': {},
         '&::before': {
           content: '""',
           position: 'absolute',
           zIndex: '-1',
           top: '-15px',
-          // right: '-15px',
           background: 'transparent', // Прозрачный цвет, чтобы не было видно перед карточкой
           height: '220px',
           width: '25px',
-          // borderRadius: '32px',a
           transform: 'scale(1)',
           transformOrigin: '50% 50%',
           transition: 'transform 0.15s ease-out',
@@ -95,8 +84,12 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
 
       <Rate rates={race.RaceRatings} race={race} />
       <CardContent>
-        <Typography variant="subtitle1" sx={{marginBottom:'10px'}}>Дата старта: {formattedDate}</Typography>
-        <Typography variant="subtitle2" sx={{marginBottom:'10px'}}>Длина маршрута: {race.length} км</Typography>
+        <Typography variant="subtitle1" sx={{ marginBottom: '10px' }}>
+          Дата старта: {formattedDate}
+        </Typography>
+        <Typography variant="subtitle2" sx={{ marginBottom: '10px' }}>
+          Длина маршрута: {race.length} км
+        </Typography>
         <Typography variant="subtitle2">{race.desc}</Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -112,7 +105,6 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
               Удалить
             </Button>
             <Button
-              // className="edit_btn"
               variant="outlined"
               color="primary"
               startIcon={<BorderColorRoundedIcon />}
@@ -145,9 +137,7 @@ export default function OneRace({ race }: OneRaceProps): JSX.Element {
             {commentsForRace.map((comment) => (
               <OneRaceComment key={comment.id} comment={comment} />
             ))}
-            {user.status === 'logged' && (
-              <AddRaceComment race={race} />
-            )}
+            {user.status === 'logged' && <AddRaceComment race={race} />}
           </Typography>
         </CardContent>
       )}

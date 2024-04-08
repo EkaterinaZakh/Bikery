@@ -61,66 +61,6 @@ export default function AuthList({ onSubmit, onCancel }: AuthListProps): JSX.Ele
   };
 
   return (
-    // <Paper sx={paperStyle}>
-    //   {status !== 'logged' ? (
-    //     <>
-    //       <Button
-    //         onClick={handleToggleAuthType}
-    //         fullWidth
-    //       >
-    //         {authType === 'login' ? 'Авторизация' : 'Регистрация'}
-    //       </Button>
-    //       {authType === 'login' ? (
-    //         <form onSubmit={loginHandler}>
-    //           <FormControl fullWidth>
-    //             <InputLabel htmlFor="email">Email</InputLabel>
-    //             <Input id="email" name="email" onChange={handleFormChange} />
-    //           </FormControl>
-    //           <FormControl fullWidth>
-    //             <InputLabel htmlFor="password">Пароль</InputLabel>
-    //             <Input id="password" name="password" type="password" onChange={handleFormChange} />
-    //           </FormControl>
-    //           <Button type="submit" color="primary" variant="contained">
-    //             Отправить
-    //           </Button>
-    //           <Button fullWidth onClick={onCancel}>
-    //             Отмена
-    //           </Button>
-    //         </form>
-    //       ) : (
-    //         <form onSubmit={signupHandler}>
-    //           <FormControl fullWidth>
-    //             <InputLabel htmlFor="name">Имя</InputLabel>
-    //             <Input id="name" name="name" onChange={handleFormChange} />
-    //           </FormControl>
-    //           <FormControl fullWidth>
-    //             <InputLabel htmlFor="email">Email</InputLabel>
-    //             <Input id="email" name="email" onChange={handleFormChange} />
-    //           </FormControl>
-    //           <FormControl fullWidth>
-    //             <InputLabel htmlFor="password">Пароль</InputLabel>
-    //             <Input id="password" name="password" type="password" onChange={handleFormChange} />
-    //           </FormControl>
-    //           <Button type="submit" color="primary" variant="contained">
-    //             Отправить
-    //           </Button>
-    //           <Button fullWidth onClick={onCancel}>
-    //             Отмена
-    //           </Button>
-    //         </form>
-    //       )}
-    //     </>
-    //   ) : (
-    //     <>
-    //       <Button onClick={logoutHandler} color="inherit">
-    //         Выйти
-    //       </Button>
-    //       <Button fullWidth onClick={onCancel}>
-    //         Отмена
-    //       </Button>
-    //     </>
-    //   )}
-    // </Paper>
     <Paper sx={paperStyle}>
       {status !== 'logged' ? (
         <>

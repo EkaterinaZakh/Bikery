@@ -90,17 +90,6 @@ export default function AddRaceForm(): JSX.Element {
             type="number"
             sx={{ margin: '5px' }}
           />
-          {/* <TextField
-            name="image"
-            required
-            id="outlined-required"
-            // label="Добавьте картинку"
-            // placeholder="http://..."
-            // value={carData.image}
-            // onChange={hangleChange}
-            type="file"
-            sx={{ margin: '5px' }}
-          /> */}
 
           <Button
             component="label"

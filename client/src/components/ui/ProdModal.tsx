@@ -6,30 +6,30 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { clearSelectedProd } from '../../redux/slices/prod/slice';
 
 function ProdModal(): JSX.Element {
-    const dispatch = useAppDispatch();
-    const modalType = useAppSelector((state) => state.products.modalType);
-    const selectedProd = useAppSelector((store) => store.products.selectedProd);
+  const dispatch = useAppDispatch();
+  const modalType = useAppSelector((state) => state.products.modalType);
+  const selectedProd = useAppSelector((store) => store.products.selectedProd);
 
-    const handleClose = (): void => {
-        dispatch(clearSelectedProd())
+  const handleClose = (): void => {
+    dispatch(clearSelectedProd());
+  };
+
+  const content = useMemo((): JSX.Element => {
+    switch (modalType) {
+      case 'info':
+        return <OneProdDesc onCancel={handleClose} />;
+      case 'edit':
+        return <EditProdList onSubmit={handleClose} onCancel={handleClose} />;
+      default:
+        return <>Error</>;
     }
+  }, [modalType]);
 
-    const content = useMemo((): JSX.Element => {
-        switch (modalType) {
-            case 'info':
-                return <OneProdDesc onCancel={handleClose} />;
-            case 'edit':
-                return <EditProdList onSubmit={handleClose} onCancel={handleClose} />;
-            default:
-                return <>Error</>;
-        }
-    }, [modalType]);
-
-    return (
-        <BaseModal open={!!selectedProd} onClose={handleClose}>
-            {content}
-        </BaseModal>
-    );
+  return (
+    <BaseModal open={!!selectedProd} onClose={handleClose}>
+      {content}
+    </BaseModal>
+  );
 }
 
 export default ProdModal;

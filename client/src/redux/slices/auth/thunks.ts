@@ -15,5 +15,3 @@ export const refreshAuth = createAsyncThunk<AuthState>('auth/refreshAuth', () =>
 );
 
 export const logoutThunk = createAsyncThunk('auth/logout', async () => authService.logout());
-
-// Допиши недостающие Thunk actions
